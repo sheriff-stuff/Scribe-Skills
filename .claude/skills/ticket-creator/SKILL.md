@@ -1,0 +1,95 @@
+---
+name: create-tickets
+description: Create GitLab ticket proposals as markdown files in proposed-tickets/. Produces one .md file per issue (and optionally one epic) with YAML frontmatter and a structured body. Handles four ticket types: Epic, Feature, Spike, and Bug. Files are validated and processed by CI on merge to main. Use when the user asks to create, draft, or write tickets; break work into tickets; create issues; write an epic; propose or scope work items; create a spike or bug ticket; breakdown an epic; or plan work as GitLab issues.
+---
+
+# Create Tickets
+
+This skill writes ticket proposal files to `proposed-tickets/`. Each file becomes a GitLab issue (or epic) when the MR merges to main. This skill does **not** create branches, commits, or MRs.
+
+## Workflow
+
+1. **Understand the request.** Clarify what the user wants to accomplish. Determine how many tickets are needed, whether an epic is appropriate, and what type each ticket is (Epic, Feature, Spike, Bug).
+
+2. **Gather context from the project.** Before writing tickets, read what's already in the repo to understand the domain wiki pages, existing code, documentation, whatever is there. Use the terminology that already exists (page names, class names, module names). Do not invent new terminology for concepts that already have a name.
+
+3. **Plan the ticket set.** Decide the breakdown:
+   - If the work has multiple child tickets that belong together, create an epic file plus individual ticket files with `epic: auto`.
+   - If the tickets are unrelated or don't warrant an epic, create standalone ticket files.
+   - Only one epic file per MR is allowed.
+   - Each ticket should represent a discrete, independently deliverable piece of work.
+
+4. **Write all ticket files.** Batch-write every `.md` file to `proposed-tickets/`. For each ticket, read the appropriate template from `templates/` and use it as the structural basis:
+   - [Epic template](templates/epic.md)
+   - [Feature template](templates/feature.md)
+   - [Spike template](templates/spike.md)
+   - [Bug template](templates/bug.md)
+
+5. **Present for review.** After writing, tell the user the files are ready for review.
+
+## Frontmatter Schema
+
+| Field       | Required | Type                | Notes                                                                           |
+| ----------- | -------- | ------------------- | ------------------------------------------------------------------------------- |
+| `title`     | **Yes**  | string              | Non-empty                                                                       |
+| `type`      | No       | string              | Only accepted value is `epic`                                                   |
+| `labels`    | No       | list                | Each label must already exist in the project                                    |
+| `assignees` | No       | list                | GitLab usernames                                                                |
+| `milestone` | No       | string              | Milestone title or ID                                                           |
+| `weight`    | No       | integer             | Non-negative                                                                    |
+| `due_date`  | No       | string              | `YYYY-MM-DD`                                                                    |
+| `epic`      | No       | integer or `"auto"` | IID of an existing epic, or `"auto"` to link to the epic created in the same MR |
+
+List fields (`labels`, `assignees`) accept YAML inline `[a, b]` or block format.
+
+## File Naming
+
+Lowercase kebab-case named by subject.
+
+**Bad:** `ticket-1.md`, `feature.md`, `epic.md`
+
+**Good:** `add-user-search-endpoint.md`, `spike-notification-strategy.md`, `dashboard-migration-epic.md`
+
+## Body Rules
+
+1. **Write actionable descriptions.** Acceptance criteria, context, and scope — as you would a real issue.
+2. **Do not infer technical decisions.** Do not prescribe specific class names, design patterns, library choices, file paths, or route paths unless they come from the wiki or existing code or the user asks you to.
+3. **Use full URLs when referencing pages, code, or other projects.** Use absolute URLs, not relative paths.
+4. **Use the language of existing documentation.** When a concept already has a name in the wiki or existing code, use that name. Do not introduce new terminology for the same thing.
+5. **Implementation Approach should orient, not prescribe.** Reference patterns, existing implementations, and key decisions to guide the developer — do not write step-by-step instructions or code that the developer would simply copy into the implementation.
+6. **Do not write justification or rationale into ticket bodies.** Tickets answer _what_ is being done and _how it'll be verified_. The _why_ lives in the wiki. If justification feels necessary, link to the wiki page that holds it; if no such page exists, suggest creating one via wiki.
+7. **Don't duplicate spec detail from the source doc.** If a referenced doc owns the full spec, list scope only (names, structural decisions, enum/constant values, non-obvious gotchas) and link it as source of truth.
+
+   **Bad: duplicates the schema doc:**
+
+   > Fields: `username` (String), `email` (String), `firstName` (String)...
+
+   **Good: scope only, defer to source:**
+
+   > Fields per `User-Storage.md`. If ticket and doc disagree, the doc wins — flag in MR.
+
+8. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not a repeat of scope/requirements, not a project-wide baseline (build/lint/test checks belong in the codebases `CLAUDE.md`), not subjective.
+
+   **Bad — restates the task, baselines, and subjective judgements:**
+
+   > - Create the User entity
+   > - Code compiles without errors
+   > - Classes follow Spring Data MongoDB conventions
+   > - `PermissionLevel` contains `NONE, READ, WRITE, ADMIN`
+   > - Code is idiomatic
+
+   **Good — each line is a check a reviewer can run:**
+
+   > - A `User` with populated `authorities` round-trips through Mongo with all fields preserved
+   > - `ZonedDateTime` fields survive a round-trip with timezone intact
+   > - Mongock migration creates a unique index on `username` and non-unique indexes on `authorities` and `organisation`
+   > - `BaseEntity` and `MongoConfig` structurally mirror the bookings-app implementations
+   > - No classes exist outside the File Structure diagram
+
+   **Bad — vague pointer that requires cross-referencing:**
+
+   > - Mongock migration creates the required indexes
+
+   **Good — names the values inline:**
+
+   > - Mongock migration creates indexes on `state`, `_class`, `createdAt`, and `createdBy`

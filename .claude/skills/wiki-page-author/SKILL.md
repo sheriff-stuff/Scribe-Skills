@@ -1,125 +1,127 @@
 ---
 name: wiki-page-author
-description: >
-  Use this skill when writing or updating any page in the project wiki, including
-  creating a new page, changing an existing one, removing a page, adding or resolving
-  open design decisions, or organising content into folders. Trigger on phrases like
-  "add to the wiki", "update the wiki", "document this", "write a page about", or any
-  request that produces a markdown file under the wiki, even if the user does not
-  explicitly say "wiki". Do not use for changelog entries (handled by wiki-changelog),
-  link checking (handled by wiki-link-check), or content outside the wiki repo.
+description: Write, update, or remove pages in the project wiki, or organise wiki content into folders. Handles the page body and the `## Open design decisions` section, which has its own inverted rules. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, or expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided") — those become entries in the open design decisions section.
 ---
 
-# Wiki page author
+# Wiki Page Author
 
-The wiki is a living spec describing the current state of the application — present tense, factual, reference-only. Pages exist to tell a future agent or human what the application is, not how it got there or why.
+This skill writes and updates pages in the project wiki. The wiki is a living spec — present tense, confirmed facts only. Pages tell a future agent or human what the application is, not how it got there or why.
 
-## What a page is
+The one section of any page where uncertainty is allowed is `## Open design decisions`. The rules for that section are inverted from the body rules and are listed separately below.
 
-A page describes one subject. The subject is named in the folder and filename. The page states facts about that subject in confident present tense.
+## Body Rules
 
-A page is not:
+These apply everywhere on the page **except** `## Open design decisions`.
 
-- a tutorial, how-to, or onboarding doc
-- a record of decisions or rationale
-- a changelog or history of what the page used to say
-- a justification for why one approach was chosen over another
+1. **One subject per page.** If content belongs to a different subject, suggest the right page rather than adding it.
 
-If the user asks for any of those, the content does not belong in the wiki. Suggest where it should go instead (commit message, MR description, a separate decisions doc) — do not refuse to help, just route it correctly.
+2. **Files and folders are named by subject, not by content type.**
 
-## Page template
+   **Bad — describes how the content was produced:**
 
-Every page follows this shape. Omit any section that has no content; do not include empty headings.
+   > `docs/`, `notes/`, `analysis/`, `architecture/`
 
-```markdown
-# [Subject]
+   **Good — describes what the content is about:**
 
-One-sentence statement of what this page is about.
+   > `Forms/`, `Users/`, `Migration/`
 
-## [Section name]
+3. **Present tense, declarative.** State what the application does, not what it doesn't.
 
-Facts about the subject. Present tense, declarative.
+   **Bad:**
 
-## [Section name]
+   > The form does not render multiple questions on one page.
 
-Facts about the subject. Present tense, declarative.
+   **Good:**
 
-## Related
+   > The form renders one question per page.
 
-- [Other page](../Folder/Page)
-- [Other page](../Folder/Page)
+4. **Never guess.** If something is unknown or undecided, ask the user. Confirmed answers go in the body; uncertainty goes in `## Open design decisions`. Do not infer from related pages, related code, or what seems plausible.
 
-## Open design decisions
+   **Bad — invents a fact the user did not state:**
 
-- Question that has not yet been answered. Options if known.
-- Question that has not yet been answered.
-```
+   > Sessions probably persist across browser restarts.
 
-Section names under the subject are themselves subject-named, not format-named. `## Validation rules` is good. `## Notes` and `## Details` are not.
+   **Good — captures the uncertainty, does not invent the answer:**
 
-## Writing rules
+   > (in `## Open design decisions`) Whether sessions persist across browser restarts.
 
-These are the rules every page must follow. Apply them every time, on every page.
+   **Bad — softens the user's uncertainty into the body:**
 
-- **Present tense, declarative.** "The user table stores email and a hashed password." Never "we will store" or "we plan to" or "the idea is to".
-- **State facts positively.** "Forms render one question per page." Never "forms do not render multiple questions per page". Normal negative facts are fine: "this field is optional".
-- **Only confirmed facts.** If a fact is unknown or undecided, do not write it. Ask the user. If they want it recorded, put it in `## Open design decisions` at the bottom.
-- **No hedging.** Do not write "likely", "probably", "should", "might", "appears to". The page either states a fact or asks a question (in `## Open design decisions`).
-- **No rationale.** The page describes what the application is, never why. If the user provides reasoning, drop it from the page. The why lives in commits and MRs.
-- **No history.** When updating a page, replace content. Do not write "previously this said X" or "changed from Y". The diff is the history.
-- **One subject per page.** If content belongs to a different subject, suggest the correct page or folder rather than adding it.
-- **Subject-named files and folders.** `Forms/`, `Users/`, `Data/`. Never `docs/`, `notes/`, `architecture/`, `analysis/`.
-- **Internal links use no `.md` extension.** `[text](../Folder/Page)`, never `[text](../Folder/Page.md)`.
+   > Sessions likely persist across browser restarts.
 
-## Procedure: writing a new page
+   **Good — routes the uncertainty to the decisions section:**
 
-1. Identify the subject from the user's request. If unclear, ask.
-2. Identify the folder. If no existing folder fits, propose a new subject-named folder before creating it.
-3. Identify the filename. Subject-named, matches the page's `# Heading`.
-4. Write the page following the template above.
-5. Update `home.md` to include the new page in its index.
-6. Confirm to the user what was created.
+   > (in `## Open design decisions`) Whether sessions persist across browser restarts.
 
-## Procedure: updating an existing page
+5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
-1. Read the current page in full.
-2. Apply the change as a replacement of the relevant section. Do not annotate the change in the page itself.
-3. If the change makes any other page in the wiki inconsistent, flag this to the user — do not silently update other pages.
-4. If the change adds or removes a page, update `home.md`.
-5. Confirm to the user what was changed.
+   **Bad — explains why the choice was made:**
 
-## Procedure: open design decisions
+   > Forms render one question per page because users on mobile struggled with multi-question screens.
 
-When the user provides information that includes an unanswered question:
+   **Good — states the fact:**
 
-1. Write everything that is confirmed in the body of the relevant page, in present tense.
-2. Add the unanswered question as a bullet in `## Open design decisions` at the bottom of that page.
-3. The bullet is a question, not a partial answer. "Whether sessions persist across browser restarts." Not "Sessions probably persist."
+   > Forms render one question per page.
 
-When an open design decision gets resolved:
+   **Good — states the fact and links the why:**
 
-1. Rewrite the relevant section of the page in confident present tense, incorporating the answer.
-2. Delete the bullet from `## Open design decisions`.
-3. If the section becomes empty, remove the heading.
+   > Forms render one question per page. See [DDR-0007 Form rendering](../Decisions/DDR-0007-Form-rendering).
 
-## Validation before finishing
+6. **No revision history.** Updates replace content; do not annotate what changed.
 
-Before reporting back to the user, check:
+   **Bad:**
 
-- [ ] Every internal link uses the no-`.md` form.
-- [ ] No sentence contains "likely", "probably", "should", "might", "we will", "we plan to", "previously", "used to".
-- [ ] The page makes sense read top-to-bottom by someone who has never seen the application.
-- [ ] `home.md` reflects any added or removed pages.
-- [ ] No content describes why a choice was made.
+   > Sessions now persist across browser restarts (previously they expired on close).
 
-If any check fails, fix it before responding.
+   **Good:**
+
+   > Sessions persist across browser restarts.
+
+7. **Internal links use no `.md` extension.**
+
+   **Bad:** `[text](../Forms/Validation.md)`
+
+   **Good:** `[text](../Forms/Validation)`
+
+8. **Body prose may cross-reference `## Open design decisions`, but only as a pointer.** A body sentence can note that a related question is unresolved by linking to the open decisions section. The body must not state the decision detail itself, list options, or hedge — that content lives only in `## Open design decisions`.
+
+   **Bad — folds the decision detail into the body:**
+
+   > Forms render one question per page. Whether partial submissions are saved automatically or only on an explicit "save draft" action is still being decided.
+
+   **Good — points at the decisions section:**
+
+   > Forms render one question per page. See `## Open design decisions` for how partial submissions are handled.
+
+## Rules for `## Open design decisions`
+
+These apply only inside that section.
+
+1. **Hedging is allowed.** "Probably", "leaning toward", "might", "should" are fine here.
+2. **Rationale is allowed** when the user has provided it.
+3. **Options without a chosen answer are allowed** — that is the point of the section.
+4. **Each entry is a bullet** stating the question, optionally with options and context.
+5. **Do not invent uncertainty.** Every entry traces back to something the user said.
+
+## Standing Instructions
+
+These apply throughout the work.
+
+- **Use the [page template](assets/page-template.md) for new pages.**
+- **Keep `home.md` in sync.** If a page is added or removed, update `home.md` in the same operation.
+- **Flag inconsistencies, do not fix them silently.** If a change makes another wiki page inconsistent, tell the user. Do not edit other pages unprompted.
+- **Re-read before finishing.** Read the body back. Check that nothing in it is guessed, hedged, justified, or historical. Fix anything that is.
+
+## Resolving an Open Design Decision
+
+When an entry in `## Open design decisions` gets answered:
+
+1. Rewrite the relevant body section in confident present tense, incorporating the answer.
+2. Remove the bullet from `## Open design decisions`.
+3. If the section is now empty, remove the heading too.
 
 ## Gotchas
 
-- The wiki is updated by replacement. There is no `## Changelog` or `## History` section on individual pages — those go in the separate `Changelog` page (handled by a different skill, not this one).
-- "I'm not sure" from the user is a signal to add an entry to `## Open design decisions`, not to guess and write a confident-sounding sentence.
-- A request to "add notes" or "document my thinking" is usually not a wiki request. The wiki holds confirmed facts about the application; thinking and notes belong elsewhere. Ask before writing.
-- The application being documented is in a separate repo. Do not look for its source code in this repo and do not infer facts about the application from any code that happens to be present here.
-- `home.md` is the page index. Every page in the wiki must be reachable from it. Update it in the same operation as adding or removing a page, never as a follow-up.
-- Folder names describing content type (`docs/`, `notes/`, `analysis/`, `architecture/`) are wrong and must be renamed if encountered. Folders are subject names.
-- When suggesting a new folder, the name describes what the content is about, not how it was produced or what kind of document it is.
+- "I'm not sure" / "we haven't decided" / "still working out" is a signal to write to `## Open design decisions`, not to guess and write a confident sentence.
+- A request can legitimately touch only `## Open design decisions` and leave the body untouched. Do not invent body content to balance the change.
+- A request to "add notes" or "document my thinking" is usually not a wiki request. Ask before writing.

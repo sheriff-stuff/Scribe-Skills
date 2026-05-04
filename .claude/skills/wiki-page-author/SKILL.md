@@ -93,6 +93,24 @@ These apply everywhere on the page **except** `## Open design decisions`.
 
    > Forms render one question per page. See `## Open design decisions` for how partial submissions are handled.
 
+9. **Anything linkable is written as an inline link.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked (it does not exist, or it is an illustrative example).
+
+   **Bad — bare in-repo path:**
+
+   > New pages use the page template at `.claude/skills/wiki-page-author/assets/page-template.md`.
+
+   **Good — inline link to the file:**
+
+   > New pages use the [page template](../.claude/skills/wiki-page-author/assets/page-template.md).
+
+   **Bad — bare URL:**
+
+   > See https://example.com/docs for the spec.
+
+   **Good — inline link with descriptive text:**
+
+   > See [the spec](https://example.com/docs).
+
 ## Rules for `## Open design decisions`
 
 These apply only inside that section.
@@ -108,7 +126,7 @@ These apply only inside that section.
 These apply throughout the work.
 
 - **Use the [page template](assets/page-template.md) for new pages.**
-- **Keep `home.md` in sync.** If a page is added or removed, update `home.md` in the same operation.
+- **Keep [`home.md`](../../../wiki/home.md) in sync.** If a page is added or removed, update [`home.md`](../../../wiki/home.md) in the same operation.
 - **Flag inconsistencies, do not fix them silently.** If a change makes another wiki page inconsistent, tell the user. Do not edit other pages unprompted.
 - **Re-read before finishing.** Read the body back. Check that nothing in it is guessed, hedged, justified, or historical. Fix anything that is.
 

@@ -1,26 +1,37 @@
 # Scribe Skills
 
-Scribe Skills is a collection of skills and agents that build and maintain a wiki for a separate application.
+Scribe Skills is a collection of reusable skills and agents that support a spec-driven development workflow. The skills are project-agnostic — point them at any project (including this one).
 
-The wiki is the deliverable. The skills and agents in this repo are the tools that produce it. The application being documented lives elsewhere; this repo does not contain its source code.
+## The workflow
+
+1. **Wiki page** — write or update a wiki page that describes the feature as a living spec. (skill: `wiki-page-author`)
+2. **Tickets** — turn the wiki page (or the diff against it) into tickets. (skill: `create-tickets`)
+3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
+4. **Pull request** — open the PR. No dedicated skill.
+
+This repo is dogfooded on itself: when a skill here is added or changed, its wiki page is updated first, and tickets are cut from that change.
 
 ## What the wiki is
 
-A living spec describing the current state of the application — present tense, factual, reference-only.
+A living spec describing the current state of the thing being documented — present tense, factual, reference-only.
 
 - No history, no rationale, no explanation, no tutorials.
-- Pages describe what the application is. If something changes, the page is updated to reflect the new state; the previous wording is not preserved.
+- Pages describe what the thing is. If something changes, the page is updated to reflect the new state; the previous wording is not preserved.
 - Open questions live in an `## Open design decisions` section on the relevant page, and are removed once resolved.
 - A single `Changelog` page records what changed (added / removed / changed from X to Y), never why. The why lives in commits and MRs.
 - Folders and pages are named by subject, not by content type or format.
 
-The wiki feeds a later spec-driven development workflow. Treat it as the source of truth that future feature specs will be built on top of.
+The wiki is the source of truth that tickets and feature specs are built on top of.
 
 ## What this repo contains
 
-- Skills and agents that generate, update, and maintain wiki pages.
-- The wiki repo itself is separate.
-- `fixtures/cortex-wiki/` — an example wiki used to help build and test the skills in this repo. Treat it as a fixture to develop against, not as the real wiki.
+- `.claude/skills/wiki-page-author/` — authors wiki pages.
+- `.claude/skills/create-tickets/` — generates tickets.
+- `fixtures/cortex-wiki/` — an example wiki used to develop and test the skills against. A fixture, not a real wiki.
+
+## Writing rules
+
+- Never use em dashes (—). Use a comma, period, parentheses, or colon instead.
 
 ## Helpful references
 

@@ -1,0 +1,39 @@
+# Validates every *.md under proposed-tickets/ on every PR that touches the directory.
+# Mark this workflow's "validate" job as a required check on `master` in
+# Settings → Branches to actually block merges on failure.
+name: Proposed tickets — validate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'proposed-tickets/**'
+      - '.github/workflows/proposed-tickets-validate.yml'
+      - '.github/scripts/proposed_tickets/**'
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: .github/scripts/proposed_tickets/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r .github/scripts/proposed_tickets/requirements.txt
+
+      - name: Validate proposed tickets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PYTHONPATH: .github/scripts
+        run: python -m proposed_tickets.validate proposed-tickets

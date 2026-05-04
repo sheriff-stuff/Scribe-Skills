@@ -29,6 +29,10 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 - `.claude/skills/create-tickets/` — generates tickets.
 - `fixtures/cortex-wiki/` — an example wiki used to develop and test the skills against. A fixture, not a real wiki.
 
+## Versioning and release branches
+
+The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
+
 ## Writing rules
 
 - Never use em dashes (—). Use a comma, period, parentheses, or colon instead.

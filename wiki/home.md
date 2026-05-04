@@ -6,3 +6,7 @@ Index of wiki pages.
 
 - [Create Tickets](Create-Tickets)
 - [Wiki Page Author](Wiki-Page-Author)
+
+## Release process
+
+- [Versioning Strategy](Versioning-Strategy)

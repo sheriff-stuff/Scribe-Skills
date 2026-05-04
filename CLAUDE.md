@@ -17,7 +17,7 @@ A living spec describing the current state of the thing being documented — pre
 
 - No history, no rationale, no explanation, no tutorials.
 - Pages describe what the thing is. If something changes, the page is updated to reflect the new state; the previous wording is not preserved.
-- Open questions live in an `## Open design decisions` section on the relevant page, and are removed once resolved.
+- Open questions live in inline `> [!ODD]` callout blocks placed next to the section they affect, and are removed once resolved.
 - A single `Changelog` page records what changed (added / removed / changed from X to Y), never why. The why lives in commits and MRs.
 - Folders and pages are named by subject, not by content type or format.
 
@@ -32,10 +32,6 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 ## Versioning and release branches
 
 The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
-
-## Writing rules
-
-- Never use em dashes (—). Use a comma, period, parentheses, or colon instead.
 
 ## Helpful references
 

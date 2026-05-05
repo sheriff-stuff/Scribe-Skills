@@ -21,7 +21,7 @@ Each type has a template under [`.claude/skills/create-tickets/templates/`](../.
 
 1. Clarify what the user wants to accomplish, how many tickets are needed, whether an epic is appropriate, and the type of each ticket.
 2. Read what's already in the repo — wiki pages, code, documentation — and reuse existing terminology rather than inventing new names.
-3. Decide the breakdown. Work that has multiple child tickets belonging together gets an epic file plus individual ticket files with `epic: auto`. Unrelated tickets stand alone. Each ticket represents a discrete, independently deliverable piece of work.
+3. Decide the breakdown. Work that has multiple child tickets belonging together gets an epic file plus individual ticket files with `epic: auto`. Unrelated tickets stand alone. Each ticket represents an independently deliverable piece of work.
 4. Batch-write every `.md` file to [`proposed-tickets/`](../proposed-tickets/), using the matching template as the structural basis.
 5. Tell the user the files are ready for review.
 
@@ -51,7 +51,7 @@ File names are lowercase kebab-case, named by subject. One epic file per MR maxi
 - References to pages, code, or other projects use absolute URLs.
 - Concepts that already have a name in the wiki or existing code keep that name.
 - Implementation Approach orients the developer with patterns, existing implementations, and key decisions. It does not prescribe step-by-step instructions or copyable code.
-- Justification and rationale live in the wiki, not in ticket bodies. Tickets link to the wiki page that holds the why; if no such page exists, the skill suggests creating one.
+- Rationale lives in the wiki, not in ticket bodies. Tickets link to the wiki page that holds the why; if no such page exists, the skill suggests creating one.
 - Spec detail owned by a referenced doc is not duplicated. Tickets list scope only — names, structural decisions, enum or constant values, non-obvious gotchas — and link the source of truth.
 - Each acceptance criterion is a falsifiable check a reviewer can perform. Restated scope, project-wide baselines (build, lint, test), and subjective judgements are not acceptance criteria.
 

@@ -17,7 +17,7 @@ A living spec describing the current state of the thing being documented — pre
 
 - No history, no rationale, no explanation, no tutorials.
 - Pages describe what the thing is. If something changes, the page is updated to reflect the new state; the previous wording is not preserved.
-- Open questions live in an `## Open design decisions` section on the relevant page, and are removed once resolved.
+- Open questions live in inline `> [!ODD]` callout blocks placed next to the section they affect, and are removed once resolved.
 - A single `Changelog` page records what changed (added / removed / changed from X to Y), never why. The why lives in commits and MRs.
 - Folders and pages are named by subject, not by content type or format.
 
@@ -35,7 +35,17 @@ The repo follows SemVer with a release-branch workflow. Trunk is `master`; relea
 
 ## Writing rules
 
-- Never use em dashes (—). Use a comma, period, parentheses, or colon instead.
+These apply to everything written in this repo — skills, wiki pages, tickets, commit messages, PR descriptions.
+
+1. **No pleonasm.** Do not append phrases that re-assert what the preceding sentence already said. The closing-reassurance flavor ("nothing more", "just that", "and that's it", "simple as that", "no more, no less") is the most common form.
+
+   **Bad — closing reassurance restates the scope:**
+
+   > It points back to the owner, nothing more.
+
+   **Good — the sentence already bounds itself:**
+
+   > It points back to the owner.
 
 ## Helpful references
 

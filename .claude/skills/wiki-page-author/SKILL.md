@@ -5,7 +5,7 @@ description: Write, update, or remove pages in the project wiki, or organise wik
 
 # Wiki Page Author
 
-This skill writes and updates pages in the project wiki. The wiki is the living design spec for the project — present tense, confirmed facts only. Pages tell a future agent or human what the project is, not how it got there or why. Development tickets are created from these pages.
+This skill writes and updates pages in the project wiki. The wiki is the living design spec for the project being built — present tense, confirmed facts only. Pages tell a future agent or human what the project is, not how it got there or why. An agent reading it should be able to treat every page as ground truth. Development tickets are created from these pages.
 
 The one place where uncertainty is allowed is inline `> [!ODD]` blocks placed next to the section they affect.
 
@@ -25,13 +25,17 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > `Forms/`, `Users/`, `Migration/`, `## Validation rules`
 
-3. **Present tense, declarative.** State what the application does, not what it doesn't.
+3. **Present tense, declarative — describes the application as if it already exists.** Even when the feature hasn't been built, write as if it has. No "we will", "we plan to", or "the idea is".
 
-   **Bad:**
+   **Bad — describes intent rather than state:**
+
+   > We plan to render one question per page.
+
+   **Bad — describes what the application doesn't do:**
 
    > The form does not render multiple questions on one page.
 
-   **Good:**
+   **Good — describes the application as it is:**
 
    > The form renders one question per page.
 

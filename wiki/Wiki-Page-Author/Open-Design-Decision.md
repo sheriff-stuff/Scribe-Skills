@@ -8,7 +8,7 @@ Open Design Decisions are inline in the document that owns the concept, placed n
 
 > [!ODD] ODD-PERM-003 — Should child pages inherit parent permissions by default?
 >
-> **Status:** Open
+> **Ticket:**
 > **Affects:** this page, [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
 > **Options:** A) inherit + override, B) explicit per page, C) read-only inherit
 > **Open questions:** interaction with sharing links; behavior on parent deletion
@@ -52,7 +52,7 @@ Sessions are stored server-side, keyed by an opaque token in an `HttpOnly` cooki
 
 > [!ODD] ODD-SESS-002 — Do sessions persist across browser restarts?
 >
-> **Status:** Open
+> **Ticket:** [PROJ-1421](https://your-tracker/PROJ-1421)
 > **Affects:** this page
 > **Options:** A) cookie expires on browser close, B) cookie has a 30-day TTL, C) configurable per user
 

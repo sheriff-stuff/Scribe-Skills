@@ -1,6 +1,6 @@
 ---
 name: ticket-author
-description: Create GitLab ticket proposals as markdown files in proposed-tickets/. Produces one .md file per issue (and optionally one epic) with YAML frontmatter and a structured body. Handles four ticket types: Epic, Feature, Spike, and Bug. Files are validated and processed by CI on merge to main. Use when the user asks to create, draft, or write tickets; break work into tickets; create issues; write an epic; propose or scope work items; create a spike or bug ticket; breakdown an epic; or plan work as GitLab issues.
+description: Create GitLab ticket proposals as markdown files in proposed-tickets/. Produces one .md file per issue (and optionally one epic) with YAML frontmatter and a structured body. Handles five ticket types: Epic, Feature, Spike, Bug, and Chore. Files are validated and processed by CI on merge to main. Use when the user asks to create, draft, or write tickets; break work into tickets; create issues; write an epic; propose or scope work items; create a spike, bug, or chore ticket; breakdown an epic; or plan work as GitLab issues.
 ---
 
 # Ticket Author
@@ -9,7 +9,7 @@ This skill writes ticket proposal files to `proposed-tickets/`. Each file become
 
 ## Workflow
 
-1. **Understand the request.** Clarify what the user wants to accomplish. Determine how many tickets are needed, whether an epic is appropriate, and what type each ticket is (Epic, Feature, Spike, Bug).
+1. **Understand the request.** Clarify what the user wants to accomplish. Determine how many tickets are needed, whether an epic is appropriate, and what type each ticket is (Epic, Feature, Spike, Bug, Chore).
 
 2. **Gather context from the project.** Before writing tickets, read what's already in the repo to understand the domain wiki pages, existing code, documentation, whatever is there. Use the terminology that already exists (page names, class names, module names). Do not invent new terminology for concepts that already have a name.
 
@@ -19,11 +19,12 @@ This skill writes ticket proposal files to `proposed-tickets/`. Each file become
    - Only one epic file per MR is allowed.
    - Each ticket should represent a discrete, independently deliverable piece of work.
 
-4. **Write all ticket files.** Batch-write every `.md` file to `proposed-tickets/`. For each ticket, read the appropriate template from `templates/` and use it as the structural basis:
-   - [Epic template](templates/epic.md)
-   - [Feature template](templates/feature.md)
-   - [Spike template](templates/spike.md)
-   - [Bug template](templates/bug.md)
+4. **Write all ticket files.** Batch-write every `.md` file to `proposed-tickets/`. For each ticket, read the appropriate template from `assets/` and use it as the structural basis:
+   - [Epic template](assets/epic-template.md)
+   - [Feature template](assets/feature-template.md)
+   - [Spike template](assets/spike-template.md)
+   - [Bug template](assets/bug-template.md)
+   - [Chore template](assets/chore-template.md)
 
 5. **Present for review.** After writing, tell the user the files are ready for review.
 

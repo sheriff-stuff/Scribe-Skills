@@ -5,7 +5,7 @@ description: Write, update, or remove pages in the project wiki, or organise wik
 
 # Wiki Page Author
 
-This skill writes and updates pages in the project wiki. The wiki is a living spec — present tense, confirmed facts only. Pages tell a future agent or human what the application is, not how it got there or why.
+This skill writes and updates pages in the project wiki. The wiki is the living design spec for the project — present tense, confirmed facts only. Pages tell a future agent or human what the project is, not how it got there or why. Development tickets are created from these pages.
 
 The one place where uncertainty is allowed is inline `> [!ODD]` blocks placed next to the section they affect.
 

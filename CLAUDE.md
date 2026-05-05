@@ -5,7 +5,7 @@ Scribe Skills is a collection of reusable skills and agents that support a spec-
 ## The workflow
 
 1. **Wiki page** — write or update a wiki page that describes the feature as a living spec. (skill: `wiki-page-author`)
-2. **Tickets** — turn the wiki page (or the diff against it) into tickets. (skill: `create-tickets`)
+2. **Tickets** — turn the wiki page (or the diff against it) into tickets. (skill: `ticket-author`)
 3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
 4. **Pull request** — open the PR. No dedicated skill.
 
@@ -26,7 +26,7 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 ## What this repo contains
 
 - `.claude/skills/wiki-page-author/` — authors wiki pages.
-- `.claude/skills/create-tickets/` — generates tickets.
+- `.claude/skills/ticket-author/` — authors tickets.
 - `fixtures/cortex-wiki/` — an example wiki used to develop and test the skills against. A fixture, not a real wiki.
 
 ## Versioning and release branches

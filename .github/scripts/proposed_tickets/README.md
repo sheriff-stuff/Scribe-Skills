@@ -1,6 +1,6 @@
 # proposed_tickets
 
-CI helper that turns the markdown files written by the `create-tickets` skill into GitHub issues.
+CI helper that turns the markdown files written by the `ticket-author` skill into GitHub issues.
 
 ## What it does
 

@@ -1,9 +1,9 @@
 ---
-name: create-tickets
+name: ticket-author
 description: Create GitLab ticket proposals as markdown files in proposed-tickets/. Produces one .md file per issue (and optionally one epic) with YAML frontmatter and a structured body. Handles four ticket types: Epic, Feature, Spike, and Bug. Files are validated and processed by CI on merge to main. Use when the user asks to create, draft, or write tickets; break work into tickets; create issues; write an epic; propose or scope work items; create a spike or bug ticket; breakdown an epic; or plan work as GitLab issues.
 ---
 
-# Create Tickets
+# Ticket Author
 
 This skill writes ticket proposal files to `proposed-tickets/`. Each file becomes a GitLab issue (or epic) when the MR merges to main. This skill does **not** create branches, commits, or MRs.
 

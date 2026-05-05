@@ -4,7 +4,7 @@ Index of wiki pages.
 
 ## Skills
 
-- [Create Tickets](Create-Tickets)
+- [Ticket Author](Ticket-Author)
 - [Wiki Page Author](Wiki-Page-Author)
 
 ## Release process

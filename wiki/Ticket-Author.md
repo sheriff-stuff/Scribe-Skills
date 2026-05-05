@@ -1,6 +1,6 @@
-# Create Tickets
+# Ticket Author
 
-The create-tickets skill writes ticket proposal files to [`proposed-tickets/`](../proposed-tickets/). Each file becomes a GitLab issue (or epic) when the MR merges to main. The skill does not create branches, commits, or MRs.
+The ticket-author skill writes ticket proposal files to [`proposed-tickets/`](../proposed-tickets/). Each file becomes a GitLab issue (or epic) when the MR merges to main. The skill does not create branches, commits, or MRs.
 
 ## Triggers
 
@@ -15,7 +15,7 @@ The create-tickets skill writes ticket proposal files to [`proposed-tickets/`](.
 - Spike
 - Bug
 
-Each type has a template under [`.claude/skills/create-tickets/templates/`](../.claude/skills/create-tickets/templates/).
+Each type has a template under [`.claude/skills/ticket-author/templates/`](../.claude/skills/ticket-author/templates/).
 
 ## Workflow
 

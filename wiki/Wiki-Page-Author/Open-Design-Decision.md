@@ -20,7 +20,7 @@ The pointer block does not restate the question, options, or context.
 
 ## ID format
 
-`ODD-<TOPIC>-<slug>` — e.g., `ODD-PERM-child-page-inheritance`. The topic prefix matches the folder or concept the decision belongs to. The slug is kebab-case, derived from the question, and specific enough to be distinct on its own (`child-page-inheritance`, not `inheritance`).
+`ODD-<TOPIC>-<slug>` — e.g., `ODD-PERM-child-page-inheritance`. The topic prefix matches the folder or concept the decision belongs to. The slug is kebab-case, derived from the question, and distinct (`child-page-inheritance`, not `inheritance`).
 
 ## Rules
 

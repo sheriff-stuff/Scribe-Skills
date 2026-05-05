@@ -4,11 +4,11 @@ One-sentence statement of what this page is about.
 
 ## [Section name]
 
-Facts about the subject. Present tense, declarative.
+Facts about the subject.
 
 ## [Section name]
 
-Facts about the subject. Present tense, declarative.
+Facts about the subject.
 
 ## Related <optional>
 

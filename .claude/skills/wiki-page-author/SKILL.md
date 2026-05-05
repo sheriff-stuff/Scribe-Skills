@@ -89,15 +89,23 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > New pages use the [page template](../.claude/skills/wiki-page-author/assets/page-template).
 
+8. **No pleonasm.** State each fact without redundant qualifiers or filler.
+
+   **Bad:**
+
+   > Each form always renders exactly one single question per page.
+
+   **Good:**
+
+   > Forms render one question per page.
+
 ## Open Design Decisions
 
-Each Open Design Decision (ODD) has an ID of the form `ODD-<TOPIC>-<slug>`, where the topic prefix matches the page or folder concept (e.g. `PERM`, `FORM`, `SESS`).
-
-The page that owns the concept carries the full ODD — see the [ODD template](assets/odd-template) for the canonical shape.
+Each Open Design Decision (ODD) has an ID of the form `ODD-<TOPIC>-<slug>`. The page that owns the concept carries the full ODD — see the [ODD template](assets/odd-template) for the canonical shape.
 
 ### Pointer blocks on affected pages
 
-Other affected pages carry a one-line pointer next to the affected section. It points back to the owner, nothing more.
+Other affected pages carry a one-line pointer next to the affected section. It points back to the owner.
 
 > [!ODD] ODD-PERM-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
 
@@ -107,7 +115,7 @@ When a pointer is added to another page, the owner page's `Affects:` line is upd
 
 These apply only inside ODD blocks.
 
-1. **IDs follow `ODD-<TOPIC>-<slug>`.** Topic prefix matches the page or folder concept (`PERM`, `FORM`, `SESS`). Slug is kebab-case, derived from the question, and specific enough to be distinct — `child-page-inheritance` not `inheritance`.
+1. **IDs follow `ODD-<TOPIC>-<slug>`.** Topic prefix matches the page or folder concept (`PERM`, `FORM`, `SESS`). Slug is kebab-case, derived from the question, and distinct — `child-page-inheritance` not `inheritance`.
 2. **`Ticket:` is always present.** Leave the value blank unless a tracker ticket exists.
 3. **`Affects:` lists every page that carries a pointer block to this ODD.**
 4. **Hedging is allowed.** "Probably", "leaning toward", "might", "should" are fine here.

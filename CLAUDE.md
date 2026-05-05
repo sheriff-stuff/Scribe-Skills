@@ -33,6 +33,20 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 
 The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
 
+## Writing rules
+
+These apply to everything written in this repo — skills, wiki pages, tickets, commit messages, PR descriptions.
+
+1. **No pleonasm.** Do not append phrases that re-assert what the preceding sentence already said. The closing-reassurance flavor ("nothing more", "just that", "and that's it", "simple as that", "no more, no less") is the most common form.
+
+   **Bad — closing reassurance restates the scope:**
+
+   > It points back to the owner, nothing more.
+
+   **Good — the sentence already bounds itself:**
+
+   > It points back to the owner.
+
 ## Helpful references
 
 Two places that are useful when working on skills — reach for them when grounding in the spec or in real examples would help, but they're not required for every task:

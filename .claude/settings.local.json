@@ -1,5 +1,9 @@
 {
   "permissions": {
-    "allow": ["Read(//tmp/**)"]
+    "allow": [
+      "Read(//tmp/**)",
+      "Bash(cp -r *)",
+      "Bash(python *)"
+    ]
   }
 }

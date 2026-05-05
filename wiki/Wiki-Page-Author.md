@@ -7,6 +7,5 @@ The wiki-page-author skill writes, updates, and removes pages in the project wik
 - [Triggers](Wiki-Page-Author/Triggers)
 - [Scope](Wiki-Page-Author/Scope)
 - [Body Rules](Wiki-Page-Author/Body-Rules)
-- [Open Design Decisions Rules](Wiki-Page-Author/Open-Design-Decisions-Rules)
+- [Open Design Decision](Wiki-Page-Author/Open-Design-Decision)
 - [Standing Instructions](Wiki-Page-Author/Standing-Instructions)
-- [Resolving an Open Design Decision](Wiki-Page-Author/Resolving-An-Open-Design-Decision)

@@ -47,7 +47,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    **Good — uncertainty captured in a block:**
 
-   > [!ODD] ODD-SESS-browser-restart-persistence — Whether sessions persist across browser restarts.
+   > [!ODD] ODD-browser-restart-persistence — Whether sessions persist across browser restarts.
 
    **Bad — body restates the adjacent ODD:**
 
@@ -57,7 +57,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > Forms render one question per page.
    >
-   > [!ODD] ODD-FORM-partial-submission-save — Are partial submissions saved automatically, or only on explicit "save draft"?
+   > [!ODD] ODD-partial-submission-save — Are partial submissions saved automatically, or only on explicit "save draft"?
 
 5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
@@ -105,13 +105,13 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
 ## Open Design Decisions
 
-Each Open Design Decision (ODD) has an ID of the form `ODD-<TOPIC>-<slug>`. The page that owns the concept carries the full ODD — see the [ODD template](assets/odd-template) for the canonical shape.
+Each Open Design Decision (ODD) has an ID of the form `ODD-<slug>`. The page that owns the concept carries the full ODD — see the [ODD template](assets/odd-template) for the canonical shape.
 
 ### Pointer blocks on affected pages
 
 Other affected pages carry a one-line pointer next to the affected section. It points back to the owner.
 
-> [!ODD] ODD-PERM-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
+> [!ODD] ODD-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
 
 When a pointer is added to another page, the owner page's `Affects:` line is updated in the same operation to include that page.
 
@@ -119,7 +119,7 @@ When a pointer is added to another page, the owner page's `Affects:` line is upd
 
 These apply only inside ODD blocks.
 
-1. **IDs follow `ODD-<TOPIC>-<slug>`.** Topic prefix matches the page or folder concept (`PERM`, `FORM`, `SESS`). Slug is kebab-case, derived from the question, and distinct — `child-page-inheritance` not `inheritance`.
+1. **IDs follow `ODD-<slug>`.** Slug is kebab-case, derived from the question, and distinct — `child-page-inheritance` not `inheritance`.
 2. **`Ticket:` is always present.** Leave the value blank unless a tracker ticket exists.
 3. **`Affects:` lists every page that carries a pointer block to this ODD.**
 4. **Hedging is allowed.** "Probably", "leaning toward", "might", "should" are fine here.

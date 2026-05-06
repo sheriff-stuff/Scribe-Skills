@@ -6,7 +6,7 @@ An Open Design Decision (ODD) is a question about a document's design that hasn'
 
 Open Design Decisions are inline in the document that owns the concept, placed next to the section they affect, marked with a callout block:
 
-> [!ODD] ODD-PERM-child-page-inheritance — Should child pages inherit parent permissions by default?
+> [!ODD] ODD-child-page-inheritance — Should child pages inherit parent permissions by default?
 >
 > **Ticket:**
 > **Affects:** [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
@@ -14,13 +14,13 @@ Open Design Decisions are inline in the document that owns the concept, placed n
 
 When a decision affects documents in other folders, the owning doc carries the full definition. Affected docs reference it with a pointer block placed next to the section it affects:
 
-> [!ODD] ODD-PERM-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
+> [!ODD] ODD-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
 
 The pointer block does not restate the question, options, or context.
 
 ## ID format
 
-`ODD-<TOPIC>-<slug>` — e.g., `ODD-PERM-child-page-inheritance`. The topic prefix matches the folder or concept the decision belongs to. The slug is kebab-case, derived from the question, and distinct (`child-page-inheritance`, not `inheritance`).
+`ODD-<slug>` — e.g., `ODD-child-page-inheritance`. The slug is kebab-case, derived from the question, and distinct (`child-page-inheritance`, not `inheritance`).
 
 ## Rules
 
@@ -50,7 +50,7 @@ A session is created on successful login and tied to the user's account.
 
 Sessions are stored server-side, keyed by an opaque token in an `HttpOnly` cookie.
 
-> [!ODD] ODD-SESS-browser-restart-persistence — Do sessions persist across browser restarts?
+> [!ODD] ODD-browser-restart-persistence — Do sessions persist across browser restarts?
 >
 > **Ticket:** [PROJ-1421](https://your-tracker/PROJ-1421)
 > **Open questions:** cookie expires on browser close vs. 30-day TTL vs. configurable per user

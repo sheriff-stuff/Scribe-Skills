@@ -1,6 +1,6 @@
 ---
 name: wiki-page-author
-description: Write, update, or remove pages in the project wiki, or organise wiki content into folders. Handles the page body and inline open design decision (ODD) blocks, which have their own inverted rules. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, or expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided") — those become inline `> [!ODD]` blocks.
+description: Write, update, or remove pages in the project wiki, or organise wiki content into folders. Also creates, updates, and resolves inline open design decision (ODD) blocks. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided" — captured as ODD blocks), or asks to add, update, or resolve an ODD directly.
 ---
 
 # Wiki Page Author
@@ -45,19 +45,19 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > Sessions probably persist across browser restarts.
 
-   **Good — block names the open question directly:**
+   **Good — block names the open point directly:**
 
-   > [!ODD] ODD-browser-restart-persistence — Whether sessions persist across browser restarts.
+   > [!ODD] ODD-browser-restart-persistence — Session persistence across browser restarts is undecided.
 
    **Bad — body restates the adjacent ODD:**
 
    > Forms render one question per page. Whether partial submissions are saved automatically or only on explicit "save draft" is still being decided.
 
-   **Good — body confident, block carries the open question:**
+   **Good — body confident, block carries the open point:**
 
    > Forms render one question per page.
    >
-   > [!ODD] ODD-partial-submission-save — Whether partial submissions are saved automatically or only on explicit "save draft".
+   > [!ODD] ODD-partial-submission-save — Partial submission save trigger is undecided — automatic, or only on explicit "save draft".
 
 5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
@@ -150,7 +150,7 @@ These apply throughout the work.
 
 - **Use the [page template](assets/page-template) for new pages.**
 - **Use the [Open Design Decision template](assets/odd-template) when adding an Open Design Decision.**
-- **Keep [`home.md`](../../../wiki/home) in sync.** If a page is added or removed, update [`home.md`](../../../wiki/home) in the same operation.
+- **Keep [`index.md`] or [`home.md`] in sync.** If a page is added or removed, update [`index.md`] or [`home.md`] in the same operation.
 - **Flag inconsistencies, do not fix them silently.** If a change makes another wiki page inconsistent, tell the user. Do not edit other pages unprompted.
 - **Re-read before finishing.** Read the body back. Check that nothing in it is guessed, hedged, justified, or historical. Fix anything that is.
 

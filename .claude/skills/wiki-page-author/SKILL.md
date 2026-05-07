@@ -83,7 +83,17 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > Sessions persist across browser restarts.
 
-7. **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
+7. **For external services, document your integration — not their API.** Capture which endpoints you call, what you send, which response fields you depend on, and how you handle errors. Link to the third party's docs for everything else; do not mirror their spec.
+
+   **Bad — mirrors the third-party API (drifts when they change it):**
+
+   > `POST /v1/users` returns `{id, name, email, phone, address, created_at, updated_at, status, role}`.
+
+   **Good — documents the contract:**
+
+   > We call `POST /v1/users` with `{name, email}`. We read `id` and `email` from the response. On `429`, we retry with exponential backoff. See [the API docs](https://example.com/docs) for the full response shape.
+
+8. **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
 
    **Bad — bare in-repo path:**
 
@@ -93,7 +103,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > New pages use the [page template](../.claude/skills/wiki-page-author/assets/page-template).
 
-8. **No pleonasm.** State each fact without redundant qualifiers or filler.
+9. **No pleonasm.** State each fact without redundant qualifiers or filler.
 
    **Bad:**
 

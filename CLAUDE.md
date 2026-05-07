@@ -2,6 +2,8 @@
 
 Scribe Skills is a collection of reusable skills and agents that support a spec-driven development workflow. The skills are project-agnostic — point them at any project (including this one).
 
+Everything under `.claude/` is read by Claude Code, not humans — templates and assets are instructions to the agent.
+
 ## The workflow
 
 1. **Wiki page** — write or update a wiki page that describes the feature as a living spec. (skill: `wiki-page-author`)

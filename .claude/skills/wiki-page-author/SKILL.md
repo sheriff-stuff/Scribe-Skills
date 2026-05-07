@@ -47,7 +47,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    **Good — block names the open point directly:**
 
-   > [!ODD] ODD-browser-restart-persistence — Session persistence across browser restarts is undecided.
+   > [!ODD] ODD-SESSIONS-browser-restart-persistence — Session persistence across browser restarts is undecided.
 
    **Bad — body restates the adjacent ODD:**
 
@@ -57,7 +57,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > Forms render one question per page.
    >
-   > [!ODD] ODD-partial-submission-save — Partial submission save trigger is undecided — automatic, or only on explicit "save draft".
+   > [!ODD] ODD-FORMS-partial-submission-save — Partial submission save trigger is undecided — automatic, or only on explicit "save draft".
 
 5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
@@ -115,13 +115,13 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
 ## Open Design Decisions
 
-Each Open Design Decision (ODD) has an ID of the form `ODD-<slug>`. The page that owns the concept carries the full ODD — see the [ODD template](assets/odd-template) for the canonical shape.
+Each Open Design Decision (ODD) has an ID of the form `ODD-<AREA>-<slug>`. The page that owns the concept carries the full ODD, prefixed by an HTML anchor (`<a id="ODD-<AREA>-<slug>"></a>`) so pointer blocks on other pages can deep-link to it — see the [ODD template](assets/odd-template) for the canonical shape.
 
 ### Pointer blocks on affected pages
 
-Other affected pages carry a one-line pointer next to the affected section. It points back to the owner.
+Other affected pages carry a one-line pointer next to the affected section. The ID is a markdown link to the owner ODD's anchor on the owner page.
 
-> [!ODD] ODD-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
+> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#ODD-PERMISSIONS-child-page-inheritance) — endpoint behavior depends on inheritance decision.
 
 When a pointer is added to another page, the owner page's `Affects:` line is updated in the same operation to include that page.
 
@@ -129,9 +129,9 @@ When a pointer is added to another page, the owner page's `Affects:` line is upd
 
 These apply only inside ODD blocks.
 
-1. **IDs follow `ODD-<slug>`.** Slug is kebab-case, describes the open point, and is distinct — `child-page-inheritance` not `inheritance`.
-2. **`Ticket:` is always present.** Leave the value blank unless a tracker ticket exists.
-3. **`Affects:` lists every page that carries a pointer block to this ODD.**
+1. **IDs follow `ODD-<AREA>-<slug>`.** Area is one uppercase word naming the page or folder concept the ODD lives under (`PERMISSIONS`, `FORMS`, `SESSIONS`). Slug is kebab-case, describes the open point, and is distinct — `child-page-inheritance` not `inheritance`.
+2. **`Ticket:` is optional.** Include the line only when a tracker ticket exists.
+3. **`Affects:` is optional.** lists every page that carries a pointer block to this ODD.
 4. **Rationale is allowed**
 5. **Every block traces back to something the user said.** Do not invent uncertainty.
 6. **One decision per block.**
@@ -141,7 +141,7 @@ These apply only inside ODD blocks.
 When an Open Design Decision is answered:
 
 1. Rewrite the relevant body sections in the owner page and every affected page in confident present tense, incorporating the answer.
-2. Remove the `> [!ODD]` block from the owner page.
+2. Remove the `> [!ODD]` block and its `<a id>` anchor from the owner page.
 3. Remove every pointer `> [!ODD]` block referencing that ID across the wiki.
 
 ## Standing Instructions

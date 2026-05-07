@@ -6,7 +6,8 @@ An Open Design Decision (ODD) is a question about a document's design that hasn'
 
 Open Design Decisions are inline in the document that owns the concept, placed next to the section they affect, marked with a callout block:
 
-> [!ODD] ODD-child-page-inheritance — Should child pages inherit parent permissions by default?
+<a id="ODD-PERMISSIONS-child-page-inheritance"></a>
+> [!ODD] ODD-PERMISSIONS-child-page-inheritance — Should child pages inherit parent permissions by default?
 >
 > **Ticket:**
 > **Affects:** [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
@@ -14,13 +15,13 @@ Open Design Decisions are inline in the document that owns the concept, placed n
 
 When a decision affects documents in other folders, the owning doc carries the full definition. Affected docs reference it with a pointer block placed next to the section it affects:
 
-> [!ODD] ODD-child-page-inheritance (defined in [Permissions](../Permissions/Permissions)) — endpoint behavior depends on inheritance decision.
+> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#ODD-PERMISSIONS-child-page-inheritance) — endpoint behavior depends on inheritance decision.
 
 The pointer block does not restate the question, options, or context.
 
 ## ID format
 
-`ODD-<slug>` — e.g., `ODD-child-page-inheritance`. The slug is kebab-case, derived from the question, and distinct (`child-page-inheritance`, not `inheritance`).
+`ODD-<AREA>-<slug>` — e.g., `ODD-PERMISSIONS-child-page-inheritance`. Area is one uppercase word naming the page or folder concept the ODD lives under. Slug is kebab-case, describes the open point, and is distinct (`child-page-inheritance`, not `inheritance`).
 
 ## Rules
 
@@ -50,7 +51,8 @@ A session is created on successful login and tied to the user's account.
 
 Sessions are stored server-side, keyed by an opaque token in an `HttpOnly` cookie.
 
-> [!ODD] ODD-browser-restart-persistence — Do sessions persist across browser restarts?
+<a id="ODD-SESSIONS-browser-restart-persistence"></a>
+> [!ODD] ODD-SESSIONS-browser-restart-persistence — Do sessions persist across browser restarts?
 >
 > **Ticket:** [PROJ-1421](https://your-tracker/PROJ-1421)
 > **Open questions:** cookie expires on browser close vs. 30-day TTL vs. configurable per user

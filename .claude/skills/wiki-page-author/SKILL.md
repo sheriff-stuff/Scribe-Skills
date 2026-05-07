@@ -39,13 +39,13 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > The form renders one question per page.
 
-4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; uncertainty — invented facts, hedges, or content duplicating an adjacent ODD — goes in a block next to the relevant section. If something is unknown or undecided, ask the user; do not infer from related pages, related code, or what seems plausible.
+4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section, stated as the open point itself. If something is unknown or undecided, ask the user; do not infer from related pages, related code, or what seems plausible.
 
    **Bad — hedge in the body:**
 
    > Sessions probably persist across browser restarts.
 
-   **Good — uncertainty captured in a block:**
+   **Good — block names the open question directly:**
 
    > [!ODD] ODD-browser-restart-persistence — Whether sessions persist across browser restarts.
 
@@ -57,7 +57,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` blocks.
 
    > Forms render one question per page.
    >
-   > [!ODD] ODD-partial-submission-save — Are partial submissions saved automatically, or only on explicit "save draft"?
+   > [!ODD] ODD-partial-submission-save — Whether partial submissions are saved automatically or only on explicit "save draft".
 
 5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
@@ -129,13 +129,12 @@ When a pointer is added to another page, the owner page's `Affects:` line is upd
 
 These apply only inside ODD blocks.
 
-1. **IDs follow `ODD-<slug>`.** Slug is kebab-case, derived from the question, and distinct — `child-page-inheritance` not `inheritance`.
+1. **IDs follow `ODD-<slug>`.** Slug is kebab-case, describes the open point, and is distinct — `child-page-inheritance` not `inheritance`.
 2. **`Ticket:` is always present.** Leave the value blank unless a tracker ticket exists.
 3. **`Affects:` lists every page that carries a pointer block to this ODD.**
-4. **Hedging is allowed.** "Probably", "leaning toward", "might", "should" are fine here.
-5. **Rationale is allowed**
-6. **Listing options without a chosen answer is allowed**
-7. **Every block traces back to something the user said.** Do not invent uncertainty.
+4. **Rationale is allowed**
+5. **Every block traces back to something the user said.** Do not invent uncertainty.
+6. **One decision per block.**
 
 ### Resolving an Open Design Decision
 

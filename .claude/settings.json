@@ -1,7 +1,5 @@
 {
   "permissions": {
-    "additionalDirectories": [
-      "../anthropics-skills"
-    ]
+    "additionalDirectories": ["../examples"]
   }
 }

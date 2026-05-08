@@ -68,7 +68,3 @@ As a <role>, I want <capability> so that <benefit>.
 -->
 
 - <Open question>
-
-## Links *(optional)*
-
-- [<Document title>](<URL>) — <one-line description>

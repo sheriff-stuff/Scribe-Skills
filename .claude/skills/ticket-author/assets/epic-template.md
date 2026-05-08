@@ -6,7 +6,15 @@ labels: [type::epic, "area::<name>"]
 
 > **Epic** — <High-level goal: what this body of work delivers when all child tickets are complete.>
 
-## Goals / Outcomes *(mandatory)*
+## Source Documentation _(mandatory)_
+
+<!--
+  The wiki page(s) or spec(s) driving this epic.
+-->
+
+- [<Document title>](URL) — <one-line description>
+
+## Goals / Outcomes _(mandatory)_
 
 <!--
   Capabilities and outcomes, not implementation tasks.
@@ -16,7 +24,7 @@ labels: [type::epic, "area::<name>"]
 - <Second outcome>
 - <Third outcome>
 
-## Scope *(mandatory)*
+## Scope _(mandatory)_
 
 <!--
   High-level only — detail belongs in child tickets.
@@ -30,7 +38,7 @@ labels: [type::epic, "area::<name>"]
 
 - <What is deferred or not included>
 
-## Child Work Items *(mandatory)*
+## Child Work Items _(mandatory)_
 
 <!--
   Titles of the child tickets created in this MR.
@@ -50,7 +58,7 @@ labels: [type::epic, "area::<name>"]
 
 - <Work that is waiting on this epic>
 
-## Definition of Done *(mandatory)*
+## Definition of Done _(mandatory)_
 
 <!--
   Outcomes spanning multiple tickets or emerging after children complete. Don't duplicate child AC.
@@ -59,10 +67,6 @@ labels: [type::epic, "area::<name>"]
 - [ ] All child work items are complete
 - [ ] <Epic-level verification or outcome>
 
-## Risks & Open Questions *(optional)*
+## Risks & Open Questions _(optional)_
 
 - <Risk or open question>
-
-## Links *(optional)*
-
-- [<Document title>](<URL>) — <one-line description>

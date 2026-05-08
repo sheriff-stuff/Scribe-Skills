@@ -36,7 +36,3 @@ weight: <non-negative integer>
 
 - [ ] <The specific things that should be true when the spike is complete>
 - [ ] Findings documented in a new wiki page at <wiki page path> covering: what worked, what was awkward, any surprises, and a recommendation on whether to proceed
-
-## Links *(optional)*
-
-- [<Document title>](<URL>) — <one-line description>

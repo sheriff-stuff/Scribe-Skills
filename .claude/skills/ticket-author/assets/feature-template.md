@@ -6,17 +6,17 @@ weight: <non-negative integer>
 
 > **Feature** — <One-sentence summary of what this ticket delivers.>
 
-## User Story *(only for user-facing features)*
+## User Story _(only for user-facing features)_
 
 As a <role>, I want <capability> so that <benefit>.
 
-## Context *(omit when this ticket is part of an epic — the epic provides context)*
+## Context _(omit when this ticket is part of an epic — the epic provides context)_
 
 <!--
   Why this work is needed.
 -->
 
-## Scope *(mandatory)*
+## Scope _(mandatory)_
 
 <!--
   Discrete deliverables.
@@ -26,13 +26,13 @@ As a <role>, I want <capability> so that <benefit>.
 2. <Second deliverable>
 3. <Third deliverable>
 
-## Implementation Approach *(mandatory)*
+## Implementation Approach _(mandatory)_
 
 <!--
   Anchors to mirror, patterns to follow, key decisions.
 -->
 
-## Testing *(mandatory)*
+## Testing _(mandatory)_
 
 <!--
   Behaviors needing test coverage.
@@ -55,16 +55,12 @@ As a <role>, I want <capability> so that <benefit>.
 
 - <Work waiting on this ticket>
 
-## Acceptance Criteria *(mandatory)*
+## Acceptance Criteria _(mandatory)_
 
 - [ ] <Specific, testable criterion>
 - [ ] <Another criterion>
 - [ ] <Another criterion>
 
-## Open Questions *(optional)*
+## Risks _(optional)_
 
-<!--
-  Unresolved unknowns block pickup. Resolve via the wiki (or as ODD blocks) before this ticket is picked up.
--->
-
-- <Open question>
+- <Risk>

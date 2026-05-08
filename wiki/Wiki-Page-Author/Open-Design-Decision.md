@@ -9,9 +9,8 @@ Open Design Decisions are inline in the document that owns the concept, placed n
 <a id="ODD-PERMISSIONS-child-page-inheritance"></a>
 > [!ODD] ODD-PERMISSIONS-child-page-inheritance — Should child pages inherit parent permissions by default?
 >
-> **Ticket:**
 > **Affects:** [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
-> **Open questions:** inherit + override vs. explicit per page vs. read-only inherit; interaction with sharing links; behavior on parent deletion
+> **Context:** inherit + override vs. explicit per page vs. read-only inherit; interaction with sharing links; behavior on parent deletion
 
 When a decision affects documents in other folders, the owning doc carries the full definition. Affected docs reference it with a pointer block placed next to the section it affects:
 
@@ -31,8 +30,9 @@ These apply only inside `> [!ODD]` blocks:
 - Rationale is allowed when the user has provided it.
 - Options without a chosen answer are allowed.
 - Every ODD traces back to something the user said.
-- `Ticket:` is always present. The value is blank unless a tracker ticket exists.
+- `Ticket:` is optional. The line is omitted when no tracker ticket exists.
 - `Affects:` on the owner block lists every page that carries a pointer block to this ODD. The owner page is not listed. The line is omitted if no other pages are affected.
+- `Context:` carries related considerations, candidate options, and edge cases. Paragraphs, bullets, and other markdown are allowed.
 
 ## Example page
 
@@ -55,7 +55,7 @@ Sessions are stored server-side, keyed by an opaque token in an `HttpOnly` cooki
 > [!ODD] ODD-SESSIONS-browser-restart-persistence — Do sessions persist across browser restarts?
 >
 > **Ticket:** [PROJ-1421](https://your-tracker/PROJ-1421)
-> **Open questions:** cookie expires on browser close vs. 30-day TTL vs. configurable per user
+> **Context:** cookie expires on browser close vs. 30-day TTL vs. configurable per user
 
 ## Termination
 

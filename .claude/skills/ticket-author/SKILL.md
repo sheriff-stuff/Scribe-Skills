@@ -7,6 +7,10 @@ description: Create GitLab ticket proposals as markdown files in proposed-ticket
 
 This skill writes ticket proposal files to `proposed-tickets/`. Each file becomes a GitLab issue (or epic) when the MR merges to main. This skill does **not** create branches, commits, or MRs.
 
+## Consumer
+
+Each ticket is a prompt for Claude Code. Combined with the wiki and the codebase, it drives an LLM agent to produce code and a PR. The rules below flow from that — write for an LLM that has the wiki in context, navigates by named anchors (files, classes, wiki pages), and uses Acceptance Criteria as its stop condition.
+
 ## Workflow
 
 1. **Understand the request.** Clarify what the user wants to accomplish. Determine how many tickets are needed, whether an epic is appropriate, and what type each ticket is (Epic, Feature, Spike, Bug, Chore).
@@ -25,8 +29,6 @@ This skill writes ticket proposal files to `proposed-tickets/`. Each file become
    - [Spike template](assets/spike-template.md)
    - [Bug template](assets/bug-template.md)
    - [Chore template](assets/chore-template.md)
-
-5. **Present for review.** After writing, tell the user the files are ready for review.
 
 ## Frontmatter Schema
 
@@ -57,9 +59,31 @@ Lowercase kebab-case named by subject.
 2. **Do not infer technical decisions.** Do not prescribe specific class names, design patterns, library choices, file paths, or route paths unless they come from the wiki or existing code or the user asks you to.
 3. **Use full URLs when referencing pages, code, or other projects.** Use absolute URLs, not relative paths.
 4. **Use the language of existing documentation.** When a concept already has a name in the wiki or existing code, use that name. Do not introduce new terminology for the same thing.
-5. **Implementation Approach should orient, not prescribe.** Reference patterns, existing implementations, and key decisions to guide the developer — do not write step-by-step instructions or code that the developer would simply copy into the implementation.
-6. **Do not write justification or rationale into ticket bodies.** Tickets answer _what_ is being done and _how it'll be verified_. The _why_ lives in the wiki. If justification feels necessary, link to the wiki page that holds it; if no such page exists, suggest creating one via wiki.
-7. **Don't duplicate spec detail from the source doc.** If a referenced doc owns the full spec, list scope only (names, structural decisions, enum/constant values, non-obvious gotchas) and link it as source of truth.
+5. **Reference files, not line numbers.** No `#L104`, no `#L3-6` — line anchors rot when files change. Identify the location by content (symbol name, string, or section heading); link to the file, not a line range.
+   **Bad:**
+
+   > Update discount calculation logic ([`PricingService#L47-89`](url)).
+
+   **Good:**
+
+   > Update discount calculation logic in [`PricingService.applyDiscount`](url).
+
+6. **Implementation Approach orients, not prescribes.** Reference patterns and existing implementations by concrete anchors (files, classes, wiki pages) — not numbered steps. Use _mirror_, not _copy_. Every Scope item must be reachable from the Approach.
+
+   **Bad:**
+
+   > - Copy `BaseRecord`, `StoreConfig`, `TimestampReadConverter`, `TimestampWriteConverter` from inventory-service, adapting packages.
+   > - In [`config.yml`](url), change `inventory.store.migrations` to `orders.store.migrations`.
+   > - Remove store autoconfigure exclusions from [`config.yml`](url).
+
+   **Good:**
+
+   > Mirror inventory-service's store setup, adapting `com.example.inventory` packages to `com.example.orders`. Anchor classes: [`BaseRecord`](url), [`StoreConfig`](url), [`TimestampReadConverter`](url), [`TimestampWriteConverter`](url). Bring along anything they reference.
+   >
+   > In `config.yml`: update migration scan package `inventory.store.migrations` → `orders.store.migrations`; remove store autoconfigure exclusions.
+
+7. **Do not write justification or rationale into ticket bodies.** Tickets answer _what_ is being done and _how it'll be verified_. The _why_ lives in the wiki. If justification feels necessary, link to the wiki page that holds it; if no such page exists, suggest creating one via wiki.
+8. **Don't duplicate spec detail from the source doc.** If a referenced doc owns the full spec, list scope only (names, structural decisions, enum/constant values, non-obvious gotchas) and link it as source of truth.
 
    **Bad: duplicates the schema doc:**
 
@@ -69,7 +93,7 @@ Lowercase kebab-case named by subject.
 
    > Fields per `User-Storage.md`. If ticket and doc disagree, the doc wins — flag in MR.
 
-8. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not a repeat of scope/requirements, not a project-wide baseline (build/lint/test checks belong in the codebases `CLAUDE.md`), not subjective.
+9. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not a repeat of scope/requirements, not a project-wide baseline (build/lint/test checks belong in the codebases `CLAUDE.md`), not subjective.
 
    **Bad — restates the task, baselines, and subjective judgements:**
 
@@ -94,3 +118,5 @@ Lowercase kebab-case named by subject.
    **Good — names the values inline:**
 
    > - Mongock migration creates indexes on `state`, `_class`, `createdAt`, and `createdBy`
+
+10. **Testing names behaviors, not cases.** Feature and bug tickets require automated tests. For bugs, a regression test covering the reproduction case is mandatory. Name the behaviors that must have coverage; the implementing agent derives cases and edges from the code change, wiki, and codebase already in context. Do not enumerate cases, edges, frameworks, or file paths.

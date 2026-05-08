@@ -7,7 +7,7 @@ Everything under `.claude/` is read by Claude Code, not humans — templates and
 ## The workflow
 
 1. **Wiki page** — write or update a wiki page that describes the feature as a living spec. (skill: `wiki-page-author`)
-2. **Tickets** — turn the wiki page (or the diff against it) into tickets. (skill: `ticket-author`)
+2. **Tickets** — turn the wiki page (or the diff against it) into tickets. Each ticket is a prompt for Claude Code: combined with the wiki, it drives an LLM agent to produce code and a PR. (skill: `ticket-author`)
 3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
 4. **Pull request** — open the PR. No dedicated skill.
 
@@ -35,25 +35,29 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 
 The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
 
-## Writing rules
+## Rules
+
+1. When a skill is added, changed, or removed, update its wiki page in the same change.
 
 These apply to everything written in this repo — skills, wiki pages, tickets, commit messages, PR descriptions.
 
-1. **No pleonasm.** Do not append phrases that re-assert what the preceding sentence already said. The closing-reassurance flavor ("nothing more", "just that", "and that's it", "simple as that", "no more, no less") is the most common form.
+### No pleonasm
 
-   **Bad — closing reassurance restates the scope:**
+Do not append phrases that re-assert what the preceding sentence already said. The closing-reassurance flavor ("nothing more", "just that", "and that's it", "simple as that", "no more, no less") is the most common form.
 
-   > It points back to the owner, nothing more.
+**Bad — closing reassurance restates the scope:**
 
-   **Good — the sentence already bounds itself:**
+> It points back to the owner, nothing more.
 
-   > It points back to the owner.
+**Good — the sentence already bounds itself:**
+
+> It points back to the owner.
 
 ## Helpful references
 
 Two places that are useful when working on skills — reach for them when grounding in the spec or in real examples would help, but they're not required for every task:
 
-1. **https://agentskills.io/llms.txt** — the public docs index. Good to fetch when creating, reviewing, validating, or auditing a skill if you want to check the official rules.
-2. **`../anthropics-skills/`** (sibling to this repo, at `C:\Users\PC\work\anthropics-skills\`) — local clone of the official Anthropic skills repo (`README.md`, `spec/`, `template/`, and real-world `skills/` examples). Useful as a structural reference and to see how working skills are put together.
+- **https://agentskills.io/llms.txt** — the public docs index. Good to fetch when creating, reviewing, validating, or auditing a skill if you want to check the official rules.
+- **`../anthropics-skills/`** (sibling to this repo, at `C:\Users\PC\work\anthropics-skills\`) — local clone of the official Anthropic skills repo (`README.md`, `spec/`, `template/`, and real-world `skills/` examples). Useful as a structural reference and to see how working skills are put together.
 
 Prefer these over guessing from memory when spec details actually matter. Otherwise, use judgment.

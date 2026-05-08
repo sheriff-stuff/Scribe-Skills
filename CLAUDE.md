@@ -11,7 +11,7 @@ Everything under `.claude/` is read by Claude Code, not humans — templates and
 3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
 4. **Pull request** — open the PR. No dedicated skill.
 
-This repo is dogfooded on itself: when a skill here is added or changed, its wiki page is updated first, and tickets are cut from that change.
+This repo is dogfooded on itself: when a skill is added, changed, or removed, its wiki page is updated in the same change, and tickets are cut from that diff.
 
 ## What the wiki is
 
@@ -36,8 +36,6 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
 
 ## Rules
-
-1. When a skill is added, changed, or removed, update its wiki page in the same change.
 
 These apply to everything written in this repo — skills, wiki pages, tickets, commit messages, PR descriptions.
 

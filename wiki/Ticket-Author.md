@@ -23,7 +23,7 @@ Each type has a template under [`.claude/skills/ticket-author/assets/`](../.clau
 ## Workflow
 
 1. Clarify what the user wants to accomplish, how many tickets are needed, whether an epic is appropriate, and the type of each ticket.
-2. Read what's already in the repo — wiki pages, code, documentation — and reuse existing terminology rather than inventing new names.
+2. Read what's already in the repo — wiki pages, code, documentation — and reuse existing terminology rather than inventing new names. When a wiki page that informs a ticket carries a top-of-page [`> [!CAUTION]`](Wiki-Page-Author/Page-Investigation-Caution) block, the skill stops, surfaces the caution to the user, and offers to route the page's material into `Out of Scope` or `Risks` (each with a link back to the cautioned page). The rule applies to Epic, Feature, Chore, and Spike tickets; Spikes and bugs are exempt.
 3. Decide the breakdown. Work that has multiple child tickets belonging together gets an epic file plus individual ticket files with `epic: auto`. Unrelated tickets stand alone. Each ticket represents an independently deliverable piece of work.
 4. Batch-write every `.md` file to [`proposed-tickets/`](../proposed-tickets/), using the matching template as the structural basis.
 
@@ -66,6 +66,7 @@ File names are lowercase kebab-case, named by subject. One epic file per MR maxi
 - Rationale lives in the wiki, not in ticket bodies. Tickets link to the wiki page that holds the why; if no such page exists, the skill suggests creating one.
 - References to supporting docs are inline at the point of mention. Epics additionally carry a mandatory Source Documentation section at the top, listing the wiki page(s) or spec(s) driving the epic.
 - Spec detail owned by a referenced doc is not duplicated. Tickets list scope only — names, structural decisions, enum or constant values, non-obvious gotchas — and link the source of truth.
+- Material from a wiki page carrying a top-of-page [`> [!CAUTION]`](Wiki-Page-Author/Page-Investigation-Caution) block does not appear in Scope, Implementation Approach, or Acceptance Criteria. By default it is routed to `Out of Scope` or `Risks` with a link back to the cautioned page. Treating a cautioned page as ground truth requires explicit user authorization.
 - Each acceptance criterion is a falsifiable check a reviewer can perform. Restated scope, project-wide baselines (build, lint, test), and subjective judgements are not acceptance criteria.
 - Testing sections name behaviors that must have coverage, not specific cases, edges, frameworks, or file paths. Bug tickets always include a regression for the reproduction case.
 

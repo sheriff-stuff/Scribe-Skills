@@ -67,6 +67,6 @@ labels: [type::epic, "area::<name>"]
 - [ ] All child work items are complete
 - [ ] <Epic-level verification or outcome>
 
-## Risks & Open Questions _(optional)_
+## Risks _(optional)_
 
-- <Risk or open question>
+- <Risk>

@@ -1,6 +1,6 @@
 # Scribe Skills
 
-Scribe Skills is a collection of reusable skills and agents that support a spec-driven development workflow. The skills are project-agnostic — point them at any project (including this one).
+Scribe Skills is a collection of reusable Claude Code extensions — skills, subagents, hooks, slash commands, and anything else that plugs into Claude Code — supporting a spec-driven development workflow. Everything here is project-agnostic; point it at any project (including this one).
 
 Everything under `.claude/` is read by Claude Code, not humans — templates and assets are instructions to the agent.
 
@@ -11,7 +11,7 @@ Everything under `.claude/` is read by Claude Code, not humans — templates and
 3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
 4. **Pull request** — open the PR. No dedicated skill.
 
-This repo is dogfooded on itself: when a skill is added, changed, or removed, its wiki page is updated in the same change, and tickets are cut from that diff.
+This repo is dogfooded on itself. **Whenever anything in `.claude/` is created, changed, or removed — skill, subagent, hook, slash command, or otherwise — the corresponding wiki page is created or updated in the same change.** The wiki is the spec; if the wiki and `.claude/` disagree, the wiki is wrong. Tickets are cut from the wiki diff.
 
 ## What the wiki is
 
@@ -27,9 +27,10 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 
 ## What this repo contains
 
-- `.claude/skills/wiki-page-author/` — authors wiki pages.
-- `.claude/skills/ticket-author/` — authors tickets.
-- `fixtures/cortex-wiki/` — an example wiki used to develop and test the skills against. A fixture, not a real wiki.
+- `.claude/skills/` — reusable skills (currently `wiki-page-author`, `ticket-author`).
+- `.claude/agents/` — subagents (currently `ticket-reviewer`).
+- `wiki/` — the living spec for everything in `.claude/`.
+- `fixtures/cortex-wiki/` — an example wiki used to develop and test against. A fixture, not a real wiki.
 
 ## Versioning and release branches
 
@@ -37,7 +38,7 @@ The repo follows SemVer with a release-branch workflow. Trunk is `master`; relea
 
 ## Rules
 
-These apply to everything written in this repo — skills, wiki pages, tickets, commit messages, PR descriptions.
+These apply to everything written in this repo — skills, subagents, hooks, slash commands, wiki pages, tickets, commit messages, PR descriptions.
 
 ### No pleonasm
 
@@ -53,9 +54,11 @@ Do not append phrases that re-assert what the preceding sentence already said. T
 
 ## Helpful references
 
-Two places that are useful when working on skills — reach for them when grounding in the spec or in real examples would help, but they're not required for every task:
+Two places that are useful when working on Claude Code extensions — reach for them when grounding in the spec or in real examples would help, but they're not required for every task:
 
 - **https://agentskills.io/llms.txt** — the public docs index. Good to fetch when creating, reviewing, validating, or auditing a skill if you want to check the official rules.
 - **`../anthropics-skills/`** (sibling to this repo) — local clone of the official Anthropic skills repo (`README.md`, `spec/`, `template/`, and real-world `skills/` examples). Useful as a structural reference and to see how working skills are put together.
+
+For subagents, hooks, slash commands, and other Claude Code features, the `claude-code-guide` agent is the fastest way to check official behavior.
 
 Prefer these over guessing from memory when spec details actually matter. Otherwise, use judgment.

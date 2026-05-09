@@ -39,6 +39,7 @@ FILE: <relative path>
 VERDICT: READY | NEEDS WORK
 VIOLATIONS:
   - Rule: <Body Rule N | Frontmatter | Naming | Template | Cross-ticket>
+    Line: <line number, or range like 12-15; omit for whole-file issues like Naming>
     Where: "<verbatim offending text, or section name if structural>"
     Why: <one sentence>
     Fix: <concrete, minimal>

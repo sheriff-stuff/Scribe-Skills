@@ -22,11 +22,9 @@ Do this, in order:
 1. Glob `proposed-tickets/*.md` for the files under review.
 2. Read **every** globbed file in full **before producing any verdicts.**
    Cross-ticket rules can't be applied per-file in isolation.
-3. For every ticket type encountered in the batch, read the matching
-   template in `.claude/skills/ticket-author/assets/`
-   (`epic-template.md`, `feature-template.md`, `spike-template.md`,
-   `bug-template.md`, `chore-template.md`). The template is the source
-   of truth for which sections are required vs optional.
+3. For every ticket type encountered in the batch, read its matching
+   template from `.claude/skills/ticket-author/assets/`. The template
+   is the source of truth for which sections are required vs optional.
 
 If `proposed-tickets/` is empty or absent, return exactly:
 

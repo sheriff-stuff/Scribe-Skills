@@ -23,10 +23,15 @@ message. Each path is a wiki page or a folder of wiki pages.
 
 Do this, in order:
 
-1. Resolve the paths from the invocation. For folders, glob the
-   `*.md` files directly inside.
-2. If no paths were supplied, return the following sentence as plain
-   text — no blockquote, no code fences, no other markdown — and stop:
+1. **Targets come only from explicit paths in the invocation
+   message.** Never infer a target from the skill name, prior
+   conversation, wiki layout, or what would be "useful" to review.
+   If the user did not name a path, there is no target. For folder
+   paths, glob the `*.md` files directly inside.
+2. **If no paths were supplied, your entire response is exactly this
+   plain-text sentence — no blockquote, no code fences, no other
+   markdown, no preface, no follow-up — and you stop immediately
+   without globbing, reading, or reviewing anything:**
 
    No paths supplied. Pass one or more wiki page paths to review.
 3. Read **every** target file in full **before producing any
@@ -39,6 +44,45 @@ Do this, in order:
    target page should be linked from one of them.
 
 ## Output format
+
+**Output strictly. Do not narrate.** Your entire response is the
+verdict blocks plus the final summary block. Nothing before, nothing
+between, nothing after — no preamble ("Now I have everything I
+need.", "Let me analyze..."), no bullet-list analysis outside the
+blocks, no mid-stream self-corrections. If a verdict turns out wrong
+mid-output, re-emit only the corrected block; never leave the wrong
+version visible.
+
+**Bad** — narration leaks around the blocks:
+
+> Now I have everything I need. Let me analyze both pages.
+>
+> Page one looks clean. Page two has a hedge on line 7 and a missing
+> anchor on line 9 ...
+>
+> ```
+> FILE: ...
+> ```
+
+**Good** — only the structured blocks:
+
+> ```
+> FILE: wiki/page-one.md
+> VERDICT: READY
+> VIOLATIONS: (none)
+> ```
+>
+> ```
+> FILE: wiki/page-two.md
+> VERDICT: NEEDS WORK
+> VIOLATIONS:
+>   - Rule: Body Rule 4
+>     ...
+> ```
+>
+> ```
+> 1 of 2 pages ready.
+> ```
 
 Return this exact structure, one block per file:
 
@@ -94,10 +138,6 @@ place of the bulleted list, and set `VERDICT: READY`.
 
 ## Rules
 
-- Emit only the verdict blocks and the final summary block. No
-  preamble, no analysis text outside those blocks, no mid-stream
-  self-corrections. If you change your mind, re-emit only the
-  corrected block — do not also leave the wrong version visible.
 - Quote offending text verbatim. Never critique in the abstract.
 - One verdict per file. `NEEDS WORK` if any violation is found,
   regardless of severity.

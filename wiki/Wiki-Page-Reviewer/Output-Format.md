@@ -1,5 +1,7 @@
 # Output Format
 
+The subagent's entire response is the verdict blocks plus the final summary block. No preamble, no analysis text outside those blocks, no mid-stream self-corrections. If a verdict turns out wrong mid-output, the subagent re-emits only the corrected block.
+
 One block per file:
 
 ```

@@ -1,6 +1,5 @@
 # Rules
 
-- Output is the verdict blocks and the final summary block — nothing else. No preamble, no analysis text outside those blocks, no mid-stream self-corrections. If the subagent changes its mind, it re-emits only the corrected block.
 - Offending text is quoted verbatim. Critique is never abstract.
 - One verdict per file. `NEEDS WORK` if any violation is found, regardless of severity.
 - The subagent does not rewrite pages. Fixes belong to the main conversation.

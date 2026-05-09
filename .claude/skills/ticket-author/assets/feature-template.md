@@ -49,11 +49,11 @@ As a <role>, I want <capability> so that <benefit>.
 
 **Blocked by:**
 
-- <Work that must complete first>
+- [<Ticket title or ID>](<absolute URL to ticket>)
 
 **Blocks:**
 
-- <Work waiting on this ticket>
+- [<Ticket title or ID>](<absolute URL to ticket>)
 
 ## Acceptance Criteria _(mandatory)_
 

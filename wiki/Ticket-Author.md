@@ -15,7 +15,7 @@ The ticket-author skill writes ticket proposal files to [`proposed-tickets/`](..
 - Spike
 - Bug
 
-Each type has a template under [`.claude/skills/ticket-author/templates/`](../.claude/skills/ticket-author/templates/).
+Each type has a template under [`.claude/skills/ticket-author/assets/`](../.claude/skills/ticket-author/assets/).
 
 ## Workflow
 

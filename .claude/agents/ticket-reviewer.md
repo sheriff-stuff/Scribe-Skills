@@ -22,11 +22,11 @@ Do this, in order:
 1. Glob `proposed-tickets/*.md` for the files under review.
 2. Read **every** globbed file in full **before producing any verdicts.**
    Cross-ticket rules can't be applied per-file in isolation.
-3. Read each ticket's matching template in
-   `.claude/skills/ticket-author/assets/` (`epic-template.md`,
-   `feature-template.md`, `spike-template.md`, `bug-template.md`,
-   `chore-template.md`) when you need to confirm which sections are
-   required vs optional.
+3. For every ticket type encountered in the batch, read the matching
+   template in `.claude/skills/ticket-author/assets/`
+   (`epic-template.md`, `feature-template.md`, `spike-template.md`,
+   `bug-template.md`, `chore-template.md`). The template is the source
+   of truth for which sections are required vs optional.
 
 If `proposed-tickets/` is empty or absent, return exactly:
 
@@ -46,7 +46,16 @@ VIOLATIONS:
     Fix: <concrete, minimal>
 ```
 
-End with a single summary line: `N of M tickets ready.`
+End with a final summary block:
+
+```
+NOTES: <optional one-line batch-level observation, omit the line entirely if none>
+N of M tickets ready.
+```
+
+The numeric line is required and must match that exact format. The
+`NOTES:` line is optional; emit it only when there is a batch-level
+pattern worth flagging (see Rules).
 
 If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 
@@ -75,7 +84,8 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 - Do not invent praise. A clean ticket gets an empty `VIOLATIONS` list
   and `VERDICT: READY`. Nothing more.
 - Be honest. If an entire batch is bland boilerplate or restates scope
-  as acceptance criteria, say so in the summary line.
+  as acceptance criteria, surface it in the `NOTES:` line above the
+  numeric summary — not inside the summary line itself.
 - When citing a Body Rule, use its number from `SKILL.md` (e.g.
   `Body Rule 5`). For schema, naming, template, and cross-ticket
   violations, use those category labels.

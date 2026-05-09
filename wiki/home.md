@@ -10,6 +10,7 @@ Index of wiki pages.
 ## Subagents
 
 - [Ticket Reviewer](Ticket-Reviewer)
+- [Wiki Page Reviewer](Wiki-Page-Reviewer)
 
 ## Release process
 

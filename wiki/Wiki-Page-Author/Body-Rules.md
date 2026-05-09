@@ -1,6 +1,6 @@
 # Body Rules
 
-These apply everywhere on a page except inside `> [!ODD]` callout blocks:
+These apply everywhere on a page except inside `> [!ODD]` and `> [!CAUTION]` callout blocks:
 
 - One subject per page. Content belonging to a different subject is suggested for the right page rather than added.
 - Files, folders, and section headings are named by subject, not by content type.

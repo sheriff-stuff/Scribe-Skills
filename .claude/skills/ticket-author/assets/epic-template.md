@@ -1,22 +1,34 @@
 ---
 type: epic
-title: "[<area>] <Epic Title>"
-labels: [type::epic]
+title: "<Epic Title>"
+labels: [type::epic, "area::<name>"]
 ---
 
 > **Epic** — <High-level goal: what this body of work delivers when all child tickets are complete.>
 
-## Goals / Outcomes
+## Source Documentation _(mandatory)_
 
-_What success looks like when this epic is done. Focus on capabilities and outcomes, not implementation tasks._
+<!--
+  The wiki page(s) or spec(s) driving this epic.
+-->
+
+- [<Document title>](URL) — <one-line description>
+
+## Goals / Outcomes _(mandatory)_
+
+<!--
+  Capabilities and outcomes, not implementation tasks.
+-->
 
 - <First outcome>
 - <Second outcome>
 - <Third outcome>
 
-## Scope
+## Scope _(mandatory)_
 
-_High-level bullet points describing what is in scope. Keep it brief — detail belongs in the child tickets._
+<!--
+  High-level only — detail belongs in child tickets.
+-->
 
 - <First area of work>
 - <Second area of work>
@@ -24,21 +36,19 @@ _High-level bullet points describing what is in scope. Keep it brief — detail 
 
 ## Out of Scope
 
-\_What is explicitly excluded from this epic.
-
 - <What is deferred or not included>
 
-## Child Work Items
+## Child Work Items _(mandatory)_
 
-_Titles of the child tickets created in this MR. Each child uses `epic: auto` to link back here._
+<!--
+  Titles of the child tickets created in this MR.
+-->
 
 - <Child ticket title 1>
 - <Child ticket title 2>
 - <Child ticket title 3>
 
 ## Dependencies
-
-_What blocks this epic or what it blocks._
 
 **Blocked by:**
 
@@ -48,28 +58,15 @@ _What blocks this epic or what it blocks._
 
 - <Work that is waiting on this epic>
 
-## Definition of Done
+## Definition of Done _(mandatory)_
 
-_Epic-level outcomes that confirm the work is complete. These should not duplicate child ticket acceptance criteria — focus on things that span multiple tickets or emerge after all children are done._
+<!--
+  Outcomes spanning multiple tickets or emerging after children complete. Don't duplicate child AC.
+-->
 
 - [ ] All child work items are complete
 - [ ] <Epic-level verification or outcome>
 
-## Risks & Open Questions
+## Risks _(optional)_
 
-_Known risks, unknowns, or undecided design questions that could affect this work._
-
-- <Risk or open question>
-
-## Links
-
-_Documents driving this epic. Use full URLs._
-
-- [<Document title>](<full URL>) — <one-line description>
-<!--
-  Label rules — ask the user for these when creating a bug ticket:
-  - Severity: severity::high, severity::medium, or severity::low
-  - Environment: env::dev, env::test, or env::prod
-  - Network: network::lowside or network::highside
-  All go in the frontmatter labels list alongside type::bug.
--->
+- <Risk>

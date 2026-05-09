@@ -1,25 +1,30 @@
-<!--
-  Use for maintenance work: dependency upgrades, version bumps, refactors with no behaviour
-  change, build/CI/tooling changes, config cleanup, removing dead code, doc-only updates.
-  If the work changes user-visible behaviour, use the Feature template instead.
-  If it fixes incorrect behaviour, use the Bug template.
--->
-
 ---
 title: "<Descriptive title>"
-labels: [type::chore]
+labels: [type::chore, "area::<name>"]
 weight: <non-negative integer>
 ---
 
+<!--
+  Use for maintenance work: dependency upgrades, version bumps, refactors with no behaviour
+  change, build/CI/tooling changes, config cleanup, removing dead code, doc-only updates.
+  If the work changes user-visible behaviour, use the Feature template.
+  If it fixes incorrect behaviour, use the Bug template.
+-->
+
 > **Chore** — <One-sentence summary of the maintenance change and the system it touches.>
 
-## Context
+## Context *(mandatory)*
 
-_What triggered this work: deprecation notice, version EOL, security advisory, accumulated drift, blocker for another ticket. Reference the relevant wiki page, advisory, or existing code using full URLs. Keep it short — a chore ticket is not the place for rationale beyond the trigger._
+<!--
+  What triggered this work: deprecation, EOL, security advisory, drift, blocker.
+  Keep it short — chore tickets aren't for rationale beyond the trigger.
+-->
 
-## Scope
+## Scope *(mandatory)*
 
-_Numbered list of what is being changed. Each item is a discrete change._
+<!--
+  Discrete changes.
+-->
 
 1. <First change>
 2. <Second change>
@@ -27,26 +32,24 @@ _Numbered list of what is being changed. Each item is a discrete change._
 
 ## Out of Scope
 
-_Adjacent cleanup that is tempting but not part of this ticket._
+<!--
+  Adjacent cleanup that's tempting but excluded.
+-->
 
 - <What is deferred>
 
-## Risk and Rollback
+## Risk and Rollback *(mandatory)*
 
-_How risky the change is and how to back it out. For low-risk chores (formatting, doc edits), state that and move on._
+<!--
+  For low-risk chores (formatting, doc edits), state that and move on.
+-->
 
 **Risk:** <low / medium / high — and why>
 
 **Rollback:** <how to revert: single revert commit, config flag, version pin>
 
-## Acceptance Criteria
+## Acceptance Criteria *(mandatory)*
 
 - [ ] <Specific, testable criterion — e.g. "package.json declares X@Y.Z and lockfile resolves to that version">
 - [ ] <Behavioural parity check — e.g. "existing test suite passes with no changes to assertions">
 - [ ] <Verification that the trigger is resolved — e.g. "deprecation warning no longer appears in build output">
-
-## Links
-
-_Reference documents, advisories, changelogs, and implementations. Use full URLs._
-
-- [<Document title>](<full URL>) — <one-line description>

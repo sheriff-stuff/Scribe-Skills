@@ -28,20 +28,22 @@ Do this, in order:
    conversation, wiki layout, or what would be "useful" to review.
    If the user did not name a path, there is no target. For folder
    paths, glob the `*.md` files directly inside.
-2. **If no paths were supplied, your entire response is exactly this
-   plain-text sentence — no blockquote, no code fences, no other
-   markdown, no preface, no follow-up — and you stop immediately
-   without globbing, reading, or reviewing anything:**
-
-   No paths supplied. Pass one or more wiki page paths to review.
+2. **If no paths were supplied, your entire response is exactly the
+   sentence between the quote marks below — printed as plain text on
+   its own line with no leading whitespace, no quote marks, no
+   blockquote, no code fences, no other markdown, no preface, no
+   follow-up — and you stop immediately without globbing, reading, or
+   reviewing anything:** "No paths supplied. Pass one or more wiki
+   page paths to review."
 3. Read **every** target file in full **before producing any
    verdicts.** Cross-page rules can't be applied per-file in isolation.
 4. For every `> [!ODD]` or `> [!CAUTION]` pointer block in the targets
    (a block whose ID is a markdown link to another page's anchor),
    follow the link and read the owner page so the anchor and (for
    ODDs) the `Affects:` line can be verified.
-5. Read `wiki/index.md` and `wiki/home.md` (whichever exists). Each
-   target page should be linked from one of them.
+5. Read `wiki/index.md` if it exists, and `wiki/home.md` if it exists
+   (read both when both are present). Each target page should be
+   linked from one of them.
 
 ## Output format
 
@@ -113,8 +115,8 @@ place of the bulleted list, and set `VERDICT: READY`.
 
 ## What to check
 
-- **Body Rules** — every Body Rule in `SKILL.md`. Apply them only
-  outside `> [!ODD]` and `> [!CAUTION]` blocks.
+- **Body Rules** — every Body Rule in the `wiki-page-author` skill.
+  Apply them only outside `> [!ODD]` and `> [!CAUTION]` blocks.
 - **ODD** — block IDs follow `ODD-<AREA>-<slug>` (uppercase area,
   kebab-case slug); the owner page carries the `<a id="ODD-...">`
   anchor; one decision per block; pointer blocks link to the owner
@@ -149,6 +151,7 @@ place of the bulleted list, and set `VERDICT: READY`.
   hedges in body prose, every page missing the H1 description
   comment), surface it in the `NOTES:` line above the numeric
   summary — not inside the summary line itself.
-- When citing a Body Rule, use its number from `SKILL.md` (e.g.
-  `Body Rule 4`). For other violations, use these category labels:
-  `ODD`, `CAUTION`, `Naming`, `Template`, `Cross-page`, `Index sync`.
+- When citing a Body Rule, use its number from the `wiki-page-author`
+  skill (e.g. `Body Rule 4`). For other violations, use these category
+  labels: `ODD`, `CAUTION`, `Naming`, `Template`, `Cross-page`,
+  `Index sync`.

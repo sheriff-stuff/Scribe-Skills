@@ -1,6 +1,6 @@
 ---
 name: ticket-author
-description: Create GitLab ticket proposals as markdown files in proposed-tickets/. Produces one .md file per issue (and optionally one epic) with YAML frontmatter and a structured body. Handles six ticket types: Epic, Feature, Spike, Bug, Chore, and ODD (raising an existing wiki Open Design Decision as a tracked decision task). Files are validated and processed by CI on merge to main. Use when the user asks to create, draft, or write tickets; break work into tickets; create issues; write an epic; propose or scope work items; create a spike, bug, chore, or ODD ticket; raise an ODD as a ticket; breakdown an epic; or plan work as GitLab issues.
+description: Create GitLab ticket proposals as markdown files in proposed-tickets/. Produces one .md file per issue (and optionally one epic) with YAML frontmatter and a structured body. Handles six ticket types: Epic, Feature, Spike, Bug, Chore, and ODD (raising an existing wiki Open Design Decision as a tracked decision task). Files are validated and processed by CI on merge to main. Use when the user asks to create, draft, or write tickets; break work into tickets; create issues; write an epic; propose or scope work items; create a spike, bug, chore, or ODD ticket; raise an ODD as a ticket; break down an epic; or plan work as GitLab issues.
 ---
 
 # Ticket Author
@@ -101,27 +101,27 @@ Lowercase kebab-case named by subject.
 
     **Bad — restates the task, baselines, and subjective judgements:**
 
-> - Create the User entity
-> - Code compiles without errors
-> - Classes follow Spring Data MongoDB conventions
-> - `PermissionLevel` contains `NONE, READ, WRITE, ADMIN`
-> - Code is idiomatic
+    > - Create the User entity
+    > - Code compiles without errors
+    > - Classes follow Spring Data MongoDB conventions
+    > - `PermissionLevel` contains `NONE, READ, WRITE, ADMIN`
+    > - Code is idiomatic
 
-**Good — each line is a check a reviewer can run:**
+    **Good — each line is a check a reviewer can run:**
 
-> - A `User` with populated `authorities` round-trips through Mongo with all fields preserved
-> - `ZonedDateTime` fields survive a round-trip with timezone intact
-> - Mongock migration creates a unique index on `username` and non-unique indexes on `authorities` and `organisation`
-> - `BaseEntity` and `MongoConfig` structurally mirror the bookings-app implementations
-> - No classes exist outside the File Structure diagram
+    > - A `User` with populated `authorities` round-trips through Mongo with all fields preserved
+    > - `ZonedDateTime` fields survive a round-trip with timezone intact
+    > - Mongock migration creates a unique index on `username` and non-unique indexes on `authorities` and `organisation`
+    > - `BaseEntity` and `MongoConfig` structurally mirror the bookings-app implementations
+    > - No classes exist outside the File Structure diagram
 
-**Bad — vague pointer that requires cross-referencing:**
+    **Bad — vague pointer that requires cross-referencing:**
 
-> - Mongock migration creates the required indexes
+    > - Mongock migration creates the required indexes
 
-**Good — names the values inline:**
+    **Good — names the values inline:**
 
-> - Mongock migration creates indexes on `state`, `_class`, `createdAt`, and `createdBy`
+    > - Mongock migration creates indexes on `state`, `_class`, `createdAt`, and `createdBy`
 
 11. **Risks entries require concrete exposure.** Only add an item to Risks when something outside the ticket's control creates a concrete risk to the work — e.g. a dependency on an unconfirmed design, an upstream migration with no fixed date, or a cautioned wiki page whose outcome could change the ticket's scope. Material that is fully excluded via Out of Scope poses no risk and should not appear in Risks.
 12. **Testing names behaviors, not cases.** Feature and bug tickets require automated tests. For bugs, a regression test covering the reproduction case is mandatory. Name the behaviors that must have coverage; the implementing agent derives cases and edges from the code change, wiki, and codebase already in context. Do not enumerate cases, edges, frameworks, or file paths.

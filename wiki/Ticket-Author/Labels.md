@@ -7,4 +7,4 @@ Labels follow GitLab's scoped-label convention (`scope::value`). Every ticket ca
 
 Bug tickets additionally carry `severity::*`, `env::*`, and `network::*` scoped labels.
 
-ODD tickets additionally carry `owner::<role>` — the discipline that owns the decision. The scope is multi-assignable: cross-discipline ODDs carry every applicable `owner::*` label so reviewers from each discipline can filter the issue list to ODDs they need to weigh in on. Roles reuse labels already in use in the project (common examples: `owner::ba`, `owner::ux`, `owner::developer`); new ones are not invented when a matching label exists.
+ODD tickets additionally carry `owner::<role>` — the discipline that owns the decision. The scope is single-assignable per GitLab's scoped-label rules; cross-discipline ODDs pick the primary owner. Roles reuse labels already in use in the project (common examples: `owner::ba`, `owner::ux`, `owner::developer`); new ones are not invented when a matching label exists.

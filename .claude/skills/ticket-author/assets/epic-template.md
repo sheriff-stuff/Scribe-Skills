@@ -52,11 +52,11 @@ labels: [type::epic, "area::<name>"]
 
 **Blocked by:**
 
-- <Work that must complete before this epic can start>
+- [<Ticket title or ID>](<absolute URL to ticket>)
 
 **Blocks:**
 
-- <Work that is waiting on this epic>
+- [<Ticket title or ID>](<absolute URL to ticket>)
 
 ## Definition of Done _(mandatory)_
 

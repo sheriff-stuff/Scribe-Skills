@@ -67,5 +67,5 @@ A session ends on explicit logout or after 30 minutes of inactivity.
 When an Open Design Decision is answered:
 
 1. The relevant body sections in the owner doc and all affected docs are rewritten in confident present tense, incorporating the answer.
-2. The `> [!ODD]` block in the owner doc is removed.
+2. The `> [!ODD]` block and its `<a id="ODD-…">` anchor are removed from the owner doc.
 3. Pointer `> [!ODD]` blocks in all affected docs are removed.

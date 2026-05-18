@@ -1,6 +1,6 @@
 ---
 name: ticket-reviewer
-description: Reviews ticket proposals in proposed-tickets/ against the ticket-author skill. Flags frontmatter, naming, structural, and body-rule violations. Invoke explicitly (e.g. `@ticket-reviewer`) — do not run automatically.
+description: Reviews ticket proposals in proposed-tickets/ against the ticket-author skill. Flags frontmatter, naming, structural, and body-rule violations.
 tools: Read, Grep, Glob
 model: sonnet
 skills:
@@ -31,7 +31,7 @@ Return this exact structure, one block per file:
 FILE: <relative path>
 VERDICT: READY | NEEDS WORK
 VIOLATIONS:
-  - Rule: <Body Rule N | Frontmatter | Naming | Template | Cross-ticket>
+  - Rule: <body rule name from the skill, or one of: Frontmatter, Naming, Template, Cross-ticket>
     Line: <line number, or range like 12-15; omit for whole-file issues like Naming>
     Where: "<verbatim offending text, or section name if structural>"
     Why: <one sentence>
@@ -51,9 +51,9 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 
 ## What to check
 
-- **Frontmatter** against the Frontmatter Schema in `SKILL.md`: required `title`, accepted `type` values, `epic` field semantics, list-field formats.
-- **File naming** against the kebab-case rule (named by subject, not generic like `feature.md` or `ticket-1.md`).
-- **Template structure** — required sections of the appropriate template in `assets/` are present. Templates have optional sections (e.g. User Story is conditional, Context is omitted when epic-linked); flag missing **required** sections only, not legitimate omissions.
+- **Frontmatter** against the Frontmatter Schema in the `ticket-author` skill.
+- **File naming** against the File Naming section of the `ticket-author` skill.
+- **Template structure** — sections marked mandatory in the appropriate template under `assets/` are present. Flag missing mandatory sections only; templates mark conditional and optional sections inline.
 - **Body Rules** — every Body Rule in `SKILL.md`.
 - **Cross-ticket** — at most one `epic` file per batch; child tickets using `epic: auto` only when an epic file is present in the batch.
 
@@ -64,4 +64,4 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 - Do not rewrite the tickets. Surgical critique only — fixes belong to the main conversation.
 - Do not invent praise. A clean ticket gets an empty `VIOLATIONS` list and `VERDICT: READY`. Nothing more.
 - Be honest. If an entire batch is bland boilerplate or restates scope as acceptance criteria, surface it in the `NOTES:` line above the numeric summary — not inside the summary line itself.
-- When citing a Body Rule, use its number from `SKILL.md` (e.g. `Body Rule 5`). For schema, naming, template, and cross-ticket violations, use those category labels.
+- When citing a Body Rule, use the rule's bolded name from the `ticket-author` skill (or a short, faithful paraphrase). For schema, naming, template, and cross-ticket violations, use those category labels.

@@ -52,6 +52,52 @@ Do not append phrases that re-assert what the preceding sentence already said. T
 
 > It points back to the owner.
 
+### No revision history
+
+Updates replace content; do not annotate what changed. This applies to skills, subagents, and other `.claude/` files just as it does to wiki pages — Claude only sees the current state, so phrasing like "no heading and no anchor", "no longer uses X", or "previously …" describes a delta that does not exist in its world.
+
+**Bad:**
+
+> Sessions now persist across browser restarts (previously they expired on close).
+
+**Good:**
+
+> Sessions persist across browser restarts.
+
+**Bad — references a removed mechanism the reader has never seen:**
+
+> The ID lives on the callout line; there is no heading and no anchor.
+
+**Good — states what is:**
+
+> The ID lives on the callout line. Pointer blocks reference it by name.
+
+### Don't cite rules by number
+
+In skills, subagents, hooks, slash commands, and any prose pointing at a rule maintained elsewhere, reference the rule by its name (the bolded lead) — not by its ordinal position. Rule numbers shift the moment a rule is added, removed, or reordered, and every existing citation silently misaligns.
+
+Applies equally to: prose like "Body Rule 4 forbids hedging", schema enums like `Rule: Body Rule N`, and output examples that show a numeric citation.
+
+**Bad — ordinal pin rots when the list changes:**
+
+> Cite the violation as `Rule: Body Rule 2`.
+
+**Good — name survives reordering:**
+
+> Cite the violation as `Rule: Names follow the subject, not the content type` (or a short, faithful paraphrase of the bolded rule lead).
+
+### Don't restate template shape in skill prose
+
+When a skill ships a template asset, the SKILL.md links to it and lets the template carry the shape. Do not re-describe in prose what the template already shows: placeholder syntax, field order, which fields are optional, placement comments, "ID lives on the first line", etc. Prose carries only what the template cannot express — policy, workflow, cross-skill contracts, and judgment calls (e.g. how to pick a good slug).
+
+**Bad — prose restates what the template already shows:**
+
+> The ID lives on the first line of the callout, followed by an em-dash and the one-sentence reason. The block sits at the top of the page, immediately after the H1 description paragraph. `Context:` is optional.
+
+**Good — prose points at the template and carries only policy:**
+
+> See the [caution template](assets/caution-template) for the canonical shape. One caution per page maximum.
+
 ## Helpful references
 
 Two places that are useful when working on Claude Code extensions — reach for them when grounding in the spec or in real examples would help, but they're not required for every task:

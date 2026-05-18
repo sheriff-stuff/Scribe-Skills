@@ -6,29 +6,23 @@ labels: [type::epic, "area::<name>"]
 
 > **Epic** — <High-level goal: what this body of work delivers when all child tickets are complete.>
 
-## Source Documentation _(mandatory)_
+## Source Documentation *(mandatory)*
 
-<!--
-  The wiki page(s) or spec(s) driving this epic.
--->
+[The wiki page(s) or spec(s) driving this epic.]
 
 - [<Document title>](URL) — <one-line description>
 
-## Goals / Outcomes _(mandatory)_
+## Goals / Outcomes *(mandatory)*
 
-<!--
-  Capabilities and outcomes, not implementation tasks.
--->
+[Capabilities and outcomes, not implementation tasks.]
 
 - <First outcome>
 - <Second outcome>
 - <Third outcome>
 
-## Scope _(mandatory)_
+## Scope *(mandatory)*
 
-<!--
-  High-level only — detail belongs in child tickets.
--->
+[High-level only — detail belongs in child tickets.]
 
 - <First area of work>
 - <Second area of work>
@@ -38,11 +32,9 @@ labels: [type::epic, "area::<name>"]
 
 - <What is deferred or not included>
 
-## Child Work Items _(mandatory)_
+## Child Work Items *(mandatory)*
 
-<!--
-  Titles of the child tickets created in this MR.
--->
+[Titles of the child tickets created in this MR.]
 
 - <Child ticket title 1>
 - <Child ticket title 2>
@@ -58,15 +50,13 @@ labels: [type::epic, "area::<name>"]
 
 - [<Ticket title or ID>](<absolute URL to ticket>)
 
-## Definition of Done _(mandatory)_
+## Definition of Done *(mandatory)*
 
-<!--
-  Outcomes spanning multiple tickets or emerging after children complete. Don't duplicate child AC.
--->
+[Outcomes spanning multiple tickets or emerging after children complete. Don't duplicate child AC.]
 
 - [ ] All child work items are complete
 - [ ] <Epic-level verification or outcome>
 
-## Risks _(optional)_
+## Risks *(optional)*
 
 - <Risk>

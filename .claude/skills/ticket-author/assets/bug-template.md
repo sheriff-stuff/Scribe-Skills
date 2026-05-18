@@ -18,21 +18,15 @@ weight: <non-negative integer>
 
 ## Impact *(mandatory)*
 
-<!--
-  Who is affected and how.
--->
+[Who is affected and how.]
 
 ## Evidence *(optional)*
 
-<!--
-  Attach screenshots or screen recordings here after the ticket is created in GitLab.
--->
+[Attach screenshots or screen recordings here after the ticket is created in GitLab.]
 
 ## Context *(optional)*
 
-<!--
-  Investigation notes, related logs, links to relevant wiki pages or existing code.
--->
+[Investigation notes, related logs, links to relevant wiki pages or existing code.]
 
 **Frequency:** <always reproducible / intermittent / observed once>
 
@@ -40,9 +34,7 @@ weight: <non-negative integer>
 
 ## Testing *(mandatory)*
 
-<!--
-  Behaviors needing test coverage. Always include a regression for the reproduction case.
--->
+[Behaviors needing test coverage. Always include a regression for the reproduction case.]
 
 - Regression: <one-line description of the failing scenario from Steps to Reproduce>
 - <Additional behavior under test if the fix touches one — otherwise remove this line>

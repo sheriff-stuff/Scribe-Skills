@@ -14,19 +14,15 @@ weight: <non-negative integer>
 
 ## Context *(mandatory)*
 
-<!--
-  Why the spike is needed and what hasn't yet been proven.
--->
+[Why the spike is needed and what hasn't yet been proven.]
 
 ## Scope *(mandatory)*
 
-<!--
-  What to try or build. Time-boxed.
--->
+[What to try or build. Time-boxed.]
 
-1. <First thing to try or build>
-2. <Second thing>
-3. <Third thing>
+- <First thing to try or build>
+- <Second thing>
+- <Third thing>
 
 ## Out of Scope
 

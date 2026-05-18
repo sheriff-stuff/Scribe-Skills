@@ -4,19 +4,22 @@ An Open Design Decision (ODD) is a question about a document's design that hasn'
 
 ## Where Open Design Decisions live
 
-Open Design Decisions are inline in the document that owns the concept, placed next to the section they affect, marked with a callout block:
+Open Design Decisions are inline in the document that owns the concept, placed next to the section they affect, marked with a callout block. The ID lives on the first line of the callout, followed by an em-dash and the one-sentence open point.
 
-<a id="ODD-PERMISSIONS-child-page-inheritance"></a>
+```markdown
 > [!ODD] ODD-PERMISSIONS-child-page-inheritance — Should child pages inherit parent permissions by default?
 >
 > **Affects:** [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
 > **Context:** inherit + override vs. explicit per page vs. read-only inherit; interaction with sharing links; behavior on parent deletion
+```
 
 When a decision affects documents in other folders, the owning doc carries the full definition. Affected docs reference it with a pointer block placed next to the section it affects:
 
-> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#ODD-PERMISSIONS-child-page-inheritance) — endpoint behavior depends on inheritance decision.
+```markdown
+> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#permissions) — endpoint behavior depends on the inheritance decision.
+```
 
-The pointer block does not restate the question, options, or context.
+The ID is rendered as a markdown link to the owner page (or the section heading the owner ODD sits under). The pointer block does not restate the question, options, or context.
 
 ## ID format
 
@@ -26,6 +29,7 @@ The pointer block does not restate the question, options, or context.
 
 These apply only inside `> [!ODD]` blocks:
 
+- The ID and the one-sentence open point are on the same line as `> [!ODD]`, separated by an em-dash.
 - Hedging is allowed ("probably", "leaning toward", "might", "should").
 - Rationale is allowed when the user has provided it.
 - Options without a chosen answer are allowed.
@@ -51,7 +55,6 @@ A session is created on successful login and tied to the user's account.
 
 Sessions are stored server-side, keyed by an opaque token in an `HttpOnly` cookie.
 
-<a id="ODD-SESSIONS-browser-restart-persistence"></a>
 > [!ODD] ODD-SESSIONS-browser-restart-persistence — Do sessions persist across browser restarts?
 >
 > **Ticket:** [PROJ-1421](https://your-tracker/PROJ-1421)
@@ -67,5 +70,5 @@ A session ends on explicit logout or after 30 minutes of inactivity.
 When an Open Design Decision is answered:
 
 1. The relevant body sections in the owner doc and all affected docs are rewritten in confident present tense, incorporating the answer.
-2. The `> [!ODD]` block and its `<a id="ODD-…">` anchor are removed from the owner doc.
-3. Pointer `> [!ODD]` blocks in all affected docs are removed.
+2. The `> [!ODD]` block is removed from the owner doc.
+3. Pointer `> [!ODD]` blocks referencing that ID in all affected docs are removed.

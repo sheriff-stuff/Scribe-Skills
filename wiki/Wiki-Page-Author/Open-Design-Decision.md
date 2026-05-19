@@ -34,7 +34,7 @@ These apply only inside `> [!ODD]` blocks:
 - Rationale is allowed when the user has provided it.
 - Options without a chosen answer are allowed.
 - Every ODD traces back to something the user said.
-- `Ticket:` is optional. The line is omitted when no tracker ticket exists.
+- `Ticket:` is required. When no tracker ticket exists yet, the line carries `*(placeholder)*`.
 - `Affects:` on the owner block lists every page that carries a pointer block to this ODD. The owner page is not listed. The line is omitted if no other pages are affected.
 - `Context:` carries related considerations, candidate options, and edge cases. Paragraphs, bullets, and other markdown are allowed.
 

@@ -25,11 +25,11 @@ Do this, in order:
 
 ## Output format
 
-**Output strictly. Do not narrate.** Your entire response is the verdict blocks plus the final summary block. Nothing before, nothing between, nothing after — no preamble ("Now I have everything I need.", "Let me analyse..."), no bullet-list analysis outside the blocks, no mid-stream self-corrections. If a verdict turns out wrong mid-output, re-emit only the corrected block; never leave the wrong version visible.
+**Output strictly. Do not narrate.** Your entire response is the verdict blocks plus the final summary block. Nothing before, nothing between, nothing after — no preamble ("Now I have everything I need.", "Let me analyze..."), no bullet-list analysis outside the blocks, no mid-stream self-corrections. If a verdict turns out wrong mid-output, re-emit only the corrected block; never leave the wrong version visible.
 
 **Bad** — narration leaks around the blocks:
 
-> Now I have everything I need. Let me analyse both pages.
+> Now I have everything I need. Let me analyze both pages.
 >
 > Page one looks clean. Page two has a hedge on line 7 and a missing anchor on line 9 ...
 >

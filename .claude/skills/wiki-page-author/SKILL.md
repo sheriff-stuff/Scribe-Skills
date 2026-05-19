@@ -39,7 +39,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
    > The form renders one question per page.
 
-4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section. A body sentence on the same topic as an adjacent ODD is fine when it states the current spec confidently — topical overlap is not a violation, hedging is.
+4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section. A body sentence on the same topic as an adjacent ODD is fine when it states the current spec confidently — topical overlap is not a violation, hedging is. If something is unknown or undecided, ask the user; do not infer it from related pages, related code, or what seems plausible.
 
    **Bad — hedge in the body:**
 
@@ -176,6 +176,10 @@ See the [page investigation caution template](assets/caution-template) for the c
 These apply only inside caution blocks.
 
 1. **One caution per page maximum.**
+2. **The reason sentence is required.** A bare `> [!CAUTION]` with no reason is not allowed.
+3. **`Context:` is optional.**
+4. **A caution is page-level.** Other pages carry no pointer blocks back to it.
+5. **Every caution traces back to something the user said.** Do not invent investigation cautions.
 
 ## Standing Instructions
 

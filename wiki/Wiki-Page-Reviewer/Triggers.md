@@ -1,6 +1,6 @@
 # Triggers
 
-The subagent is invoked explicitly (e.g. `@wiki-page-reviewer <paths>`). It does not run automatically.
+The subagent is invoked by name with the wiki page paths to review (e.g. `@wiki-page-reviewer <paths>`), or Claude delegates to it when a task matches its description.
 
 Tools available to the subagent: `Read`, `Grep`, `Glob`. No write access.
 

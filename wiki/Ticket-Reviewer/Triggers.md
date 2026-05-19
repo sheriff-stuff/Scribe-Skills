@@ -1,6 +1,6 @@
 # Triggers
 
-The subagent is invoked explicitly (e.g. `@ticket-reviewer`). It does not run automatically.
+The subagent is invoked by name (e.g. `@ticket-reviewer`), or Claude delegates to it when a task matches its description.
 
 Tools available to the subagent: `Read`, `Grep`, `Glob`. No write access.
 

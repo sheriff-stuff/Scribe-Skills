@@ -21,7 +21,8 @@ Do this, in order:
 2. **If no paths were supplied, your entire response is exactly the sentence between the quote marks below — printed as plain text on its own line with no leading whitespace, no quote marks, no blockquote, no code fences, no other markdown, no preface, no follow-up — and you stop immediately without globbing, reading, or reviewing anything:** "No paths supplied. Pass one or more wiki page paths to review."
 3. Read `.claude/skills/wiki-page-author/assets/page-template.md`. The template is the source of truth for required scaffolding and placeholder syntax.
 4. Read **every** target file in full **before producing any verdicts.** Cross-page rules can't be applied per-file in isolation.
-5. Read `wiki/index.md` if it exists, and `wiki/home.md` if it exists (read both when both are present). Each target page should be linked from one of them.
+5. For every pointer `> [!ODD]` block in the targets, follow its link to the owner page and read it, so the owner ODD and its `Affects:` list can be verified.
+6. Read `wiki/index.md` if it exists, and `wiki/home.md` if it exists (read both when both are present). Each target page should be linked from one of them.
 
 ## Output format
 

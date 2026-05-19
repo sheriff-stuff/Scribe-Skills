@@ -24,7 +24,7 @@ As a <role>, I want <capability> so that <benefit>.
 
 ## Implementation Approach *(mandatory)*
 
-[Anchors to mirror, patterns to follow, key decisions.]
+[Anchors to orient from — what to take from existing implementations and what to change, patterns to follow, key decisions.]
 
 ## Testing *(mandatory)*
 

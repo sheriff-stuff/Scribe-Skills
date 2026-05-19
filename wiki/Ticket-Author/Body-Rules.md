@@ -5,7 +5,8 @@
 - References to pages, code, or other projects use absolute URLs.
 - Concepts that already have a name in the wiki or existing code keep that name.
 - File references identify locations by content (symbol name, string, or section heading) and link to the file. Line-number anchors (`#L104`, `#L3-6`) are not used.
-- Implementation Approach orients the developer with patterns, existing implementations, and key decisions. It does not prescribe step-by-step instructions or copyable code. Approaches use _mirror_, not _copy_, and every Scope item is reachable from the Approach.
+- Implementation Approach orients the developer with patterns, existing implementations, and key decisions referenced by concrete anchors (files, classes, wiki pages). It does not prescribe numbered steps or copyable code, and every Scope item is reachable from the Approach.
+- A reference to an existing implementation names what to take from it and what to change. Single verbs (mirror, match, follow, reference) are not used — they leave the executing agent guessing how closely to copy. Class names follow the class's role: infrastructure names (base classes, configs, converters) come with the borrowed structure; domain names (entities, repositories, services) are renamed to the ticket's domain.
 - Rationale lives in the wiki, not in ticket bodies. Tickets link to the wiki page that holds the why; if no such page exists, the skill suggests creating one.
 - References to supporting docs are inline at the point of mention. Epics additionally carry a mandatory Source Documentation section at the top, listing the wiki page(s) or spec(s) driving the epic.
 - Spec detail owned by a referenced doc is not duplicated. Tickets list scope only — names, structural decisions, enum or constant values, non-obvious gotchas — and link the source of truth.

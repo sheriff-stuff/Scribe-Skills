@@ -73,22 +73,41 @@ Lowercase kebab-case named by subject.
 
    > Update discount calculation logic in [`PricingService.applyDiscount`](url).
 
-6. **Implementation Approach orients, not prescribes.** Reference patterns and existing implementations by concrete anchors (files, classes, wiki pages) — not numbered steps. Use _mirror_, not _copy_. Every Scope item must be reachable from the Approach.
+6. **Implementation Approach orients, not prescribes.** Reference patterns and existing implementations by concrete anchors (files, classes, wiki pages) — not numbered steps. Every Scope item must be reachable from the Approach.
 
-   **Bad:**
+   **Bad — enumerates as a step-by-step list:**
 
-   > - Copy `BaseRecord`, `StoreConfig`, `TimestampReadConverter`, `TimestampWriteConverter` from inventory-service, adapting packages.
-   > - In [`config.yml`](url), change `inventory.store.migrations` to `orders.store.migrations`.
-   > - Remove store autoconfigure exclusions from [`config.yml`](url).
+   > 1. Add `email` field to [`User`](url)
+   > 2. Add `phone` field to [`User`](url)
+   > 3. Add format validation for email and phone
+   > 4. Update [`UserController.createUser`](url) to accept the new fields
+   > 5. Update [`UserRepository`](url) findBy methods
+   > 6. Add migration script for existing users
 
-   **Good:**
+   **Good — prose orientation with anchors:**
 
-   > Mirror inventory-service's store setup, adapting `com.example.inventory` packages to `com.example.orders`. Anchor classes: [`BaseRecord`](url), [`StoreConfig`](url), [`TimestampReadConverter`](url), [`TimestampWriteConverter`](url). Bring along anything they reference.
-   >
-   > In `config.yml`: update migration scan package `inventory.store.migrations` → `orders.store.migrations`; remove store autoconfigure exclusions.
+   > Add `email` and `phone` fields to [`User`](url) with format validation. Extend [`UserController.createUser`](url) and [`UserRepository`](url) to handle the new fields. A new migration script populates `email` and `phone` for existing users.
 
-7. **Do not write justification or rationale into ticket bodies.** Tickets answer _what_ is being done and _how it'll be verified_. The _why_ lives in the wiki. If justification feels necessary, link to the wiki page that holds it; if no such page exists, suggest creating one via wiki.
-8. **Don't duplicate spec detail from the source doc.** If a referenced doc owns the full spec, list scope only (names, structural decisions, enum/constant values, non-obvious gotchas) and link it as source of truth.
+7. **Describe relationships in parts, not single verbs.** When pointing at an existing implementation, name what to take from it and what to change. Single verbs (mirror, match, follow, reference) leave the executing agent guessing where on the spectrum to land. Class names follow the class's role: infrastructure names (base classes, configs, converters) come with the borrowed structure; domain names (entities, repositories, services) are part of _what to change_.
+
+   **Bad — gestures at the relationship with a single verb:**
+
+   > Mirror inventory-service's store setup, adapting packages.
+
+   **Good — names what to take and what to change:**
+
+   > Take the class structure and converter logic from inventory-service's [`BaseRecord`](url), [`StoreConfig`](url), [`TimestampReadConverter`](url), [`TimestampWriteConverter`](url). Change package names from `com.example.inventory` to `com.example.orders`. Bring along anything these classes reference.
+
+   **Bad — no distinction between infrastructure and domain classes:**
+
+   > Take the entity and repository structure from `Analyst`, `AnalystRepository`, `BaseEntity`.
+
+   **Good — infrastructure name stays; domain classes are renamed:**
+
+   > Take the entity and repository shape from [`Analyst`](url), [`AnalystRepository`](url), and [`BaseEntity`](url): a MongoDB-mapped entity extending `BaseEntity`, paired with a Spring Data `MongoRepository`. Change `Analyst`/`AnalystRepository` to `Project`/`ProjectRepository`, `Team`/`TeamRepository`, `Silo`/`SiloRepository`. `BaseEntity` keeps its name.
+
+8. **Do not write justification or rationale into ticket bodies.** Tickets answer _what_ is being done and _how it'll be verified_. The _why_ lives in the wiki. If justification feels necessary, link to the wiki page that holds it; if no such page exists, suggest creating one via wiki.
+9. **Don't duplicate spec detail from the source doc.** If a referenced doc owns the full spec, list scope only (names, structural decisions, enum/constant values, non-obvious gotchas) and link it as source of truth.
 
    **Bad: duplicates the schema doc:**
 
@@ -98,8 +117,8 @@ Lowercase kebab-case named by subject.
 
    > Fields per `User-Storage.md`.
 
-9. **Material from a cautioned wiki page does not belong in Scope, Implementation Approach, or Acceptance Criteria.** A wiki page carrying a top-of-page `> [!CAUTION]` block is under investigation and not ready for implementation. Route its material to `Out of Scope` if the ticket has no dependency on it, or to `Risks` if the ticket still has exposure to the cautioned design (e.g. an entity created now will need fields added once the design is confirmed).
-10. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not an imperative, not a project-wide baseline (build/lint/test belong in the project's `CLAUDE.md`), not subjective. State assertions that mirror a scope goal are fine if falsifiable.
+10. **Material from a cautioned wiki page does not belong in Scope, Implementation Approach, or Acceptance Criteria.** A wiki page carrying a top-of-page `> [!CAUTION]` block is under investigation and not ready for implementation. Route its material to `Out of Scope` if the ticket has no dependency on it, or to `Risks` if the ticket still has exposure to the cautioned design (e.g. an entity created now will need fields added once the design is confirmed).
+11. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not an imperative, not a project-wide baseline (build/lint/test belong in the project's `CLAUDE.md`), not subjective. State assertions that correspond to a scope goal are fine if falsifiable.
 
     **Bad — restates the task, baselines, and subjective judgements:**
 
@@ -114,7 +133,7 @@ Lowercase kebab-case named by subject.
     > - A `User` with populated `authorities` round-trips through Mongo with all fields preserved
     > - `ZonedDateTime` fields survive a round-trip with timezone intact
     > - Mongock migration creates a unique index on `username` and non-unique indexes on `authorities` and `organisation`
-    > - `BaseEntity` and `MongoConfig` structurally mirror the bookings-app implementations
+    > - `BaseEntity` and `MongoConfig` contain the same fields and methods as the bookings-app implementations
     > - Collections are accessible from a running application instance
     > - No classes exist outside the File Structure diagram
 
@@ -127,6 +146,6 @@ Lowercase kebab-case named by subject.
     > - Mongock migration creates indexes on `state`, `_class`, `createdAt`, and `createdBy`
     > - Seed documents contain fields matching the [Project ORIN Schema](url)
 
-11. **Risks entries require concrete exposure.** Only add an item to Risks when something outside the ticket's control creates a concrete risk to the work — e.g. a dependency on an unconfirmed design, an upstream migration with no fixed date, or a cautioned wiki page whose outcome could change the ticket's scope. Material that is fully excluded via Out of Scope poses no risk and should not appear in Risks.
-12. **Testing names behaviours, not cases.** Feature and bug tickets require automated tests. For bugs, a regression test covering the reproduction case is mandatory. Name the behaviours that must have coverage; the implementing agent derives cases and edges from the code change, wiki, and codebase already in context. Do not enumerate cases, edges, frameworks, or file paths.
-13. **ODD tickets request resolution of an existing wiki ODD.** The ticket closes when the wiki ODD is [resolved](../wiki-page-author/SKILL#resolving-an-open-design-decision).
+12. **Risks entries require concrete exposure.** Only add an item to Risks when something outside the ticket's control creates a concrete risk to the work — e.g. a dependency on an unconfirmed design, an upstream migration with no fixed date, or a cautioned wiki page whose outcome could change the ticket's scope. Material that is fully excluded via Out of Scope poses no risk and should not appear in Risks.
+13. **Testing names behaviours, not cases.** Feature and bug tickets require automated tests. For bugs, a regression test covering the reproduction case is mandatory. Name the behaviours that must have coverage; the implementing agent derives cases and edges from the code change, wiki, and codebase already in context. Do not enumerate cases, edges, frameworks, or file paths.
+14. **ODD tickets request resolution of an existing wiki ODD.** The ticket closes when the wiki ODD is [resolved](../wiki-page-author/SKILL#resolving-an-open-design-decision).

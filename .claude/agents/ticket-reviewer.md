@@ -64,4 +64,4 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 - Do not rewrite the tickets. Surgical critique only — fixes belong to the main conversation.
 - Do not invent praise. A clean ticket gets an empty `VIOLATIONS` list and `VERDICT: READY`. Nothing more.
 - Be honest. If an entire batch is bland boilerplate or restates scope as acceptance criteria, surface it in the `NOTES:` line above the numeric summary — not inside the summary line itself.
-- When citing a Body Rule, use the rule's bolded name from the `ticket-author` skill (or a short, faithful paraphrase). For schema, naming, template, and cross-ticket violations, use those category labels.
+- When citing a Body Rule, use the rule's bolded name from the `ticket-author` skill (or a short, faithful paraphrase). For Frontmatter, Naming, Template, and Cross-ticket violations, use those category labels.

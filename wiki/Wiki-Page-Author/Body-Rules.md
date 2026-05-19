@@ -8,5 +8,7 @@ These apply everywhere on a page except inside `> [!ODD]` and `> [!CAUTION]` cal
 - Confirmed answers go in the body; uncertainty goes in a `> [!ODD]` block placed next to the affected section. Facts are not inferred from related pages, related code, or what seems plausible.
 - No rationale on the page. Justification lives in a design decision record, linked from the page.
 - No revision history. Updates replace content.
+- For external services and libraries, the page documents the integration — which component, endpoint, or module is used and what it does — not the third party's API surface. Properties, attributes, slots, and parameters live in the library's own documentation. Relating a local structure to an external shape is allowed; reproducing the shape is not.
 - Anything linkable is written as an inline link — files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are used only when the target genuinely cannot be linked. Internal targets use no `.md` extension.
+- No pleonasm. Facts are stated without redundant qualifiers, intensifiers, or filler.
 - Body prose adjacent to an ODD block does not restate it. The block carries the question, options, and any hedging; the body around it stays in confident present tense.

@@ -1,18 +1,15 @@
-# <Subject>
+# [SUBJECT]
 
-<!-- One-sentence statement of what this page is about. -->
+[One-sentence statement of what this page is about.]
 
-## <Section name>
+## [SECTION NAME]
 
-<!-- Facts about the subject. -->
+[Facts about the subject.]
 
-## <Section name>
+## [SECTION NAME]
 
-<!-- Facts about the subject. -->
+[Facts about the subject.]
 
-## Related *(optional)*
-
-- [<Other page>](<../Folder/Page>)
-- [<Other page>](<../Folder/Page>)
+<!-- Repeat ## sections as needed. -->
 
 ---

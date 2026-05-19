@@ -39,7 +39,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
    > The form renders one question per page.
 
-4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section, stated as the open point itself. If something is unknown or undecided, ask the user; do not infer from related pages, related code, or what seems plausible.
+4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section. A body sentence on the same topic as an adjacent ODD is fine when it states the current spec confidently — topical overlap is not a violation, hedging is. If something is unknown or undecided, ask the user; do not infer it from related pages, related code, or what seems plausible.
 
    **Bad — hedge in the body:**
 
@@ -58,6 +58,11 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
    > Forms render one question per page.
    >
    > [!ODD] ODD-FORMS-partial-submission-save — Partial submission save trigger is undecided — automatic, or only on explicit "save draft".
+
+   **Good — body states current spec, ODD flags future change:**
+
+   > User data is stored in a local MongoDB collection seeded with test fixtures.
+   > [!ODD] ODD-DATA-external-api-migration — Migration to external API X is pending API readiness.
 
 5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
@@ -83,7 +88,7 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
    > Sessions persist across browser restarts.
 
-7. **For external services, document your integration — not their API.** Capture which endpoints you call, what you send, which response fields you depend on, and how you handle errors. Link to the third party's docs for everything else; do not mirror their spec.
+7. **For external services and libraries, document the integration — not their API.** State which component, endpoint, or module is used and what it does in the application. Do not list its properties, attributes, slots, or parameters — those belong in the library's own documentation and drift when it changes. A statement about how a local structure relates to an external shape is allowed. Reproducing the shape itself is not.
 
    **Bad — mirrors the third-party API (drifts when they change it):**
 
@@ -92,6 +97,22 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
    **Good — documents the contract:**
 
    > We call `POST /v1/users` with `{name, email}`. We read `id` and `email` from the response. On `429`, we retry with exponential backoff. See [the API docs](https://example.com/docs) for the full response shape.
+
+   **Bad — lists component attributes (drifts when the library changes):**
+
+   > Uses `ic-text-field` with `label`, `helper-text`, `placeholder`, `validation-status`.
+
+   **Good — names the component and describes application behaviour:**
+
+   > Single-line text input rendered with `ic-text-field`.
+
+   **Good — relational statement, no enumeration:**
+
+   > The local user document mirrors the API response shape.
+
+   **Bad — reproduces the external shape under a "describing the local one" framing:**
+
+   > The local user document has fields `id`, `name`, `email`, `phone`, `address`.
 
 8. **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
 
@@ -115,13 +136,13 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
 ## Open Design Decisions
 
-Each Open Design Decision (ODD) has an ID of the form `ODD-<AREA>-<slug>`. The page that owns the concept carries the full ODD, prefixed by an HTML anchor (`<a id="ODD-<AREA>-<slug>"></a>`) so pointer blocks on other pages can deep-link to it — see the [ODD template](assets/odd-template) for the canonical shape.
+Each Open Design Decision (ODD) has an ID of the form `ODD-<AREA>-<slug>`. See the [ODD template](assets/odd-template) for the canonical shape. On the owner page the ID is plain text; on pointer blocks elsewhere the ID is rendered as a markdown link to the owner page (or the section heading the block sits under).
 
 ### Pointer blocks on affected pages
 
-Other affected pages carry a one-line pointer next to the affected section. The ID is a markdown link to the owner ODD's anchor on the owner page.
+Other affected pages carry a one-line pointer next to the affected section. The ID is rendered as a markdown link to the owner page (or the section heading the owner ODD sits under).
 
-> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#ODD-PERMISSIONS-child-page-inheritance) — endpoint behavior depends on inheritance decision.
+> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#child-pages) — endpoint behaviour depends on the inheritance decision.
 
 When a pointer is added to another page, the owner page's `Affects:` line is updated in the same operation to include that page.
 
@@ -130,9 +151,9 @@ When a pointer is added to another page, the owner page's `Affects:` line is upd
 These apply only inside ODD blocks.
 
 1. **IDs follow `ODD-<AREA>-<slug>`.** Area is one uppercase word naming the page or folder concept the ODD lives under (`PERMISSIONS`, `FORMS`, `SESSIONS`). Slug is kebab-case, describes the open point, and is distinct — `child-page-inheritance` not `inheritance`.
-2. **`Ticket:` is optional.** Include the line only when a tracker ticket exists.
-3. **`Affects:` is optional.** lists every page that carries a pointer block to this ODD.
-4. **Rationale is allowed**
+2. **`Ticket:` is required.** Use `*(placeholder)*` if no ticket has been created.
+3. **`Affects:`, when present, lists every page that carries a pointer block to this ODD.**
+4. **Rationale is allowed.**
 5. **Every block traces back to something the user said.** Do not invent uncertainty.
 6. **One decision per block.**
 
@@ -141,23 +162,24 @@ These apply only inside ODD blocks.
 When an Open Design Decision is answered:
 
 1. Rewrite the relevant body sections in the owner page and every affected page in confident present tense, incorporating the answer.
-2. Remove the `> [!ODD]` block and its `<a id>` anchor from the owner page.
+2. Remove the `> [!ODD]` block from the owner page.
 3. Remove every pointer `> [!ODD]` block referencing that ID across the wiki.
 
 ## Page Investigation Cautions
 
 A Page Investigation Caution marks a whole page as not ready for implementation — coarser than an ODD, which scopes uncertainty to one point and treats the rest of the body as ground truth. The [ticket-author](../ticket-author/SKILL) skill refuses to draw Scope, Implementation Approach, or Acceptance Criteria from a cautioned page without explicit user authorization.
 
-Each caution has an ID of the form `CAUTION-<AREA>-<slug>`. The block sits at the top of the page, prefixed by an HTML anchor (`<a id="CAUTION-<AREA>-<slug>"></a>`) — see the [page investigation caution template](assets/caution-template) for the canonical shape.
+See the [page investigation caution template](assets/caution-template) for the canonical shape. Tickets that act on the caution link to the page itself.
 
 ### Rules inside `> [!CAUTION]` blocks
 
 These apply only inside caution blocks.
 
-1. **IDs follow `CAUTION-<AREA>-<slug>`.** Area is one uppercase word naming the page or folder concept the caution lives under (`PERMISSIONS`, `FORMS`, `SESSIONS`) — Slug is kebab-case and describes why the page is under investigation (`awaiting-product-review`, `flow-redesign-pending`).
-2. **Placement is fixed.** The block lives at the top of the page, immediately after the H1 description comment
-3. **The reason sentence is required.** A bare `> [!CAUTION]` with no reason is not allowed.
-4. **`Context:` is optional.** When present, it carries what's still being worked out — paragraphs, bullets, and other markdown allowed.
+1. **One caution per page maximum.**
+2. **The reason sentence is required.** A bare `> [!CAUTION]` with no reason is not allowed.
+3. **`Context:` is optional.**
+4. **A caution is page-level.** Other pages carry no pointer blocks back to it.
+5. **Every caution traces back to something the user said.** Do not invent investigation cautions.
 
 ## Standing Instructions
 

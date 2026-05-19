@@ -9,6 +9,6 @@
 | `milestone` | No       | string              | Milestone title or ID                                                           |
 | `weight`    | No       | integer             | Non-negative                                                                    |
 | `due_date`  | No       | string              | `YYYY-MM-DD`                                                                    |
-| `epic`      | No       | integer or `"auto"` | IID of an existing epic, or `"auto"` to link to the epic created in the same MR |
+| `epic`      | No       | integer or `"auto"` | IID of an existing epic, or `"auto"` to link to the epic created in the same branch |
 
 List fields (`labels`, `assignees`) accept YAML inline `[a, b]` or block format.

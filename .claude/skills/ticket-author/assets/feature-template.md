@@ -6,40 +6,32 @@ weight: <non-negative integer>
 
 > **Feature** — <One-sentence summary of what this ticket delivers.>
 
-## User Story _(only for user-facing features)_
+## User Story *(only for user-facing features)*
 
 As a <role>, I want <capability> so that <benefit>.
 
-## Context _(omit when this ticket is part of an epic — the epic provides context)_
+## Context *(omit when this ticket is part of an epic — the epic provides context)*
 
-<!--
-  Why this work is needed.
--->
+[Why this work is needed.]
 
-## Scope _(mandatory)_
+## Scope *(mandatory)*
 
-<!--
-  Discrete deliverables.
--->
+[Discrete deliverables.]
 
-1. <First deliverable>
-2. <Second deliverable>
-3. <Third deliverable>
+- <First deliverable>
+- <Second deliverable>
+- <Third deliverable>
 
-## Implementation Approach _(mandatory)_
+## Implementation Approach *(mandatory)*
 
-<!--
-  Anchors to mirror, patterns to follow, key decisions.
--->
+[Anchors to mirror, patterns to follow, key decisions.]
 
-## Testing _(mandatory)_
+## Testing *(mandatory)*
 
-<!--
-  Behaviors needing test coverage.
--->
+[Behaviours needing test coverage.]
 
-- <Behavior under test>
-- <Behavior under test>
+- <Behaviour under test>
+- <Behaviour under test>
 
 ## Out of Scope
 
@@ -55,12 +47,12 @@ As a <role>, I want <capability> so that <benefit>.
 
 - [<Ticket title or ID>](<absolute URL to ticket>)
 
-## Acceptance Criteria _(mandatory)_
+## Acceptance Criteria *(mandatory)*
 
 - [ ] <Specific, testable criterion>
 - [ ] <Another criterion>
 - [ ] <Another criterion>
 
-## Risks _(optional)_
+## Risks *(optional)*
 
 - <Risk>

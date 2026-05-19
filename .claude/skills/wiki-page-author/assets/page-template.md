@@ -10,6 +10,6 @@
 
 [Facts about the subject.]
 
-## ...
+<!-- Repeat ## sections as needed. -->
 
 ---

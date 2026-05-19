@@ -44,3 +44,8 @@ Name the behaviours that must keep working. Omit for pure config/tooling changes
 - [ ] <Specific, testable criterion — e.g. "package.json declares <X@Y.Z> and lockfile resolves to that version">
 - [ ] <Behavioural parity check — e.g. "existing test suite passes with no changes to assertions">
 - [ ] <Verification that the trigger is resolved — e.g. "deprecation warning no longer appears in build output">
+
+## Rollback *(optional)*
+
+[For upgrade-style work — how to revert if the change causes problems. Omit when
+reverting the commit is rollback enough.]

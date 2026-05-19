@@ -40,9 +40,13 @@ The repo follows SemVer with a release-branch workflow. Trunk is `master`; relea
 
 These apply to everything written in this repo — skills, subagents, hooks, slash commands, wiki pages, tickets, commit messages, PR descriptions.
 
+### British spelling
+
+Write in British English.
+
 ### No pleonasm
 
-Do not append phrases that re-assert what the preceding sentence already said. The closing-reassurance flavor ("nothing more", "just that", "and that's it", "simple as that", "no more, no less") is the most common form.
+Do not append phrases that re-assert what the preceding sentence already said. The closing-reassurance flavour ("nothing more", "just that", "and that's it", "simple as that", "no more, no less") is the most common form.
 
 **Bad — closing reassurance restates the scope:**
 
@@ -88,7 +92,7 @@ Applies equally to: prose like "Body Rule 4 forbids hedging", schema enums like 
 
 ### Don't restate template shape in skill prose
 
-When a skill ships a template asset, the SKILL.md links to it and lets the template carry the shape. Do not re-describe in prose what the template already shows: placeholder syntax, field order, which fields are optional, placement comments, "ID lives on the first line", etc. Prose carries only what the template cannot express — policy, workflow, cross-skill contracts, and judgment calls (e.g. how to pick a good slug).
+When a skill ships a template asset, the SKILL.md links to it and lets the template carry the shape. Do not re-describe in prose what the template already shows: placeholder syntax, field order, which fields are optional, placement comments, "ID lives on the first line", etc. Prose carries only what the template cannot express — policy, workflow, cross-skill contracts, and judgement calls (e.g. how to pick a good slug).
 
 **Bad — prose restates what the template already shows:**
 
@@ -105,6 +109,6 @@ Two places that are useful when working on Claude Code extensions — reach for 
 - **https://agentskills.io/llms.txt** — the public docs index. Good to fetch when creating, reviewing, validating, or auditing a skill if you want to check the official rules.
 - **`../anthropics-skills/`** (sibling to this repo) — local clone of the official Anthropic skills repo (`README.md`, `spec/`, `template/`, and real-world `skills/` examples). Useful as a structural reference and to see how working skills are put together.
 
-For subagents, hooks, slash commands, and other Claude Code features, the `claude-code-guide` agent is the fastest way to check official behavior.
+For subagents, hooks, slash commands, and other Claude Code features, the `claude-code-guide` agent is the fastest way to check official behaviour.
 
-Prefer these over guessing from memory when spec details actually matter. Otherwise, use judgment.
+Prefer these over guessing from memory when spec details actually matter. Otherwise, use judgement.

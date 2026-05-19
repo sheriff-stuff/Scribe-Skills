@@ -10,13 +10,13 @@ Open Design Decisions are inline in the document that owns the concept, placed n
 > [!ODD] ODD-PERMISSIONS-child-page-inheritance — Should child pages inherit parent permissions by default?
 >
 > **Affects:** [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
-> **Context:** inherit + override vs. explicit per page vs. read-only inherit; interaction with sharing links; behavior on parent deletion
+> **Context:** inherit + override vs. explicit per page vs. read-only inherit; interaction with sharing links; behaviour on parent deletion
 ```
 
 When a decision affects documents in other folders, the owning doc carries the full definition. Affected docs reference it with a pointer block placed next to the section it affects:
 
 ```markdown
-> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#permissions) — endpoint behavior depends on the inheritance decision.
+> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#child-pages) — endpoint behaviour depends on the inheritance decision.
 ```
 
 The ID is rendered as a markdown link to the owner page (or the section heading the owner ODD sits under). The pointer block does not restate the question, options, or context.
@@ -30,7 +30,7 @@ The ID is rendered as a markdown link to the owner page (or the section heading 
 These apply only inside `> [!ODD]` blocks:
 
 - The ID and the one-sentence open point are on the same line as `> [!ODD]`, separated by an em-dash.
-- Hedging is allowed ("probably", "leaning toward", "might", "should").
+- Hedging is allowed ("probably", "leaning towards", "might", "should").
 - Rationale is allowed when the user has provided it.
 - Options without a chosen answer are allowed.
 - Every ODD traces back to something the user said.

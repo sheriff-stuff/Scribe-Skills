@@ -2,8 +2,8 @@
 
 Labels follow GitLab's scoped-label convention (`scope::value`). Every ticket carries:
 
-- `type::<kind>` — set by the template (`type::feature`, `type::bug`, `type::spike`, `type::chore`, `type::documentation`, `type::epic`, `type::odd`).
-- `area::<name>` — the part of the system the work touches (`area::backend`, `area::frontend`, `area::infra`). Areas reuse names already in use in the project; new ones are not invented when a matching label exists.
+- `type::<kind>` — set by the template (`type::feature`, `type::bug`, `type::spike`, `type::chore`, `type::documentation`, `type::epic`, `type::ODD`).
+- `area::<name>` — the part of the system the work touches (`area::backend`, `area::frontend`, `area::infra`, `area::wiki`). Areas reuse names already in use in the project; new ones are not invented when a matching label exists.
 
 Bug tickets additionally carry `severity::*`, `env::*`, and `network::*` scoped labels.
 

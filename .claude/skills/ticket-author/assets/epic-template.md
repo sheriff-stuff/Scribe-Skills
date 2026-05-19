@@ -34,7 +34,7 @@ labels: [type::epic, "area::<name>"]
 
 ## Child Work Items *(mandatory)*
 
-[Titles of the child tickets created in this MR.]
+[Titles of the child tickets created in this branch.]
 
 - <Child ticket title 1>
 - <Child ticket title 2>

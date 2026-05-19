@@ -142,7 +142,7 @@ Each Open Design Decision (ODD) has an ID of the form `ODD-<AREA>-<slug>`. See t
 
 Other affected pages carry a one-line pointer next to the affected section. The ID is rendered as a markdown link to the owner page (or the section heading the owner ODD sits under).
 
-> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#permissions) — endpoint behavior depends on the inheritance decision.
+> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#child-pages) — endpoint behaviour depends on the inheritance decision.
 
 When a pointer is added to another page, the owner page's `Affects:` line is updated in the same operation to include that page.
 

@@ -30,8 +30,8 @@ As a <role>, I want <capability> so that <benefit>.
 
 [Behaviours needing test coverage.]
 
-- <Behavior under test>
-- <Behavior under test>
+- <Behaviour under test>
+- <Behaviour under test>
 
 ## Out of Scope
 

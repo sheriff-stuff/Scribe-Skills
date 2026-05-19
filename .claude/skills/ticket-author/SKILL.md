@@ -1,6 +1,6 @@
 ---
 name: ticket-author
-description: Use when the user wants to create, edit, or break down GitLab tickets — including epics, features, spikes, bugs, chores, and ODDs (Open Design Decisions raised from the wiki).
+description: Use when the user wants to create, edit, or break down GitLab tickets — including epics, features, spikes, bugs, chores, documentation, and ODDs (Open Design Decisions raised from the wiki).
 ---
 
 # Ticket Author
@@ -13,7 +13,7 @@ Each ticket is a prompt for Claude Code. Combined with the wiki and the codebase
 
 ## Workflow
 
-1. **Understand the request.** Determine how many tickets are needed. For each ticket's type (Feature, Spike, Bug, Chore, ODD): if the request names it, use it; otherwise, ask before picking Spike, Bug, or Chore over Feature. ODD requires explicit naming. Epic is decided in step 3.
+1. **Understand the request.** Determine how many tickets are needed. For each ticket's type (Feature, Spike, Bug, Chore, Documentation, ODD): if the request names it, use it; otherwise, ask before picking Spike, Bug, or Chore over Feature. ODD requires explicit naming. Epic is decided in step 3.
 
 2. **Gather context from the project.** Before writing tickets, read what's already in the repo to understand the domain wiki pages, existing code, documentation, whatever is there. Use the terminology that already exists (page names, class names, module names). Do not invent new terminology for concepts that already have a name.
 
@@ -26,13 +26,13 @@ Each ticket is a prompt for Claude Code. Combined with the wiki and the codebase
    - Each ticket should represent a discrete, independently deliverable piece of work.
 
 4. **Write all ticket files.** Batch-write every `.md` file to `proposed-tickets/`. For each ticket, read the appropriate template from `assets/` and use it as the structural basis:
-   - [Epic template](assets/epic-template.md)
-   - [Feature template](assets/feature-template.md)
-   - [Spike template](assets/spike-template.md)
-   - [Bug template](assets/bug-template.md)
-   - [Chore template](assets/chore-template.md)
-   - [Documentation template](assets/documentation-template.md)
-   - [ODD template](assets/odd-template.md)
+   - [Epic template](assets/epic-template)
+   - [Feature template](assets/feature-template)
+   - [Spike template](assets/spike-template)
+   - [Bug template](assets/bug-template)
+   - [Chore template](assets/chore-template)
+   - [Documentation template](assets/documentation-template)
+   - [ODD template](assets/odd-template)
 
 ## Frontmatter Schema
 
@@ -99,7 +99,7 @@ Lowercase kebab-case named by subject.
    > Fields per `User-Storage.md`.
 
 9. **Material from a cautioned wiki page does not belong in Scope, Implementation Approach, or Acceptance Criteria.** A wiki page carrying a top-of-page `> [!CAUTION]` block is under investigation and not ready for implementation. Route its material to `Out of Scope` if the ticket has no dependency on it, or to `Risks` if the ticket still has exposure to the cautioned design (e.g. an entity created now will need fields added once the design is confirmed).
-10. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not an imperative, not a project-wide baseline (build/lint/test belong in `CLAUDE.md`), not subjective. State assertions that mirror a scope goal are fine if falsifiable.
+10. **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not an imperative, not a project-wide baseline (build/lint/test belong in the project's `CLAUDE.md`), not subjective. State assertions that mirror a scope goal are fine if falsifiable.
 
     **Bad — restates the task, baselines, and subjective judgements:**
 

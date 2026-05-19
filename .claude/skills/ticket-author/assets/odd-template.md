@@ -9,9 +9,13 @@ weight: <non-negative integer>
   `> [!ODD]` block, but ensure the title stands on its own for a ticket - add
   context if the wiki wording relies on its surrounding page for clarity.
   Do not prefix with the ODD ID — the ID is in the link below.
+
+  Link rule: link the ODD ID to the owner wiki page. If the ODD sits under a
+  specific section of that page, link that section's anchor instead:
+  [ODD-<AREA>-<slug>](<absolute URL to owner page>#<section-anchor>).
 -->
 
-> **ODD** — Resolve [ODD-<AREA>-<slug>](<absolute URL to owner page>) (under [§ <section heading>](<absolute URL to owner page>#<section-anchor>) if a specific section applies). Open point and context live in the wiki `> [!ODD]` block.
+> **ODD** — Resolve [ODD-<AREA>-<slug>](<absolute URL to owner page>). Open point and context live in the wiki `> [!ODD]` block.
 
 ## Affected Wiki Pages *(optional)*
 

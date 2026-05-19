@@ -34,10 +34,10 @@ weight: <non-negative integer>
 
 ## Testing *(mandatory)*
 
-[Behaviors needing test coverage. Always include a regression for the reproduction case.]
+[Behaviours needing test coverage. Always include a regression for the reproduction case.]
 
 - Regression: <one-line description of the failing scenario from Steps to Reproduce>
-- <Additional behavior under test if the fix touches one — otherwise remove this line>
+- <Additional behaviour under test if the fix touches one — otherwise remove this line>
 
 ## Acceptance Criteria *(mandatory)*
 

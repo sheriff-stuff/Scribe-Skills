@@ -26,11 +26,11 @@ Do this, in order:
 
 ## Output format
 
-**Output strictly. Do not narrate.** Your entire response is the verdict blocks plus the final summary block. Nothing before, nothing between, nothing after — no preamble ("Now I have everything I need.", "Let me analyze..."), no bullet-list analysis outside the blocks, no mid-stream self-corrections. If a verdict turns out wrong mid-output, re-emit only the corrected block; never leave the wrong version visible.
+**Output strictly. Do not narrate.** Your entire response is the verdict blocks plus the final summary block. Nothing before, nothing between, nothing after — no preamble ("Now I have everything I need.", "Let me analyse..."), no bullet-list analysis outside the blocks, no mid-stream self-corrections. If a verdict turns out wrong mid-output, re-emit only the corrected block; never leave the wrong version visible.
 
 **Bad** — narration leaks around the blocks:
 
-> Now I have everything I need. Let me analyze both pages.
+> Now I have everything I need. Let me analyse both pages.
 >
 > Page one looks clean. Page two has a hedge on line 7 and a missing heading on line 9 ...
 >
@@ -98,5 +98,5 @@ If a page is clean, write `VIOLATIONS: (none)` on a single line in place of the 
 - One verdict per file. `NEEDS WORK` if any violation is found, regardless of severity.
 - Do not rewrite the pages. Surgical critique only — fixes belong to the main conversation.
 - Do not invent praise. A clean page gets `VIOLATIONS: (none)` and `VERDICT: READY`.
-- Be honest. If an entire batch shares the same defect (every page hedges in body prose, every page missing the H1 description comment), surface it in the `NOTES:` line above the numeric summary — not inside the summary line itself.
+- Be honest. If an entire batch shares the same defect (every page hedges in body prose, every page missing the H1 description paragraph), surface it in the `NOTES:` line above the numeric summary — not inside the summary line itself.
 - When citing a Body Rule, use the rule's bolded name from the `wiki-page-author` skill (or a short, faithful paraphrase). For other violations, use these category labels: `ODD`, `CAUTION`, `Template`, `Cross-page`, `Index sync`.

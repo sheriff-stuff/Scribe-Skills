@@ -106,9 +106,9 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
    > Single-line text input rendered with `ic-text-field`.
 
-   **Good — relational statement, no enumeration:**
+   **Good — points to the external source instead of describing the relationship:**
 
-   > The local user document mirrors the API response shape.
+   > See [the API docs](https://example.com/docs) for an example of the user document shape.
 
    **Bad — reproduces the external shape under a "describing the local one" framing:**
 

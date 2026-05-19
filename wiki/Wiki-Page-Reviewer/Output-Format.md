@@ -8,7 +8,7 @@ One block per file:
 FILE: <relative path>
 VERDICT: READY | NEEDS WORK
 VIOLATIONS:
-  - Rule: <Body Rule N | ODD | CAUTION | Naming | Template | Cross-page | Index sync>
+  - Rule: <body rule name from the [Wiki Page Author](../Wiki-Page-Author) skill, or one of: ODD, CAUTION, Template, Cross-page, Index sync>
     Line: <line number, or range like 12-15; omitted for whole-file issues>
     Where: "<verbatim offending text, or section name if structural>"
     Why: <one sentence>

@@ -1,9 +1,9 @@
 # Checks
 
 - **Body Rules** — every Body Rule from the [Wiki Page Author](../Wiki-Page-Author) skill. Applied outside `> [!ODD]` and `> [!CAUTION]` blocks only.
-- **ODD** — block IDs follow `ODD-<AREA>-<slug>`; owner page carries the `<a id="ODD-...">` anchor; one decision per block; pointer blocks link to the owner anchor; reason sentence present.
-- **CAUTION** — block IDs follow `CAUTION-<AREA>-<slug>`; anchor present; block sits at the top of the page immediately after the H1 description comment; reason sentence present.
-- **Naming** — file, folder, and section heading names follow the subject, not the content type. Generic names (`docs/`, `notes/`, `## Notes`, `## Details`) are flagged.
+- **ODD** — every rule in the [Open Design Decision](../Wiki-Page-Author/Open-Design-Decision) page's rules section. Applied only inside `> [!ODD]` blocks.
+- **CAUTION** — every rule in the [Page Investigation Caution](../Wiki-Page-Author/Page-Investigation-Caution) page's rules section. Applied only inside `> [!CAUTION]` blocks.
+- **Naming** — the Body Rule on naming files, folders, and section headings by subject. Generic names (`docs/`, `notes/`, `## Notes`, `## Details`) are flagged.
 - **Template** — required scaffolding from the page template is present. Optional pieces are not flagged when legitimately omitted.
-- **Cross-page** — every pointer block resolves to an existing owner anchor; owner `Affects:` lines are reciprocated by pointer blocks on the listed pages.
-- **Index sync** — every target page is linked from `wiki/index.md` or `wiki/home.md`.
+- **Cross-page** — each pointer `> [!ODD]` block's link resolves to an owner ODD on the linked page, and that owner's `Affects:` list matches the set of pages carrying pointer blocks back to it.
+- **Index sync** — every target page is linked from the wiki index, per the Standing Instruction in the [Wiki Page Author](../Wiki-Page-Author) skill.

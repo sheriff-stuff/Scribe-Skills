@@ -6,7 +6,7 @@ One block per file:
 FILE: <relative path>
 VERDICT: READY | NEEDS WORK
 VIOLATIONS:
-  - Rule: <Body Rule N | Frontmatter | Naming | Template | Cross-ticket>
+  - Rule: <body rule name from the [Ticket Author](../Ticket-Author) skill, or one of: Frontmatter, Naming, Template, Cross-ticket>
     Line: <line number, or range like 12-15; omitted for whole-file issues like Naming>
     Where: "<verbatim offending text, or section name if structural>"
     Why: <one sentence>

@@ -1,6 +1,6 @@
 ---
 name: wiki-page-author
-description: Write, update, or remove pages in the project wiki, or organise wiki content into folders. Also creates, updates, and resolves inline open design decision (ODD) blocks and page-level investigation caution blocks. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided" — captured as ODD blocks), asks to add, update, or resolve an ODD directly, or asks to mark a page as under investigation, add a do-not-implement marker to a page, or lift the investigation marker once the page is ready.
+description: Write, update, fix, or remove pages in the project wiki, or organise wiki content into folders. Also creates, updates, and resolves inline open design decision (ODD) blocks and page-level investigation caution blocks. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided" — captured as ODD blocks), asks to add, update, or resolve an ODD directly, or asks to mark a page as under investigation, add a do-not-implement marker to a page, or lift the investigation marker once the page is ready.
 ---
 
 # Wiki Page Author
@@ -14,6 +14,16 @@ Uncertainty is allowed in two places: inline `> [!ODD]` blocks placed next to th
 These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION]` blocks.
 
 1. **One subject per page.** If content belongs to a different subject, suggest the right page rather than adding it.
+
+   The test is whether the content describes the subject of the page, or describes how another part of the application _uses_ the subject. The latter belongs on the consuming feature's page.
+
+   **Bad — adjacent subject on the wrong page:**
+
+   > A User Identity page that explains how FGS and RBAC use the user's attributes. That belongs on the Restrictions and Permissions pages respectively.
+
+   **Good — stays on subject:**
+
+   > A User Identity page that explains how users are identified and what attributes are retrieved from Corporate Directory.
 
 2. **Names — files, folders, and section headings — follow the subject, not the content type.**
 
@@ -114,7 +124,25 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
    > The local user document has fields `id`, `name`, `email`, `phone`, `address`.
 
-8. **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
+8. **Do not document implementation details that are self-evident from the code.** Identifiers (file names, variable names, lookup keys), structural conventions (naming patterns, directory layouts), and class/method signatures belong in the code, not the wiki. Documenting them here creates a second source of truth that can silently diverge. Technology choices and mechanisms (e.g. "loaded via Mongock", "JSON fixtures", "stored in MongoDB") _are_ design facts — they describe what approach was taken and belong in the wiki. Similarly, domain model vocabulary — field names and attributes that define the application's data model (e.g. `createdBy`, `roles`, `clearances`) — are design facts, not code identifiers.
+
+   **Bad — documents a code identifier as if it were a design fact:**
+
+   > The fixture file for the approver user is named `e2e-approver.json` and is loaded with `UserLookup.lookup("e2e-approver")`.
+
+   **Bad — documents code structure that is self-evident from the directory:**
+
+   > Each file is named by `uid` (e.g., `adeveloper.json`). A `UserLookup` utility class loads these fixtures.
+
+   **Good — describes what exists without naming the identifier or structure:**
+
+   > A fixture exists for a user with the Approver role only, used in Playwright e2e tests.
+
+   **Good — names the technology choice (a design fact):**
+
+   > Seed data is loaded via Mongock changesets that run on application startup.
+
+9. **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
 
    **Bad — bare in-repo path:**
 
@@ -124,15 +152,25 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
    > New pages use the [page template](../.claude/skills/wiki-page-author/assets/page-template).
 
-9. **No pleonasm.** State each fact without redundant qualifiers or filler.
+10. **No pleonasm.** State each fact without redundant qualifiers or filler.
 
-   **Bad:**
+    **Bad:**
 
-   > Each form always renders exactly one single question per page.
+> Each form always renders exactly one single question per page.
 
-   **Good:**
+**Good:**
 
-   > Forms render one question per page.
+> Forms render one question per page.
+
+11. **Don't repeat lists or definitions owned by another page — link instead.** When another wiki page defines a set of attributes, states, or categories, reference that page rather than re-enumerating the items. Enumerations drift when the source page is updated.
+
+    **Bad — enumerates attributes already defined on User-Identity:**
+
+> Each fixture contains the user's full DN, roles, clearances, COIs, ACGs, and organisations.
+
+**Good — links to the owning page:**
+
+> Each fixture provides the same identity attributes that Corporate Directory returns (see [User Identity](../Users/User-Identity)).
 
 ## Open Design Decisions
 

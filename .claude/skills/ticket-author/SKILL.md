@@ -1,6 +1,6 @@
 ---
 name: ticket-author
-description: Use when the user wants to create, edit, or break down GitLab tickets — including epics, features, spikes, bugs, chores, documentation, and ODDs (Open Design Decisions raised from the wiki).
+description: Use when the user wants to create, edit, fix, or break down tickets — including epics, features, spikes, bugs, chores, documentation, and ODDs (Open Design Decisions raised from the wiki).
 ---
 
 # Ticket Author
@@ -26,13 +26,13 @@ Each ticket is a prompt for Claude Code. Combined with the wiki and the codebase
    - Each ticket should represent a discrete, independently deliverable piece of work.
 
 4. **Write all ticket files.** Batch-write every `.md` file to `proposed-tickets/`. For each ticket, read the appropriate template from `assets/` and use it as the structural basis:
-   - [Epic template](assets/epic-template)
-   - [Feature template](assets/feature-template)
-   - [Spike template](assets/spike-template)
-   - [Bug template](assets/bug-template)
-   - [Chore template](assets/chore-template)
-   - [Documentation template](assets/documentation-template)
-   - [ODD template](assets/odd-template)
+   - [Epic template](assets/epic-template.md)
+   - [Feature template](assets/feature-template.md)
+   - [Spike template](assets/spike-template.md)
+   - [Bug template](assets/bug-template.md)
+   - [Chore template](assets/chore-template.md)
+   - [Documentation template](assets/documentation-template.md)
+   - [ODD template](assets/odd-template.md)
 
 ## Frontmatter Schema
 
@@ -73,7 +73,7 @@ Lowercase kebab-case named by subject.
 
    > Update discount calculation logic in [`PricingService.applyDiscount`](url).
 
-6. **Implementation Approach orients, not prescribes.** Reference patterns and existing implementations by concrete anchors (files, classes, wiki pages) — not numbered steps. Every Scope item must be reachable from the Approach.
+6. **Implementation Approach orients, not prescribes.** Reference patterns and existing implementations by concrete anchors (files, classes, wiki pages) — not numbered steps. Bulleted lists are acceptable for structural or orientation notes (e.g. "one file per user in `src/main/resources/users/`"), but not as a substitute for numbered imperative steps. Every Scope item must be reachable from the Approach.
 
    **Bad — enumerates as a step-by-step list:**
 

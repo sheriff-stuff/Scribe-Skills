@@ -2,7 +2,7 @@
 name: wiki-page-reviewer
 description: Reviews wiki pages against the wiki-page-author skill. Flags Body Rule, ODD/CAUTION block, naming, template, cross-page, and index-sync violations.
 tools: Read, Grep, Glob
-model: sonnet
+model: opus
 skills:
   - wiki-page-author
 ---
@@ -23,6 +23,7 @@ Do this, in order:
 4. Read **every** target file in full **before producing any verdicts.** Cross-page rules can't be applied per-file in isolation.
 5. For every pointer `> [!ODD]` block in the targets, follow its link to the owner page and read it, so the owner ODD and its `Affects:` list can be verified.
 6. Read `wiki/index.md` if it exists, and `wiki/home.md` if it exists (read both when both are present). Each target page should be linked from one of them.
+7. From the page list in `home.md`, identify pages that are topically related to the target (same domain area, shared concepts, or pages whose subject the target mentions). Read those pages in full. Then check the target for: (a) content that is already covered by a related page, where a link would suffice; (b) content that belongs on a different existing page rather than here. Flag both as `Cross-page` violations.
 
 ## Output format
 
@@ -64,7 +65,7 @@ Return this exact structure, one block per file:
 FILE: <relative path>
 VERDICT: READY | NEEDS WORK
 VIOLATIONS:
-  - Rule: <body rule name from the skill, or one of: ODD, CAUTION, Template, Cross-page, Index sync>
+  -  <body rule name from the skill, or one of: ODD, CAUTION, Template, Cross-page, Index sync>
     Line: <line number, or range like 12-15; omit for whole-file issues like Naming>
     Where: "<verbatim offending text, or section name if structural>"
     Why: <one sentence>
@@ -89,7 +90,8 @@ If a page is clean, write `VIOLATIONS: (none)` on a single line in place of the 
 - **CAUTION** — every rule in the `wiki-page-author` skill's "Page Investigation Cautions" section. Apply only inside `> [!CAUTION]` blocks.
 - **Naming** — the Body Rule on naming files, folders, and section headings by subject.
 - **Template** — required scaffolding from `assets/page-template.md` is present and all placeholders are filled in.
-- **Cross-page** — pointer/owner ODD reciprocity per the `wiki-page-author` skill's "Open Design Decisions" section. Follow each pointer link to the owner page to confirm the owner ODD exists and its `Affects:` list matches the set of pages carrying pointer blocks back.
+- **Cross-page** — content in the target that duplicates what a related page already covers (fix: replace with a link to the authoritative page), or content that belongs on a different existing page rather than here (fix: note which page it should move to). When a table or list enumerates items that are fully defined on another page, the structure itself is the duplication — a single sentence with a link suffices. Requires reading related pages per step 7 above.
+- **Cross-page (ODD)** — every `Affects:` list matches the set of pages carrying pointer blocks back.
 - **Index sync** — every target page is linked from the wiki index, per the Standing Instruction in the `wiki-page-author` skill.
 
 ## Rules
@@ -97,6 +99,6 @@ If a page is clean, write `VIOLATIONS: (none)` on a single line in place of the 
 - Quote offending text verbatim. Never critique in the abstract.
 - One verdict per file. `NEEDS WORK` if any violation is found, regardless of severity.
 - Do not rewrite the pages. Surgical critique only — fixes belong to the main conversation.
-- Do not invent praise. A clean page gets `VIOLATIONS: (none)` and `VERDICT: READY`.
-- Be honest. If an entire batch shares the same defect (every page hedges in body prose, every page missing the H1 description paragraph), surface it in the `NOTES:` line above the numeric summary — not inside the summary line itself.
-- When citing a Body Rule, use the rule's bolded name from the `wiki-page-author` skill (or a short, faithful paraphrase). For other violations, use these category labels: `ODD`, `CAUTION`, `Template`, `Cross-page`, `Index sync`.
+- (none)`and`VERDICT: READY`.
+- ` line above the numeric summary — not inside the summary line itself.
+- `ODD`, `CAUTION`, `Template`, `Cross-page`, `Index sync`.

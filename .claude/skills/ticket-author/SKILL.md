@@ -5,7 +5,7 @@ description: Use when the user wants to create, edit, or break down GitLab ticke
 
 # Ticket Author
 
-This skill writes ticket proposal files to `proposed-tickets/`. Each file becomes a ticket (or epic) when the PR/MR merges to main.
+This skill writes ticket proposal files to `proposed-tickets/`. Each file becomes a ticket (or epic) when the PR/MR is merged.
 
 ## Consumer
 
@@ -23,8 +23,6 @@ Each ticket is read by a human reviewer and executed by an LLM agent that has th
    | No               | No           | No                       | Use Feature                                       |
 
 2. **Gather context from the project.** Before writing tickets, read what's already in the repo to understand the domain wiki pages, existing code, documentation, whatever is there. Use the terminology that already exists (page names, class names, module names). Do not invent new terminology for concepts that already have a name.
-
-   **If a wiki page informing the ticket carries a top-of-page `> [!CAUTION]` block** ([page investigation caution](../wiki-page-author/SKILL#page-investigation-cautions)): notify the user, quote the caution's reason, and wait for instruction before proceeding. The Body Rule on material from a cautioned wiki page governs how to handle it. Spike and Bug tickets are exempt — a Spike's purpose is to investigate unresolved design, and a Bug targets existing behaviour rather than committing to the cautioned design.
 
 3. **Plan the ticket set.** Decide the breakdown:
    - If the work has multiple child tickets that belong together, create an epic file plus individual ticket files with `epic: auto`.
@@ -138,7 +136,6 @@ Lowercase kebab-case named by subject.
 
   > Fields per [`User-Storage.md`](https://example.com/wiki/User-Storage).
 
-- **Material from a cautioned wiki page does not belong in Scope, Implementation Approach, or Acceptance Criteria.** A wiki page carrying a top-of-page `> [!CAUTION]` block is under investigation and not ready for implementation. Those two sections are acceptable destinations because neither commits the implementation to the cautioned design: `Out of Scope` excludes it explicitly, `Risks` flags it as exposure. Route material to `Out of Scope` if the ticket has no dependency on it, or to `Risks` if the ticket still has exposure to the cautioned design (e.g. an entity created now will need fields added once the design is confirmed).
 - **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not an imperative, not a project-wide baseline (build/lint/test belong in the project's `CLAUDE.md`), not subjective. State assertions that correspond to a scope goal are fine if falsifiable.
 
   **Bad — restates the task, baselines, and subjective judgements:**
@@ -167,7 +164,6 @@ Lowercase kebab-case named by subject.
   > - Mongock migration creates indexes on `state`, `_class`, `createdAt`, and `createdBy`
   > - Seed documents contain fields matching the [Project ORIN Schema](https://example.com/wiki/Project-ORIN-Schema)
 
-- **Risks entries require concrete exposure.** Only add an item to Risks when something outside the ticket's control creates a concrete risk to the work — e.g. a dependency on an unconfirmed design, an upstream migration with no fixed date, or a cautioned wiki page whose outcome could change the ticket's scope. Material that is fully excluded via Out of Scope poses no risk and should not appear in Risks.
 - **Testing names behaviours, not cases.** Feature and bug tickets require automated tests. For bugs, a regression test covering the reproduction case is mandatory. Name the behaviours that must have coverage; the implementing agent derives cases and edges from the code change, wiki, and codebase already in context. Do not enumerate cases, edges, frameworks, or file paths.
 - **ODD tickets request resolution of an existing wiki ODD.** The ticket closes when the wiki ODD is resolved.
 
@@ -182,7 +178,6 @@ Lowercase kebab-case named by subject.
 - [ ] Relationships described in parts — what to take and what to change; no bare single verbs (mirror, match, follow, reference)
 - [ ] No justification or rationale in ticket bodies
 - [ ] No duplicated spec detail from a source-of-truth doc
-- [ ] Cautioned wiki material appears only in Out of Scope or Risks
 - [ ] Acceptance Criteria assert outcomes — each is a falsifiable check, not a restatement of Scope, a project baseline, or a subjective judgement
 - [ ] Risks entries point to concrete exposure outside the ticket's control
 - [ ] Testing names behaviours, not cases — no enumerated cases, edges, frameworks, or file paths

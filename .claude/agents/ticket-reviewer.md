@@ -60,9 +60,9 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 
 ## What to check
 
-- **Frontmatter** against the Frontmatter Schema in the `ticket-author` skill. If a ticket's type field is missing or unrecognised, flag it as a Frontmatter violation.
+- **Frontmatter** against the Frontmatter Schema in the `ticket-author` skill.
 - **File naming** against the File Naming section of the `ticket-author` skill.
-- **Template structure** — sections marked mandatory in the appropriate template under `assets/` are present. Flag missing mandatory sections only; templates mark conditional and optional sections inline. If the type is unrecognised and no matching template exists, skip Template checks for that file and add `Where: "Template checks skipped: unknown type"`.
+- **Template structure** — sections marked mandatory in the appropriate template under `assets/` are present. Flag missing mandatory sections only; templates mark conditional and optional sections inline.
 - **Body Rules** — every Body Rule in `SKILL.md`.
 - **Cross-ticket** — at most one `epic` file per batch; child tickets using `epic: auto` only when an epic file is present in the batch.
 

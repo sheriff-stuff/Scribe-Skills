@@ -12,6 +12,10 @@ Index of wiki pages.
 - [Ticket Reviewer](Ticket-Reviewer)
 - [Wiki Page Reviewer](Wiki-Page-Reviewer)
 
+## Slash commands
+
+- [Count Skill Tokens](Count-Skill-Tokens)
+
 ## Release process
 
 - [Versioning Strategy](Versioning-Strategy)

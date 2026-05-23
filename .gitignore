@@ -5,3 +5,4 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .claude/settings.local.json
+.claude/commands/scripts/.anthropic_api_key

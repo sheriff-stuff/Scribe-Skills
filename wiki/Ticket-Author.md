@@ -1,8 +1,8 @@
 # Ticket Author
 
-The ticket-author skill writes ticket proposal files to [`proposed-tickets/`](../proposed-tickets/). Each file becomes a GitLab issue (or epic) when the MR merges to main. The skill does not create branches, commits, or MRs.
+The ticket-author skill writes ticket proposal files to [`proposed-tickets/`](../proposed-tickets/). Each file becomes a ticket (or epic) when the PR/MR merges to main.
 
-Each ticket is a prompt for Claude Code: combined with the wiki and the codebase, it drives an LLM agent to produce code and a PR.
+Each ticket is read by a human reviewer and executed by an LLM agent that has the wiki and the codebase in context.
 
 ## Sections
 
@@ -13,3 +13,4 @@ Each ticket is a prompt for Claude Code: combined with the wiki and the codebase
 - [Labels](Ticket-Author/Labels)
 - [File Naming](Ticket-Author/File-Naming)
 - [Body Rules](Ticket-Author/Body-Rules)
+- [Validation](Ticket-Author/Validation)

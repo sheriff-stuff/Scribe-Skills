@@ -1,6 +1,6 @@
 ---
 name: wiki-page-author
-description: Write, update, or remove pages in the project wiki, or organise wiki content into folders. Also creates, updates, and resolves inline open design decision (ODD) blocks and page-level investigation caution blocks. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided" — captured as ODD blocks), asks to add, update, or resolve an ODD directly, or asks to mark a page as under investigation, add a do-not-implement marker to a page, or lift the investigation marker once the page is ready.
+description: Write, update, fix, or remove pages in the project wiki, or organise wiki content into folders. Also creates, updates, and resolves inline open design decision (ODD) blocks and page-level investigation caution blocks. Use when the user asks to add to the wiki, update the wiki, document something, write a page about a subject, remove a page, expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided" — captured as ODD blocks), asks to add, update, or resolve an ODD directly, or asks to mark a page as under investigation, add a do-not-implement marker to a page, or lift the investigation marker once the page is ready.
 ---
 
 # Wiki Page Author
@@ -13,187 +13,228 @@ Uncertainty is allowed in two places: inline `> [!ODD]` blocks placed next to th
 
 These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION]` blocks.
 
-1. **One subject per page.** If content belongs to a different subject, suggest the right page rather than adding it.
+- **One subject per page.** If content belongs to a different subject, suggest the right page rather than adding it. The test is whether the content describes the `subject` of the page, or describes how another part of the application _uses_ the subject — the latter belongs on the consuming feature's page.
 
-2. **Names — files, folders, and section headings — follow the subject, not the content type.**
+  **Bad — User Identity page drifts into how other features consume it:**
 
-   **Bad — describes how the content was produced:**
+  > ## How restrictions use identity
+  >
+  > FGS reads the user's `clearance` and `region` attributes to filter visible records.
+  >
+  > ## How permissions use identity
+  >
+  > RBAC maps the user's `role` attribute to a permission set.
 
-   > `docs/`, `notes/`, `analysis/`, `architecture/`, `## Notes`, `## Details`, `## Information`
+  **Good — User Identity page stays on its subject:**
 
-   **Good — describes what the content is about:**
+  > Users are identified by their corporate directory entry. The following attributes are retrieved on sign-in: `clearance`, `region`, `role`, `email`.
 
-   > `Forms/`, `Users/`, `Migration/`, `## Validation rules`
+- **Names — files, folders, and section headings — follow the subject, not the content type.**
 
-3. **Present tense, declarative — describes the application as if it already exists.** Even when the feature hasn't been built, write as if it has. No "we will", "we plan to", or "the idea is".
+  **Bad — describes how the content was produced:**
 
-   **Bad — describes intent rather than state:**
+  > `docs/`, `notes/`, `analysis/`, `architecture/`, `## Notes`, `## Details`, `## Information`
 
-   > We plan to render one question per page.
+  **Good — describes what the content is about:**
 
-   **Bad — describes what the application doesn't do:**
+  > `Forms/`, `Users/`, `Migration/`, `## Validation rules`
 
-   > The form does not render multiple questions on one page.
+- **Present tense, declarative — describes the application as if it already exists.** Even when the feature hasn't been built, write as if it has. No "we will", "we plan to", or "the idea is".
 
-   **Good — describes the application as it is:**
+  **Bad — describes intent rather than state:**
 
-   > The form renders one question per page.
+  > We plan to render one question per page.
 
-4. **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section. A body sentence on the same topic as an adjacent ODD is fine when it states the current spec confidently — topical overlap is not a violation, hedging is. If something is unknown or undecided, ask the user; do not infer it from related pages, related code, or what seems plausible.
+  **Bad — describes what the application doesn't do:**
 
-   **Bad — hedge in the body:**
+  > The form does not render multiple questions on one page.
 
-   > Sessions probably persist across browser restarts.
+  **Good — describes the application as it is:**
 
-   **Good — block names the open point directly:**
+  > The form renders one question per page.
 
-   > [!ODD] ODD-SESSIONS-browser-restart-persistence — Session persistence across browser restarts is undecided.
+- **Uncertainty lives only in `> [!ODD]` blocks, never in body prose.** Confirmed answers go in the body; block carries what's open next to the relevant section. A body sentence on the same topic as an adjacent ODD is fine when it states the current spec confidently — topical overlap is not a violation, hedging is. If something is unknown or undecided, ask the user; do not infer it from related pages, related code, or what seems plausible.
 
-   **Bad — body restates the adjacent ODD:**
+  **Bad — hedge in the body:**
 
-   > Forms render one question per page. Whether partial submissions are saved automatically or only on explicit "save draft" is still being decided.
+  > Sessions probably persist across browser restarts.
 
-   **Good — body confident, block carries the open point:**
+  **Good — block names the open point directly:**
 
-   > Forms render one question per page.
-   >
-   > [!ODD] ODD-FORMS-partial-submission-save — Partial submission save trigger is undecided — automatic, or only on explicit "save draft".
+  > [!ODD] ODD-SESSIONS-browser-restart-persistence — Session persistence across browser restarts is undecided.
 
-   **Good — body states current spec, ODD flags future change:**
+  **Bad — body restates the adjacent ODD:**
 
-   > User data is stored in a local MongoDB collection seeded with test fixtures.
-   > [!ODD] ODD-DATA-external-api-migration — Migration to external API X is pending API readiness.
+  > Forms render one question per page. Whether partial submissions are saved automatically or only on explicit "save draft" is still being decided.
 
-5. **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
+  **Good — body confident, block carries the open point:**
 
-   **Bad — explains why the choice was made:**
+  > Forms render one question per page.
+  >
+  > [!ODD] ODD-FORMS-partial-submission-save — Partial submission save trigger is undecided — automatic, or only on explicit "save draft".
 
-   > Forms render one question per page because users on mobile struggled with multi-question screens.
+  **Good — body states current spec, ODD flags future change:**
 
-   **Good — states the fact:**
+  > User data is stored in a local MongoDB collection seeded with test fixtures.
+  > [!ODD] ODD-DATA-external-api-migration — Migration to external API X is pending API readiness.
 
-   > Forms render one question per page.
+- **No rationale; link to a design decision record if justification is needed.** The page describes what the application is, not why. The why lives in design decision records. If a design choice needs justification, link to the DDR rather than writing the justification on the page. If a relevant DDR doesn't exist, suggest creating one rather than writing the rationale into the page.
 
-   **Good — states the fact and links the why:**
+  **Bad — explains why the choice was made:**
 
-   > Forms render one question per page. See [DDR-0007 Form rendering](../Decisions/DDR-0007-Form-rendering).
+  > Forms render one question per page because users on mobile struggled with multi-question screens.
 
-6. **No revision history.** Updates replace content; do not annotate what changed.
+  **Good — states the fact:**
 
-   **Bad:**
+  > Forms render one question per page.
 
-   > Sessions now persist across browser restarts (previously they expired on close).
+  **Good — states the fact and links the why:**
 
-   **Good:**
+  > Forms render one question per page. See [DDR-0007 Form rendering](../Decisions/DDR-0007-Form-rendering).
 
-   > Sessions persist across browser restarts.
+- **No revision history.** Updates replace content; do not annotate what changed.
 
-7. **For external services and libraries, document the integration — not their API.** State which component, endpoint, or module is used and what it does in the application. Do not list its properties, attributes, slots, or parameters — those belong in the library's own documentation and drift when it changes. A statement about how a local structure relates to an external shape is allowed. Reproducing the shape itself is not.
+  **Bad:**
 
-   **Bad — mirrors the third-party API (drifts when they change it):**
+  > Sessions now persist across browser restarts (previously they expired on close).
 
-   > `POST /v1/users` returns `{id, name, email, phone, address, created_at, updated_at, status, role}`.
+  **Good:**
 
-   **Good — documents the contract:**
+  > Sessions persist across browser restarts.
 
-   > We call `POST /v1/users` with `{name, email}`. We read `id` and `email` from the response. On `429`, we retry with exponential backoff. See [the API docs](https://example.com/docs) for the full response shape.
+- **For external services and libraries, document the integration — not their API.** State which component, endpoint, or module is used and what it does in the application. Do not list its properties, attributes, slots, or parameters — those belong in the library's own documentation and drift when it changes. A statement about how a local structure relates to an external shape is allowed. Reproducing the shape itself is not.
 
-   **Bad — lists component attributes (drifts when the library changes):**
+  **Bad — mirrors the third-party API (drifts when they change it):**
 
-   > Uses `ic-text-field` with `label`, `helper-text`, `placeholder`, `validation-status`.
+  > `POST /v1/users` returns `{id, name, email, phone, address, created_at, updated_at, status, role}`.
 
-   **Good — names the component and describes application behaviour:**
+  **Good — documents the contract:**
 
-   > Single-line text input rendered with `ic-text-field`.
+  > We call `POST /v1/users` with `{name, email}`. We read `id` and `email` from the response. On `429`, we retry with exponential backoff. See [the API docs](https://example.com/docs) for the full response shape.
 
-   **Good — points to the external source instead of describing the relationship:**
+  **Bad — lists component attributes (drifts when the library changes):**
 
-   > See [the API docs](https://example.com/docs) for an example of the user document shape.
+  > Uses `ic-text-field` with `label`, `helper-text`, `placeholder`, `validation-status`.
 
-   **Bad — reproduces the external shape under a "describing the local one" framing:**
+  **Good — names the component and describes application behaviour:**
 
-   > The local user document has fields `id`, `name`, `email`, `phone`, `address`.
+  > Single-line text input rendered with `ic-text-field`.
 
-8. **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
+  **Good — points to the external source instead of describing the relationship:**
 
-   **Bad — bare in-repo path:**
+  > See [the API docs](https://example.com/docs) for an example of the user document shape.
 
-   > New pages use the page template at `.claude/skills/wiki-page-author/assets/page-template.md`.
+  **Bad — reproduces the external shape under a "describing the local one" framing:**
 
-   **Good — inline link to the file:**
+  > The local user document has fields `id`, `name`, `email`, `phone`, `address`.
 
-   > New pages use the [page template](../.claude/skills/wiki-page-author/assets/page-template).
+- **Document design facts, not code identifiers or structure.** Identifiers (file names, variable names, lookup keys) and structural conventions (naming patterns, directory layouts, class and method signatures) live in the code, not the wiki — documenting them creates a second source of truth that drifts. Technology choices and mechanisms (e.g. "loaded via Mongock changesets", "JSON fixtures", "stored in MongoDB") _are_ design facts and belong here. Domain model vocabulary — field names and attributes that define the application's data model (e.g. `createdBy`, `roles`, `clearances`) — are also design facts. The test: does the name appear in conversations about _what the application is_ (domain vocabulary, design facts), or only in conversations about _how the code is organised_ (file layout, helper classes, fixture names)? The first belongs in the wiki; the second doesn't.
 
-9. **No pleonasm.** State each fact without redundant qualifiers or filler.
+  **Bad — documents a code identifier as if it were a design fact:**
 
-   **Bad:**
+  > The fixture file for the approver user is named `e2e-approver.json` and is loaded with `UserLookup.lookup("e2e-approver")`.
 
-   > Each form always renders exactly one single question per page.
+  **Bad — documents code structure that is self-evident from the directory:**
 
-   **Good:**
+  > Each fixture file is named by `uid` (e.g., `adeveloper.json`) and lives in `src/test/fixtures/users/`.
 
-   > Forms render one question per page.
+  **Good — describes what exists without naming the identifier or structure:**
+
+  > A fixture exists for a user with the Approver role only, used in Playwright e2e tests.
+
+  **Good — names the technology choice (a design fact):**
+
+  > Seed data is loaded via Mongock changesets that run on application startup.
+
+- **Anything linkable is written as an inline link, and internal targets use no `.md` extension.** This covers files and folders inside the wiki, files and folders elsewhere in the repo, and external URLs. Bare paths and bare URLs are only used when the target genuinely cannot be linked.
+
+  **Bad — bare in-repo path:**
+
+  > New pages use the page template at `.claude/skills/wiki-page-author/assets/page-template.md`.
+
+  **Good — inline link to the file:**
+
+  > New pages use the [page template](../.claude/skills/wiki-page-author/assets/page-template).
+
+- **No pleonasm.** State each fact without redundant qualifiers or filler.
+
+  **Bad:**
+
+  > Each form always renders exactly one single question per page.
+
+  **Good:**
+
+  > Forms render one question per page.
 
 ## Open Design Decisions
 
-Each Open Design Decision (ODD) has an ID of the form `ODD-<AREA>-<slug>`. See the [ODD template](assets/odd-template) for the canonical shape. On the owner page the ID is plain text; on pointer blocks elsewhere the ID is rendered as a markdown link to the owner page (or the section heading the block sits under).
+Every ODD traces back to something the user said — do not invent uncertainty.
 
-### Pointer blocks on affected pages
-
-Other affected pages carry a one-line pointer next to the affected section. The ID is rendered as a markdown link to the owner page (or the section heading the owner ODD sits under).
-
-> [!ODD] [ODD-PERMISSIONS-child-page-inheritance](../Permissions/Permissions#child-pages) — endpoint behaviour depends on the inheritance decision.
-
-When a pointer is added to another page, the owner page's `Affects:` line is updated in the same operation to include that page.
-
-### Rules inside `> [!ODD]` blocks
-
-These apply only inside ODD blocks.
-
-1. **IDs follow `ODD-<AREA>-<slug>`.** Area is one uppercase word naming the page or folder concept the ODD lives under (`PERMISSIONS`, `FORMS`, `SESSIONS`). Slug is kebab-case, describes the open point, and is distinct — `child-page-inheritance` not `inheritance`.
-2. **`Ticket:` is required.** Use `*(placeholder)*` if no ticket has been created.
-3. **`Affects:`, when present, lists every page that carries a pointer block to this ODD.**
-4. **Rationale is allowed.**
-5. **Every block traces back to something the user said.** Do not invent uncertainty.
-6. **One decision per block.**
-
-### Resolving an Open Design Decision
-
-When an Open Design Decision is answered:
-
-1. Rewrite the relevant body sections in the owner page and every affected page in confident present tense, incorporating the answer.
-2. Remove the `> [!ODD]` block from the owner page.
-3. Remove every pointer `> [!ODD]` block referencing that ID across the wiki.
+When the user expresses uncertainty about something they want recorded ("I'm not sure", "we haven't decided", "still working out"), asks to add or update an ODD, or asks to resolve an ODD, read [`references/open-design-decisions`](references/open-design-decisions) before writing or modifying the block. That reference covers the `ODD-<AREA>-<slug>` ID format, owner pages vs pointer blocks, the `Affects:` line, the rules that apply inside `> [!ODD]` blocks, and the resolution flow.
 
 ## Page Investigation Cautions
 
 A Page Investigation Caution marks a whole page as not ready for implementation — coarser than an ODD, which scopes uncertainty to one point and treats the rest of the body as ground truth. The [ticket-author](../ticket-author/SKILL) skill refuses to draw Scope, Implementation Approach, or Acceptance Criteria from a cautioned page without explicit user authorization.
 
-See the [page investigation caution template](assets/caution-template) for the canonical shape. Tickets that act on the caution link to the page itself.
+Every caution traces back to something the user said — do not invent investigation cautions.
 
-### Rules inside `> [!CAUTION]` blocks
-
-These apply only inside caution blocks.
-
-1. **One caution per page maximum.**
-2. **The reason sentence is required.** A bare `> [!CAUTION]` with no reason is not allowed.
-3. **`Context:` is optional.**
-4. **A caution is page-level.** Other pages carry no pointer blocks back to it.
-5. **Every caution traces back to something the user said.** Do not invent investigation cautions.
+When the user says the page is "still being figured out", "don't build from this yet", or asks to mark a page as under investigation, add a do-not-implement marker, or lift the investigation marker once the page is ready, read [`references/page-investigation-caution`](references/page-investigation-caution) before writing or modifying the block. That reference covers the rules that apply inside `> [!CAUTION]` blocks.
 
 ## Standing Instructions
 
 These apply throughout the work.
 
 - **Use the [page template](assets/page-template) for new pages.**
-- **Use the [Open Design Decision template](assets/odd-template) when adding an Open Design Decision.**
-- **Use the [page investigation caution template](assets/caution-template) when marking a page as under investigation.**
 - **Keep [`index.md`] or [`home.md`] in sync.** If a page is added or removed, update [`index.md`] or [`home.md`] in the same operation.
 - **Flag inconsistencies, do not fix them silently.** If a change makes another wiki page inconsistent, tell the user. Do not edit other pages unprompted.
-- **Re-read before finishing.** Read the body back. Check that nothing in it is guessed, hedged, justified, or historical. Fix anything that is.
+
+## Validation
+
+Walk this checklist against every page you wrote or changed. If any item fails, fix it and re-run the checklist on the revised page. Repeat until every item passes. If a failure cannot be resolved without information only the user can provide (an undecided answer, an unresolvable concept), stop and ask the user — list every unresolved item in one message rather than asking piecemeal. Do not report the work as done until validation passes cleanly.
+
+Body — walk the Body Rules section above and confirm each holds for every sentence on the page:
+
+- [ ] One subject per page
+- [ ] Names follow the subject
+- [ ] Present tense, declarative
+- [ ] No hedging in body prose
+- [ ] No rationale in body
+- [ ] No revision history
+- [ ] External services and libraries documented as integrations
+- [ ] Design facts only
+- [ ] Anything linkable is an inline link
+- [ ] No pleonasm
+
+Open Design Decisions — applies inside every `> [!ODD]` block touched:
+
+- [ ] ID follows `ODD-<AREA>-<slug>` — area is one uppercase word naming the owning page or folder concept; slug is kebab-case and distinct
+- [ ] `Ticket:` is present (use `*(placeholder)*` if no ticket exists)
+- [ ] On the owner page the ID is plain text; on pointer blocks it is a markdown link to the owner page or the owner section heading
+- [ ] On the owner page, `Affects:` lists every page that carries a pointer block to this ODD
+- [ ] Every pointer block elsewhere references an ODD that exists on its owner page
+- [ ] One decision per block
+- [ ] The block traces back to something the user said — uncertainty is not invented
+
+Page Investigation Caution — applies when a `> [!CAUTION]` block was added, changed, or removed:
+
+- [ ] At most one caution per page
+- [ ] The reason sentence is present — no bare `> [!CAUTION]`
+- [ ] No pointer blocks elsewhere reference the caution
+- [ ] The caution traces back to something the user said
+
+Cross-page and index:
+
+- [ ] **Cross-page check.** From the page list in [`index.md`] or [`home.md`], identify pages topically related to the target — same domain area, shared concepts, or pages whose subject the target mentions. Read those pages in full. Then check the target for: (a) content already covered by a related page, where a link would suffice; (b) content that belongs on a different existing page rather than here. Flag both to the user.
+- [ ] If a page was added or removed, [`index.md`] or [`home.md`] reflects it
+- [ ] Inconsistencies introduced on other pages by this change have been flagged to the user — not silently fixed
+
+Resolution and removal:
+
+- [ ] When an ODD was resolved, the owner block and every pointer block referencing its ID are removed, and the affected body sections have been rewritten in confident present tense
+- [ ] When a caution was lifted, the block is removed and the body has been rewritten as ground truth
 
 ## Gotchas
 
-- "I'm not sure" / "we haven't decided" / "still working out" is a signal to write an inline `> [!ODD]` block, not to guess and write a confident sentence.
-- "this page is still being figured out" / "don't build from this yet" / "treat this as a draft / proposal" is a signal to add a top-of-page `> [!CAUTION]` block, not an ODD. ODD is section-scoped; caution is page-scoped.
+- "I'm not sure" / "we haven't decided" / "still working out" is a signal to write an inline `> [!ODD]` block, not to guess and write a confident sentence. Load [`references/open-design-decisions`](references/open-design-decisions) before writing the block.
+- "this page is still being figured out" / "don't build from this yet" / "treat this as a draft / proposal" is a signal to add a top-of-page `> [!CAUTION]` block, not an ODD. ODD is section-scoped; caution is page-scoped. Load [`references/page-investigation-caution`](references/page-investigation-caution) before writing the block.
 - A request to "add notes" or "document my thinking" is usually not a wiki request. Ask before writing.

@@ -11,7 +11,7 @@ Everything under `.claude/` is read by Claude Code, not humans — templates and
 3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
 4. **Pull request** — open the PR. No dedicated skill.
 
-This repo is dogfooded on itself. **Whenever anything in `.claude/` is created, changed, or removed — skill, subagent, hook, slash command, or otherwise — the corresponding wiki page is created or updated in the same change.** The wiki is the spec; if the wiki and `.claude/` disagree, the wiki is wrong. Tickets are cut from the wiki diff.
+This repo is dogfooded on itself. **The wiki must match `.claude/` before a PR is opened; mid-branch commits can diverge.** Iterate on skills, subagents, hooks, and slash commands freely — individual commits need not touch the wiki. Before pushing the PR, sync the affected wiki pages in the same branch so the update lands in the PR diff. The wiki is the spec; if the wiki and `.claude/` disagree on `master`, the wiki is wrong. Tickets are cut from the wiki diff.
 
 ## What the wiki is
 

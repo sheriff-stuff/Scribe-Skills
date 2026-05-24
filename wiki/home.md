@@ -16,6 +16,10 @@ Index of wiki pages.
 
 - [Count Skill Tokens](Count-Skill-Tokens)
 
+## Distribution
+
+- [Plugin Marketplace](Plugin-Marketplace)
+
 ## Release process
 
 - [Versioning Strategy](Versioning-Strategy)

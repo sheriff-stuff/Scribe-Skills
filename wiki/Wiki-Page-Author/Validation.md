@@ -1,6 +1,6 @@
 # Validation
 
-Before finishing, the skill walks a checklist against every page it wrote or changed. Items that fail are fixed and the checklist is re-walked, until every item passes. If a failure requires information only the user can provide, the skill stops and lists every unresolved item in one message rather than asking piecemeal. Work is not reported as done until the checklist passes.
+Before reporting work as done, the skill walks a checklist against every page it wrote or changed. Items that fail are fixed and the checklist is re-walked, until every item passes. If a failure requires information only the user can provide, the skill stops and lists every unresolved item in one message rather than asking piecemeal.
 
 The checklist covers:
 

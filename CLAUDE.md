@@ -34,10 +34,6 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 - `.claude/commands/` — slash commands used while working in this repo (e.g. `/count-skill-tokens`). Local-only; not shipped via the marketplace.
 - `wiki/` — the living spec for everything in `skills/` and `.claude/`.
 
-## Versioning and release branches
-
-The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
-
 ## Rules
 
 These apply to everything written in this repo — skills, subagents, hooks, slash commands, wiki pages, tickets, commit messages, PR descriptions.

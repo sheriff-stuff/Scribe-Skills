@@ -19,7 +19,3 @@ Index of wiki pages.
 ## Distribution
 
 - [Plugin Marketplace](Plugin-Marketplace)
-
-## Release process
-
-- [Versioning Strategy](Versioning-Strategy)

@@ -1,6 +1,6 @@
 # Triggers
 
-The subagent is invoked by name with the wiki page paths to review (e.g. `@wiki-page-reviewer <paths>`), or Claude delegates to it when a task matches its description.
+The subagent is invoked by name with the wiki page paths to review (e.g. `@wiki-page-reviewer <paths>`), or Claude delegates to it when the user asks to review, audit, lint, validate, or check a wiki page, and after the [Wiki Page Author](../Wiki-Page-Author) skill writes or updates a page.
 
 Tools available to the subagent: `Read`, `Grep`, `Glob`. No write access.
 

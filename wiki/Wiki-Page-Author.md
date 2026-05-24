@@ -1,6 +1,6 @@
 # Wiki Page Author
 
-The wiki-page-author skill writes, updates, and removes pages in the project wiki, and organises wiki content into folders.
+The wiki-page-author skill writes, fixes, updates, and removes pages in the project wiki, and organises wiki content into folders.
 
 ## Sections
 
@@ -10,3 +10,4 @@ The wiki-page-author skill writes, updates, and removes pages in the project wik
 - [Open Design Decision](Wiki-Page-Author/Open-Design-Decision)
 - [Page Investigation Caution](Wiki-Page-Author/Page-Investigation-Caution)
 - [Standing Instructions](Wiki-Page-Author/Standing-Instructions)
+- [Validation](Wiki-Page-Author/Validation)

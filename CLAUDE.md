@@ -31,7 +31,6 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 - `skills/` — reusable skills shipped to marketplace installers. Each skill folder holds its `SKILL.md`, `assets/`, `references/`, and any bundled subagents under `agents/`.
 - `.claude/commands/` — slash commands used while working in this repo (e.g. `/count-skill-tokens`). Local-only; not shipped via the marketplace.
 - `wiki/` — the living spec for everything in `skills/` and `.claude/`.
-- `fixtures/cortex-wiki/` — an example wiki used to develop and test against. A fixture, not a real wiki.
 
 ## Versioning and release branches
 

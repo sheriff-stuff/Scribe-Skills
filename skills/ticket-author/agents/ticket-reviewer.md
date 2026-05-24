@@ -23,7 +23,7 @@ Do this, in order:
 
 1. Glob `proposed-tickets/*.md` for the files under review.
 2. Read **every** globbed file in full **before producing any verdicts.** Cross-ticket rules are limited to those listed under **Cross-ticket** in `## What to check`. Read all files before applying them so batch-wide state is known.
-3. For every ticket type encountered in the batch, read its matching template from `.claude/skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
+3. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
 4. Construct a unified mental checklist: [Frontmatter fields from SKILL.md schema] + [naming pattern from File Naming section] + [mandatory sections from template] + [Body Rules from SKILL.md] + [cross-ticket rules]. Apply this checklist to each file before writing any verdict.
 
 If `proposed-tickets/` is empty or absent, return exactly:

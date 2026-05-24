@@ -32,4 +32,4 @@ skills/
 wiki/                             Living spec for the skills themselves
 ```
 
-The wiki is the source of truth. If `wiki/` and `skills/` disagree on `master`, the wiki is right and the skill needs updating.
+The wiki documents the shipped skills. If `wiki/` and `skills/` disagree on `master`, the skill is right and the wiki needs updating.

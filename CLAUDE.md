@@ -1,8 +1,8 @@
 # Scribe Skills
 
-Scribe Skills is a collection of reusable Claude Code extensions — skills, subagents, hooks, slash commands, and anything else that plugs into Claude Code — supporting a spec-driven development workflow. Everything here is project-agnostic; point it at any project (including this one).
+Scribe Skills is a Claude Code plugin marketplace of reusable extensions — skills, subagents, hooks, slash commands, and anything else that plugs into Claude Code — supporting a spec-driven development workflow. Everything here is project-agnostic; point it at any project (including this one).
 
-Everything under `.claude/` is read by Claude Code, not humans — templates and assets are instructions to the agent.
+Installable plugins are declared in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) and consumed via `/plugin marketplace add sheriff-stuff/Scribe-Skills`. Everything under `skills/` and `.claude/` is read by Claude Code, not humans — templates and assets are instructions to the agent.
 
 ## The workflow
 
@@ -11,7 +11,9 @@ Everything under `.claude/` is read by Claude Code, not humans — templates and
 3. **Do the work** — pick up tickets and implement. No dedicated skill; handled by regular Claude Code.
 4. **Pull request** — open the PR. No dedicated skill.
 
-This repo is dogfooded on itself. **The wiki must match `.claude/` before a PR is opened; mid-branch commits can diverge.** Iterate on skills, subagents, hooks, and slash commands freely — individual commits need not touch the wiki. Before pushing the PR, sync the affected wiki pages in the same branch so the update lands in the PR diff. The wiki is the spec; if the wiki and `.claude/` disagree on `master`, the wiki is wrong. Tickets are cut from the wiki diff.
+This repo is dogfooded on itself, but with the polarity flipped from the consumer workflow above. For projects that *use* these skills, the wiki is the spec and code follows. **For this repo, the shipped skill in `skills/` is authoritative — the wiki documents it.** If `wiki/` and `skills/` (or `.claude/`) disagree on `master`, the skill is right and the wiki needs updating.
+
+**The wiki must match `skills/` and `.claude/` before a PR is opened; mid-branch commits can diverge.** Iterate on skills, subagents, hooks, and slash commands freely — individual commits need not touch the wiki. Before pushing the PR, sync the affected wiki pages in the same branch so the update lands in the PR diff. Tickets are cut from the wiki diff during feature work.
 
 ## What the wiki is
 
@@ -27,14 +29,10 @@ The wiki is the source of truth that tickets and feature specs are built on top 
 
 ## What this repo contains
 
-- `.claude/skills/` — reusable skills (currently `wiki-page-author`, `ticket-author`).
-- `.claude/agents/` — subagents (currently `ticket-reviewer`).
-- `wiki/` — the living spec for everything in `.claude/`.
-- `fixtures/cortex-wiki/` — an example wiki used to develop and test against. A fixture, not a real wiki.
-
-## Versioning and release branches
-
-The repo follows SemVer with a release-branch workflow. Trunk is `master`; release branches are `vX.Y`; releases are tagged `vX.Y.Z`. When asked to "create a new release branch", "cut a release", or do related branch/tag work, follow [`wiki/Versioning-Strategy.md`](wiki/Versioning-Strategy.md) as the source of truth.
+- `.claude-plugin/marketplace.json` — plugin marketplace manifest. Declares the installable plugins (`wiki-page-author`, `ticket-author`).
+- `skills/` — reusable skills shipped to marketplace installers. Each skill folder holds its `SKILL.md`, `assets/`, `references/`, and any bundled subagents under `agents/`.
+- `.claude/commands/` — slash commands used while working in this repo (e.g. `/count-skill-tokens`). Local-only; not shipped via the marketplace.
+- `wiki/` — the living spec for everything in `skills/` and `.claude/`.
 
 ## Rules
 
@@ -58,7 +56,7 @@ Do not append phrases that re-assert what the preceding sentence already said. T
 
 ### No revision history
 
-Updates replace content; do not annotate what changed. This applies to skills, subagents, and other `.claude/` files just as it does to wiki pages — Claude only sees the current state, so phrasing like "no heading and no anchor", "no longer uses X", or "previously …" describes a delta that does not exist in its world.
+Updates replace content; do not annotate what changed. This applies to skills, subagents, slash commands, and other shipped files just as it does to wiki pages — Claude only sees the current state, so phrasing like "no heading and no anchor", "no longer uses X", or "previously …" describes a delta that does not exist in its world.
 
 **Bad:**
 

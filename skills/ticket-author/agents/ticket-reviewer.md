@@ -21,7 +21,7 @@ If `ticket-author` SKILL.md cannot be read (missing or permission error) or is e
 
 Do this, in order:
 
-1. Read `.claude/url-resolution.md` from the project root. The file maps remote URLs (or URL prefixes) to local checkout paths — use those mappings whenever a URL needs to be inspected. If the file is absent, continue; URL-content checks will be skipped, and the missing file is surfaced in the batch NOTES line so the user knows to create one.
+1. Read `.claude/url-resolution.md` from the project root. The file maps remote URLs (or URL prefixes) to local checkout paths — use those mappings whenever a URL needs to be inspected. If the file is absent, skip URL-content checks and surface the missing file in the batch NOTES line.
 2. Glob `proposed-tickets/*.md` for the files under review.
 3. Read **every** globbed file in full **before producing any verdicts.** Cross-ticket rules are limited to those listed under **Cross-ticket** in `## What to check`. Read all files before applying them so batch-wide state is known.
 4. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.

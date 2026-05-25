@@ -9,21 +9,21 @@
   },
   "plugins": [
     {
-      "name": "wiki-page-author",
-      "description": "Write, update, and organise project wiki pages as a living spec. Handles ODD callouts, page-level caution blocks, and includes a wiki-page-reviewer subagent.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/wiki-page-author"
-      ]
-    },
-    {
       "name": "ticket-author",
       "description": "Turn wiki pages (or wiki diffs) into tickets that drive Claude Code implementation. Includes a ticket-reviewer subagent.",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/ticket-author"
+      ]
+    },
+    {
+      "name": "wiki-page-author",
+      "description": "Write, update, and organise project wiki pages as a living spec. Handles ODD callouts, page-level caution blocks, and includes a wiki-page-reviewer subagent.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/wiki-page-author"
       ]
     }
   ]

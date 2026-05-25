@@ -21,10 +21,12 @@ If `ticket-author` SKILL.md cannot be read (missing or permission error) or is e
 
 Do this, in order:
 
-1. Glob `proposed-tickets/*.md` for the files under review.
-2. Read **every** globbed file in full **before producing any verdicts.** Cross-ticket rules are limited to those listed under **Cross-ticket** in `## What to check`. Read all files before applying them so batch-wide state is known.
-3. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
-4. Construct a unified mental checklist: [Frontmatter fields from SKILL.md schema] + [naming pattern from File Naming section] + [mandatory sections from template] + [Body Rules from SKILL.md] + [cross-ticket rules]. Apply this checklist to each file before writing any verdict.
+1. Read `.claude/url-resolution.md` from the project root. The file maps remote URLs (or URL prefixes) to local checkout paths — use those mappings whenever a URL needs to be inspected. If the file is absent, continue; URL-content checks will be skipped, and the missing file is surfaced in the batch NOTES line so the user knows to create one.
+2. Glob `proposed-tickets/*.md` for the files under review.
+3. Read **every** globbed file in full **before producing any verdicts.** Cross-ticket rules are limited to those listed under **Cross-ticket** in `## What to check`. Read all files before applying them so batch-wide state is known.
+4. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
+5. For every URL appearing in any ticket, resolve it against the mappings from step 1 and read the local file. Use the content to check whether the ticket's Scope, Implementation Approach, or Acceptance Criteria duplicates detail the linked resource already owns (Body Rule **Don't duplicate spec detail from the source doc**). Never fetch the URL itself. Skip work-item URLs (issues, MRs, PRs) — they have no local equivalent. Collect any URL that has no mapping for the batch NOTES line.
+6. Construct a unified mental checklist: [Frontmatter fields from SKILL.md schema] + [naming pattern from File Naming section] + [mandatory sections from template] + [Body Rules from SKILL.md] + [cross-ticket rules]. Apply this checklist to each file before writing any verdict.
 
 If `proposed-tickets/` is empty or absent, return exactly:
 
@@ -52,7 +54,11 @@ NOTES: <optional one-line batch-level observation; omit the line entirely if non
 N of M tickets ready.
 ```
 
-The numeric line is required and must match that exact format. The `NOTES:` line is optional; emit it only when a batch-level pattern emerges (e.g., multiple tickets violating the same Body Rule or cross-ticket structural issues).
+The numeric line is required and must match that exact format. The `NOTES:` line is optional; emit it when:
+
+- a batch-level pattern emerges (e.g., multiple tickets violating the same Body Rule or cross-ticket structural issues), or
+- `.claude/url-resolution.md` is missing — note that the user should create one to enable URL-content checks, or
+- URLs in the batch have no mapping in `.claude/url-resolution.md` — name each unresolved URL so the user can extend the mapping.
 
 Within each file block, list violations in this order: Frontmatter, Naming, Template, Body Rules, Cross-ticket.
 
@@ -64,7 +70,7 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 - **File naming** against the File Naming section of the `ticket-author` skill.
 - **Template structure** — sections marked mandatory in the appropriate template under `assets/` are present. Flag missing mandatory sections only; templates mark conditional and optional sections inline.
 - **Body Rules** — every Body Rule in `SKILL.md`.
-- **Cross-ticket** — at most one `epic` file per batch; child tickets using `epic: auto` only when an epic file is present in the batch.
+- **Cross-ticket** — `epic: auto` only when an epic file is present in the batch.
 
 ## Rules
 

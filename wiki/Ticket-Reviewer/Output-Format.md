@@ -22,6 +22,10 @@ NOTES: <optional one-line batch-level observation, omit the line entirely if non
 N of M tickets ready.
 ```
 
-The numeric line is required and matches that exact format. The `NOTES:` line is emitted only when a batch-level pattern emerges — for example, multiple tickets violating the same Body Rule or cross-ticket structural issues.
+The numeric line is required and matches that exact format. The `NOTES:` line is emitted when:
+
+- a batch-level pattern emerges — for example, multiple tickets violating the same Body Rule or cross-ticket structural issues, or
+- the consumer project's `.claude/url-resolution.md` is missing — the note prompts the user to create one to enable URL-content checks, or
+- URLs in the batch have no mapping in `.claude/url-resolution.md` — the unresolved URLs are named so the mapping can be extended.
 
 A clean ticket gets an empty `VIOLATIONS:` list and `VERDICT: READY`.

@@ -1,9 +1,9 @@
 # Validates this repo's plugin marketplace on every PR that touches the
-# manifest or any shipped skill content. Uses the canonical composite action
-# from anthropics/claude-plugins-community, which installs the official
-# `claude` CLI fresh each run and uses `claude plugin validate` as the source
-# of truth for the marketplace schema. Mark this workflow's "validate" job as
-# a required check on `master` in Settings → Branches to actually block merges.
+# manifest or any shipped skill content. Installs the official `claude` CLI
+# via the self-contained installer and runs `claude plugin validate` as the
+# source of truth for the marketplace schema. Mark this workflow's "validate"
+# job as a required check on `master` in Settings → Branches to actually block
+# merges.
 name: Validate plugins
 
 on:
@@ -24,14 +24,14 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
-      - uses: anthropics/claude-plugins-community/.github/actions/validate-plugins@f846a0bcb0e721b1f93d60e8b73e91dafc4a1e87
-        with:
-          marketplace-path: .claude-plugin/marketplace.json
-          claude-cli-version: latest
+      - name: Install claude CLI
+        run: |
+          set -euo pipefail
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Validate marketplace
+        run: claude plugin validate .claude-plugin/marketplace.json

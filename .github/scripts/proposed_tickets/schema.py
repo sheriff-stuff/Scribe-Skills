@@ -48,6 +48,9 @@ def validate_ticket(ticket: Ticket) -> list[str]:
         if not ok:
             errors.append(f"`epic` must be 'auto' or an integer (got {epic!r})")
 
+    if ticket.is_epic and "epic" in fm:
+        errors.append("a `type: epic` file must not also set `epic` (an epic is not a child of another epic)")
+
     return errors
 
 

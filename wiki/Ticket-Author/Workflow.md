@@ -1,5 +1,7 @@
 # Workflow
 
+The steps the ticket-author skill follows to produce a set of ticket files.
+
 1. Understand the request and determine how many tickets are needed. The skill chooses each ticket's type using this decision table; epic is decided in step 4.
 
    | User named type? | Type is ODD? | Type is Spike/Bug/Chore? | Action                                            |
@@ -15,5 +17,5 @@
 5. Batch-write every `.md` file to [`proposed-tickets/`](../../proposed-tickets/), using the matching template as the structural basis.
 6. Walk the [Validation](Validation) checklist against each ticket. Items that fail are fixed and the checklist re-run on the revised ticket until every item passes.
 7. Delegate to the [ticket-reviewer](../Ticket-Reviewer) subagent, which reviews every file in [`proposed-tickets/`](../../proposed-tickets/). The skill waits for its verdicts before continuing.
-8. Act on the review. Files marked `NEEDS WORK` have their listed violations applied and the [Validation](Validation) checklist re-run, then return to the reviewer; this repeats until every file returns `READY` and the summary reports `M of M tickets ready`. A `No tickets to review.` result stops the loop. URLs a `NOTES:` line reports as missing from `.claude/url-resolution.md` are listed to the user once.
-9. The ticket set is reported as ready once the reviewer returns all `READY` verdicts.
+8. Act on the review, driving the loop off each file's `VERDICT:` line rather than the summary count. A file marked `NEEDS WORK` either has each listed violation applied, or has a finding declined with a citation to the wiki, existing code, or the template — a finding is never silently dropped. Fixed files re-run the [Validation](Validation) checklist and return to the reviewer, and the loop stops as soon as every file reports `READY`. The loop is capped at three reviews: files still marked `NEEDS WORK` after the third, or a finding the author and reviewer deadlock on, are surfaced to the user with reasoning instead of re-reviewed. A `No tickets to review.` result stops the loop. URLs a `NOTES:` line reports as missing from `.claude/url-resolution.md` are listed to the user once.
+9. The ticket set is reported as ready once every file reports `READY`. If the loop hits the cap with violations outstanding, those and the reasoning are reported instead — the set is not presented as ready.

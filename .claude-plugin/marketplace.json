@@ -15,6 +15,9 @@
       "strict": false,
       "skills": [
         "./skills/wiki-page-author"
+      ],
+      "agents": [
+        "./agents/wiki-page-reviewer.md"
       ]
     },
     {

@@ -9,6 +9,27 @@ This skill writes and updates pages in the project wiki. The wiki is the living 
 
 Uncertainty is allowed in two places: inline `> [!ODD]` blocks placed next to the section they affect (a single open point on an otherwise ground-truth page), and a top-of-page `> [!CAUTION]` block (the whole page is under investigation and not ready to build from).
 
+## Workflow
+
+1. **Understand the request.** Decide what kind of work it is — write, update, or remove a page; add or resolve an inline `> [!ODD]` block; add or lift a page investigation caution; or organise folders. The [Gotchas](#gotchas) name the signals that distinguish these — an "I'm not sure" routes to an ODD, not a confident sentence.
+
+2. **Gather context.** Read [`index.md`] or [`home.md`] and the pages topically related to the subject, plus the target page if it already exists. Use the terminology those pages establish; do not invent a new name for a concept that already has one.
+
+3. **Write the page.** Start new pages from the [page template](assets/page-template) and hold every sentence to the [Body Rules](#body-rules). Before writing an ODD or caution block, load its reference — [`references/open-design-decisions`](references/open-design-decisions) or [`references/page-investigation-caution`](references/page-investigation-caution).
+
+4. **Sync and flag.** Update [`index.md`] or [`home.md`] for any page added or removed, and flag — never silently fix — inconsistencies the change introduces on other pages. See [Standing Instructions](#standing-instructions).
+
+5. **Self-validate.** Walk the [Validation](#validation) checklist against every page you wrote or changed. Fix and re-run until every item passes.
+
+6. **Review with `wiki-page-reviewer`.** Delegate to the `wiki-page-reviewer` subagent, passing the path of every page you wrote or changed — the reviewer acts only on the paths it is given. Wait for its verdicts before continuing.
+
+7. **Act on the review.**
+   - For every page with `VERDICT: NEEDS WORK`, apply the violations listed under `VIOLATIONS:` and re-run the [Validation](#validation) checklist on the revised page.
+   - After fixes, delegate to `wiki-page-reviewer` again. Repeat until every page returns `VERDICT: READY` and the summary line reports `M of M pages ready`.
+   - If a `NOTES:` line reports that no wiki index was found, or names a batch-level pattern only the user can resolve, surface it to the user once and stop — do not loop.
+
+8. **Report.** Only report the work as done once `wiki-page-reviewer` returns all `READY` verdicts.
+
 ## Body Rules
 
 These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION]` blocks.

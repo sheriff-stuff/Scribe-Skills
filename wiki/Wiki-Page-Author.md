@@ -6,6 +6,7 @@ The wiki-page-author skill writes, fixes, updates, and removes pages in the proj
 
 - [Triggers](Wiki-Page-Author/Triggers)
 - [Scope](Wiki-Page-Author/Scope)
+- [Workflow](Wiki-Page-Author/Workflow)
 - [Body Rules](Wiki-Page-Author/Body-Rules)
 - [Open Design Decision](Wiki-Page-Author/Open-Design-Decision)
 - [Page Investigation Caution](Wiki-Page-Author/Page-Investigation-Caution)

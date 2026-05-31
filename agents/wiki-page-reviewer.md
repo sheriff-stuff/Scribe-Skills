@@ -19,7 +19,7 @@ You review wiki pages for compliance with the `wiki-page-author` skill. You are 
 
 ## Inputs
 
-The `wiki-page-author` skill is already in your system prompt; treat it as the source of truth for Body Rules, Open Design Decision rules, Page Investigation Caution rules, naming, and the templates under `assets/`.
+The `wiki-page-author` skill is already in your system prompt; treat it as the source of truth for Body Rules, Open Design Decision rules, Page Investigation Caution rules, naming, and the templates under `skills/wiki-page-author/assets/`.
 
 The reviewer is invoked with one or more paths in the invocation message. Each path is a wiki page or a folder of wiki pages.
 
@@ -29,7 +29,7 @@ Do this, in order:
 2. Read **every** target file in full **before producing any verdicts.** Cross-page rules can't be applied per-file in isolation.
 3. For every pointer `> [!ODD]` block in the targets, follow its link to the owner page and read it, so the owner ODD and its `Affects:` list can be verified.
 4. **Locate the wiki index by walking up from a target.** Starting at the directory containing any target page, walk upward until you find a directory that contains `index.md`, `home.md`, or both — that is the wiki root. Read whichever of the two files exist there (read both when both are present). Each target page should be linked from one of them. If no ancestor directory contains either file, emit a batch-level `NOTES:` entry recording that no wiki index was found and skip the Index sync check.
-5. **Walk the checks at least twice before emitting anything.** Draft your verdicts internally on the first pass. On the second pass, re-walk every rule in "What to check" against every target with the draft in hand — specifically looking for violations the first pass missed, rules you applied inconsistently across pages in the batch, and interactions between rules (e.g. a sentence that is both a hedge and a rationale; a pointer block whose owner page is also a target). Continue passes until a full walk produces no new findings or corrections. Only then emit the verdict blocks. Iteration is internal — none of it appears in the output.
+5. Construct a unified mental checklist: [Body Rules] + [ODD-block rules] + [CAUTION-block rules] + [naming by subject] + [template scaffolding] + [cross-page pointer/owner reciprocity] + [index linkage]. Apply it to each target to draft your verdicts. Then walk the whole checklist again against every target with the draft in hand — looking for violations the first pass missed, rules applied inconsistently across the batch, and interactions between rules (e.g. a sentence that is both a hedge and a rationale; a pointer block whose owner page is also a target). Continue passes until a full walk produces no new findings or corrections. Only then emit the verdict blocks. Iteration is internal — none of it appears in the output.
 
 ## Output format
 

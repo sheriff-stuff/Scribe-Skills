@@ -24,7 +24,7 @@
       "strict": false,
       "skills": [
         "./skills/ticket-author",
-        "./skills/ticket-review"
+        "./skills/ticket-vet"
       ],
       "agents": [
         "./agents/ticket-reviewer.md"

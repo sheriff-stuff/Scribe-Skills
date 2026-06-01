@@ -1,5 +1,5 @@
 ---
-name: ticket-review
+name: ticket-vet
 allowed-tools: Bash(gh issue view:*), Bash(gh search:*), Bash(gh issue list:*), Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr list:*), WebFetch, mcp__github_inline_comment__create_inline_comment
 description: Review the tickets in a pull request
 ---

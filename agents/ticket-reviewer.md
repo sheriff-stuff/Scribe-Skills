@@ -18,13 +18,13 @@ The `ticket-author` skill is preloaded into your context at startup — its Fron
 Do this, in order:
 
 1. Read `.claude/url-resolution.md` from the project root. The file maps remote URLs (or URL prefixes) to local checkout paths — use those mappings whenever a URL needs to be inspected. If the file is absent, skip URL-content checks, surface the missing file in the batch NOTES line, and mark the **Don't duplicate spec detail from the source doc** check as `UNVERIFIED` for every file whose source it would have read.
-2. Glob `proposed-tickets/*.md` for the files under review.
-3. Read **every** globbed file in full **before producing any verdicts.** Cross-ticket rules require batch-wide state to be known before any verdict is drafted.
+2. Determine the set under review. If the dispatch named specific ticket files, that named set is the set under review; otherwise glob `proposed-tickets/*.md`. This set is the batch for the cross-ticket checks below — when it holds a single file, those checks cannot run, so mark them `UNVERIFIED` for that file rather than passing them.
+3. Read **every** file in the set under review in full **before producing any verdicts.** Cross-ticket rules require the whole set's state to be known before any verdict is drafted.
 4. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
 5. For every URL appearing in any ticket, resolve it against the mappings from step 1 and read the local file. Use the content to check whether the ticket's Scope, Implementation Approach, or Acceptance Criteria duplicates detail the linked resource already owns (Body Rule **Don't duplicate spec detail from the source doc**). Never fetch the URL itself. Skip work-item URLs (issues, MRs, PRs) — they have no local equivalent. Collect any URL that has no mapping for the batch NOTES line, and mark the **Don't duplicate spec detail from the source doc** check `UNVERIFIED` for the file that carries it — a `READY` verdict must not imply a check that could not run.
 6. Draft verdicts by applying every check in [Validation checks](#validation-checks) to each file. Then re-walk all files with the draft in hand, looking for violations the first pass missed and rules applied inconsistently. Repeat until a walk produces no new findings. Iteration is internal — none of it appears in the output.
 
-If `proposed-tickets/` is empty or absent, return exactly:
+If the set under review is empty (no files were named and `proposed-tickets/` is empty or absent), return exactly:
 
 > `No tickets to review.`
 

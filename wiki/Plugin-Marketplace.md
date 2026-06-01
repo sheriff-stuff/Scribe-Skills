@@ -11,7 +11,7 @@ The repo is a Claude Code plugin marketplace. Installers add it once, then insta
 | Plugin | Bundles |
 | --- | --- |
 | `wiki-page-author` | [Wiki Page Author](Wiki-Page-Author) skill and the [Wiki Page Reviewer](Wiki-Page-Reviewer) subagent. |
-| `ticket-author` | [Ticket Author](Ticket-Author) skill and the [Ticket Reviewer](Ticket-Reviewer) subagent. |
+| `ticket-author` | [Ticket Author](Ticket-Author) and [Ticket Review](Ticket-Review) skills and the [Ticket Reviewer](Ticket-Reviewer) subagent. |
 
 Each plugin is independently installable.
 

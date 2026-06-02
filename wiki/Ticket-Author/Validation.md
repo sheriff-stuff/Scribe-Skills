@@ -15,4 +15,4 @@ After writing tickets, the skill walks this checklist against each one. Items th
 - Acceptance Criteria assert outcomes — each is a falsifiable check, not a restatement of Scope, a project baseline, or a subjective judgement.
 - Risks entries point to concrete exposure outside the ticket's control.
 - Testing names behaviours, not cases — no enumerated cases, edges, frameworks, or file paths.
-- ODD tickets resolve an existing wiki ODD — the `Resolve` link points the ODD ID at its owner wiki page.
+- ODD tickets resolve an existing wiki ODD — the `Resolve [ODD-…]` line links the ODD ID to its owner wiki page.

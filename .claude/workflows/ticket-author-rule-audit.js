@@ -14,13 +14,12 @@ export const meta = {
 // Re-runnable audit of the ticket-author skill. Reads SKILL.md, the reviewer,
 // and templates from disk each run, so editing the skill and re-running yields
 // a fresh diffable report. Optional args: a list of rule keys (see ALL_RULES) to
-// scope the run to a subset, e.g. args: ["full-urls"] to re-run a single rule.
+// scope the run to a subset, e.g. args: ["no-line-numbers"] to re-run a single rule.
 
 // ---- Rule inventory (names are the exact bolded leads from SKILL.md) ----
 const ALL_RULES = [
   { key: 'actionable',          name: 'Write actionable descriptions',                          gist: 'AC, context, scope as a real issue' },
   { key: 'no-infer',            name: 'Do not infer technical decisions',                       gist: 'no prescribed class/pattern/lib/path/route without a wiki/code anchor or user ask' },
-  { key: 'full-urls',           name: 'Use full URLs when referencing pages, code, or other projects', gist: 'absolute URLs; in-branch ticket refs are plain-text titles' },
   { key: 'existing-language',   name: 'Use the language of existing documentation',             gist: 'reuse existing names; no new terminology for named concepts' },
   { key: 'no-line-numbers',     name: 'Reference files, not line numbers',                      gist: 'no #L anchors; identify location by symbol/string/heading' },
   { key: 'approach-orients',    name: 'Implementation Approach orients, not prescribes',        gist: 'prose orientation by anchors, not numbered/bulleted imperative steps; every Scope item reachable' },
@@ -211,8 +210,8 @@ const analysisThunks = [
     'Test for: non-termination / oscillation between author and reviewer, handling of "No tickets to review.", the "M of M tickets ready" gate, NOTES/url-resolution handling, and what happens when self-validation and the reviewer disagree. Report edge-cases, gotchas, ineffective steps, and what works.',
     { label: 'process:review-loop', phase: 'Analyse', schema: ANALYSIS }),
   () => agent(
-    'Do a STATIC COVERAGE check between the Validation checklist and the Body Rules in ' + SKILL + '. Read the skill. ' +
-    'Build a bidirectional map: every Validation checkbox to its Body Rule, and every Body Rule to its checkbox. Flag orphans BOTH ways — e.g. a checklist item with no Body Rule behind it (look hard at the Risks checklist item), or a Body Rule with no checklist item. Orphan checks and orphan rules are prime "ineffective/coverage-gap" candidates. Report findings with kind=coverage-gap or ineffective as appropriate.',
+    'Do a STATIC COVERAGE check between the reviewer Validation checks in ' + REVIEWER + ' and the Body Rules in ' + SKILL + '. Read both. ' +
+    'Build a bidirectional map: every Validation check to its Body Rule, and every Body Rule to its check. Flag orphans BOTH ways — e.g. a checklist item with no Body Rule behind it (look hard at the Risks checklist item), or a Body Rule with no checklist item. Orphan checks and orphan rules are prime "ineffective/coverage-gap" candidates. Report findings with kind=coverage-gap or ineffective as appropriate.',
     { label: 'static:validation-coverage', phase: 'Analyse', schema: ANALYSIS }),
   () => agent(
     'Do a STATIC COVERAGE check between the ticket-author rules and what the ticket-reviewer can actually enforce. Read ' + SKILL + ' and ' + REVIEWER + '. ' +

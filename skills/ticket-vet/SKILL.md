@@ -39,7 +39,7 @@ Note: Still review Claude-generated PRs.
    For each changed ticket file, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
 
    Agent 3: ticket-reviewer agent, whole batch (parallel subagent with the others)
-   Launch the ticket-reviewer agent once over the whole `proposed-tickets/` batch, passing no target set so it sees every ticket. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues. Deduplicate its per-ticket findings against the per-ticket runs on file + rule + verbatim offending text.
+   Launch the ticket-reviewer agent once over the whole `proposed-tickets/` batch, passing no target set so it sees every ticket. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
 
    Agent 4: sonnet implementability agent, one per changed ticket (parallel subagents with the others)
    Launch one of these for each changed ticket, skipping any `type: epic` file — an epic is a grouping, not a unit of work to implement (the group implementability agent covers the epic with its children). A ticket is a prompt handed to an LLM coding agent that has the wiki and the codebase in context. Take that agent's position: read the ticket as your prompt and follow its links. Decide whether you could carry the ticket to a correct PR without inventing a decision the ticket left open. You are judging feasibility — do not make any changes. Flag the ticket where you would have to guess at an undecided choice, where the linked context does not resolve a detail the work needs, or where you could not tell when the work is done.
@@ -63,6 +63,8 @@ Note: Still review Claude-generated PRs.
    If you are not certain an issue is real, do not flag it. False positives erode trust and waste reviewer time.
 
    In addition to the above, each subagent should be told the PR title and description. This will help provide context regarding the author's intent.
+
+   Once every agent above has returned, deduplicate the whole-batch reviewer's per-ticket findings against the per-ticket runs on file + rule + verbatim offending text, keeping its cross-ticket findings. The parallel agents cannot see each other's output, so this dedup happens here, after they all return — not inside any agent.
 
 5. For each issue found in the previous step, launch parallel subagents to validate the issue. These subagents should get the PR title and description along with a description of the issue. The agent's job is to review the issue to validate that the stated issue is truly an issue with high confidence. For a CLAUDE.md or ticket-author rule violation, the agent should validate that the rule that was violated is scoped for this file and is actually violated. For an objective-ticket or implementability issue, the agent should validate that the problem holds when the ticket and the context it links are read together. Use sonnet subagents to validate.
 

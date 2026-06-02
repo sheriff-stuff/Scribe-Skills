@@ -4,20 +4,22 @@ The repo is a Claude Code plugin marketplace. Installers add it once, then insta
 
 ## Manifest
 
-[`.claude-plugin/marketplace.json`](../.claude-plugin/marketplace.json) at the repo root declares the marketplace. The `plugins` array lists each installable plugin. Each entry names the plugin, describes it, and points at the skill folders it bundles under `skills/`.
+[`.claude-plugin/marketplace.json`](../.claude-plugin/marketplace.json) at the repo root declares the marketplace. The `plugins` array lists each installable plugin. Each entry names the plugin, describes it, points at the skill folders it bundles under `skills/`, and may list reviewer agent files under the top-level [`agents/`](../agents/) through an `agents` array.
 
 ## Plugins
 
 | Plugin | Bundles |
 | --- | --- |
 | `wiki-page-author` | [Wiki Page Author](Wiki-Page-Author) skill and the [Wiki Page Reviewer](Wiki-Page-Reviewer) subagent. |
-| `ticket-author` | [Ticket Author](Ticket-Author) skill and the [Ticket Reviewer](Ticket-Reviewer) subagent. |
+| `ticket-author` | [Ticket Author](Ticket-Author) and [Ticket Vet](Ticket-Vet) skills and the [Ticket Reviewer](Ticket-Reviewer) subagent. |
 
 Each plugin is independently installable.
 
-## Bundled subagents
+## Reviewer subagents
 
-A skill ships its reviewer subagent inside `skills/<skill-name>/agents/`. The subagent is installed as part of the plugin and is invoked by name. The skill's frontmatter references the subagent by name, not by path.
+Each plugin ships a reviewer subagent, installed with the plugin and invoked by name. The skill's frontmatter references its reviewer by name, not by path.
+
+The `ticket-author` plugin registers its reviewer as a plugin agent: the agent file lives at the top-level [`agents/`](../agents/) and is listed in the plugin's `agents` array in the manifest. The `wiki-page-author` plugin ships its reviewer inside [`skills/wiki-page-author/agents/`](../skills/wiki-page-author/agents/).
 
 ## Local-only tooling
 

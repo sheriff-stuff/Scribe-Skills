@@ -8,6 +8,7 @@ Each ticket is read by a human reviewer and executed by an LLM agent that has th
 
 - [Triggers](Ticket-Author/Triggers)
 - [Ticket Types](Ticket-Author/Ticket-Types)
+- [Ticket Anchoring](Ticket-Author/Ticket-Anchoring)
 - [Workflow](Ticket-Author/Workflow)
 - [Frontmatter Schema](Ticket-Author/Frontmatter-Schema)
 - [Labels](Ticket-Author/Labels)

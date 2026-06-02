@@ -15,7 +15,6 @@ A living spec describing the current state of the thing being documented — pre
 - No history, no rationale, no explanation, no tutorials.
 - Pages describe what the thing is. If something changes, the page is updated to reflect the new state; the previous wording is not preserved.
 - Open questions live in inline `> [!ODD]` callout blocks placed next to the section they affect, and are removed once resolved.
-- A single `Changelog` page records what changed (added / removed / changed from X to Y), never why. The why lives in commits and MRs.
 - Folders and pages are named by subject, not by content type or format.
 
 The wiki is the source of truth that tickets and feature specs are built on top of.

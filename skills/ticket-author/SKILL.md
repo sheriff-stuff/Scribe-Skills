@@ -73,7 +73,7 @@ If unsure, ask the user.
 
 ## File Naming
 
-Lowercase kebab-case named by tickets title.
+Lowercase kebab-case named by the ticket's title.
 
 ## Body Rules
 

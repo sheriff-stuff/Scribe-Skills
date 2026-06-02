@@ -46,6 +46,11 @@ def test_bad_epic_value_fails():
     assert any("epic" in e for e in errors)
 
 
+def test_epic_file_with_epic_ref_fails():
+    errors = validate_ticket(_load("invalid-epic-with-epic-ref.md"))
+    assert any("must not also set `epic`" in e for e in errors)
+
+
 def test_pr_invariants_allow_zero_or_one_epic():
     assert validate_pr_invariants([_load("valid-feature.md")]) == []
     assert validate_pr_invariants([_load("valid-epic.md")]) == []

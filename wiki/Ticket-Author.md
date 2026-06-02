@@ -1,6 +1,6 @@
 # Ticket Author
 
-The ticket-author skill writes ticket proposal files to [`proposed-tickets/`](../proposed-tickets/). Each file becomes a ticket (or epic) when the PR/MR merges to main.
+The ticket-author skill writes ticket proposal files to [`proposed-tickets/`](../proposed-tickets/). Each file becomes a ticket (or epic) when the PR/MR is merged.
 
 Each ticket is read by a human reviewer and executed by an LLM agent that has the wiki and the codebase in context.
 
@@ -8,9 +8,9 @@ Each ticket is read by a human reviewer and executed by an LLM agent that has th
 
 - [Triggers](Ticket-Author/Triggers)
 - [Ticket Types](Ticket-Author/Ticket-Types)
+- [Ticket Anchoring](Ticket-Author/Ticket-Anchoring)
 - [Workflow](Ticket-Author/Workflow)
 - [Frontmatter Schema](Ticket-Author/Frontmatter-Schema)
 - [Labels](Ticket-Author/Labels)
 - [File Naming](Ticket-Author/File-Naming)
 - [Body Rules](Ticket-Author/Body-Rules)
-- [Validation](Ticket-Author/Validation)

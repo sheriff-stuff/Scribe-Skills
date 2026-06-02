@@ -1,6 +1,8 @@
 # Output Format
 
-One block per file:
+The subagent returns one verdict block per file, then a final summary block.
+
+Each file block:
 
 ```
 FILE: <relative path>
@@ -11,9 +13,11 @@ VIOLATIONS:
     Where: "<verbatim offending text, or section name if structural>"
     Why: <one sentence>
     Fix: <minimal pointer to the problem; fixes are suggestions only and belong to the main conversation>
+UNVERIFIED:
+  - <check name> — <why it could not be run for this file>
 ```
 
-Within each file block, violations are listed in this order: Frontmatter, Naming, Template, Body Rules, Cross-ticket.
+The `UNVERIFIED:` block is emitted only when a check could not be run for that file — for example, the **Don't duplicate spec detail from the source doc** check when the file's source URL has no mapping in `.claude/url-resolution.md`, or the cross-ticket checks when the set under review is a single file. When every check ran, the block is omitted. A `VERDICT: READY` alongside an `UNVERIFIED:` line means no violations among the checks that could run — not that the file was fully verified.
 
 A final summary block follows:
 

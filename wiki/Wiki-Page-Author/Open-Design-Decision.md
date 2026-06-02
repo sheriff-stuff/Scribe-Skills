@@ -9,6 +9,7 @@ Open Design Decisions are inline in the document that owns the concept, placed n
 ```markdown
 > [!ODD] ODD-PERMISSIONS-child-page-inheritance — Should child pages inherit parent permissions by default?
 >
+> **Ticket:** *(placeholder)*
 > **Affects:** [API endpoints](../API/Endpoints), [Sharing links](../Sharing/Links)
 > **Context:** inherit + override vs. explicit per page vs. read-only inherit; interaction with sharing links; behaviour on parent deletion
 ```

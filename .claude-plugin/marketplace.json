@@ -19,11 +19,15 @@
     },
     {
       "name": "ticket-author",
-      "description": "Turn wiki pages (or wiki diffs) into tickets that drive Claude Code implementation. Includes a ticket-reviewer subagent.",
+      "description": "Author tickets from wiki pages (or wiki diffs) that drive Claude Code implementation, and review the tickets in a pull request. Includes a ticket-reviewer subagent.",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/ticket-author"
+        "./skills/ticket-author",
+        "./skills/ticket-vet"
+      ],
+      "agents": [
+        "./agents/ticket-reviewer.md"
       ]
     }
   ]

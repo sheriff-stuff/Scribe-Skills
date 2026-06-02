@@ -1,8 +1,10 @@
 # Ticket Anchoring
 
-Every ticket is anchored in one of two places, identified before its body is written. The anchor determines what the body carries.
+Every ticket is anchored where its _why_ lives, identified before its body is written. The anchor decides what the body carries — see [Body Rules](Body-Rules).
 
-- **Wiki-anchored** — a wiki page holds the _what_ and the _why_. The ticket links that page and carries only scope, anchors, and acceptance criteria. Feature work, ODDs, and anything tied to a domain concept is wiki-anchored.
-- **Codebase-anchored** — the decision is technical and code-local, and no wiki page holds it. The ticket is the source of truth for itself and carries the mechanical detail needed to execute. Refactors, internal cleanups, dependency upgrades, and code-shape decisions are codebase-anchored.
+The anchor is found by one test: does the ticket need motivational rationale — business case, user impact, or domain or strategic justification — to make sense?
 
-The anchor sets what counts as a valid body — see [Body Rules](Body-Rules). An anchor the skill cannot determine is settled with the user before drafting.
+- **Wiki-anchored** — yes. A wiki page holds the _why_ and the _what_; the ticket links it. Feature work, ODDs, and anything tied to a domain concept is wiki-anchored. When no such page exists, the skill suggests creating one.
+- **Codebase-anchored** — no; the only justification is causal-mechanical — sequencing, invariants, what depends on what — and the ticket is its own source of truth. Refactors, internal cleanups, and dependency upgrades are codebase-anchored.
+
+Mechanical detail does not flip the anchor: a wiki-anchored ticket may carry it too, with the _why_ on the wiki. The _why_ is what classifies — a ticket whose reader would need business case, user impact, or domain rationale to know why the work matters is wiki-anchored. An anchor the skill cannot determine is settled with the user before drafting.

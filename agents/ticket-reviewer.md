@@ -73,7 +73,6 @@ Every check below is sourced from the preloaded `ticket-author` skill — its Fr
 - [ ] Anchor choice is correct, not just consistent — for each codebase-anchored ticket, a reader needs no business case, user impact, or domain rationale to know why the work matters; if they would, it is wiki-anchored and mislabelled
 - [ ] Description is self-sufficient — the concrete problem and the done-state are recoverable from Scope and AC without opening the linked spec
 - [ ] No inferred technical decisions — no prescribed class names, design patterns, library choices, file paths, or route paths without a wiki/code anchor or user request
-- [ ] Full URLs for pages, code, and other projects; in-branch ticket references use the plain-text title
 - [ ] Existing documentation's language used; no new terminology for concepts already named
 - [ ] File references identify content (symbol, string, section heading), not line numbers
 - [ ] Implementation Approach orients, not prescribes — prose, no numbered or bulleted imperative steps; every Scope item reachable from it
@@ -84,7 +83,7 @@ Every check below is sourced from the preloaded `ticket-author` skill — its Fr
 - [ ] Acceptance Criteria assert outcomes — each is a falsifiable check, not a restatement of Scope, a project baseline, or a subjective judgement; spec-owned values are resolved through the authoritative link, not reproduced as a field/validation matrix inline
 - [ ] Risks entries name concrete exposure outside the ticket's control (external dependency, migration hazard, cross-system contract) — not generic caveats; applies when a Risks section is present
 - [ ] Testing names behaviours, not cases — no enumerated cases, edges, frameworks, or file paths; a bug's mandatory regression names the broken behaviour, not a framework or path
-- [ ] ODD tickets link the wiki ODD page; AC is its resolution
+- [ ] ODD tickets resolve an existing wiki ODD — the `Resolve [ODD-…]` line links the ODD ID to its owner wiki page
 - [ ] Cross-ticket: at most one `type: epic` file in the batch; `epic: auto` is used only when that epic file exists, and an integer `epic:` points at an existing epic
 - [ ] Cross-ticket: no file sets both `type: epic` and `epic:` — an epic is not a child of another epic
 

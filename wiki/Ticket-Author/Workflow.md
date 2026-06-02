@@ -12,7 +12,7 @@ The steps the ticket-author skill follows to produce a set of ticket files.
    | No               | No           | No                       | Use Feature                                       |
 
 2. Identify each ticket's [anchor](Ticket-Anchoring) — wiki-anchored or codebase-anchored. An anchor the skill cannot determine is settled with the user before drafting.
-3. Read what's already in the repo — wiki pages, code, documentation — and reuse existing terminology rather than inventing new names. When a wiki page that informs a ticket carries a top-of-page [`> [!CAUTION]`](../Wiki-Page-Author/Page-Investigation-Caution) block, the skill stops, surfaces the caution to the user, and waits for instruction. Spike and Bug tickets are exempt — a Spike's purpose is to investigate unresolved design, and a Bug targets existing behaviour rather than committing to the cautioned design.
+3. Read what's already in the repo — wiki pages, code, documentation — and reuse existing terminology rather than inventing new names. When a wiki page that informs a ticket carries a top-of-page [`> [!CAUTION]`](../Wiki-Page-Author/Page-Investigation-Caution) block, the skill warns the user that the page is under investigation.
 4. Decide the breakdown. Work that has multiple child tickets belonging together gets an epic file plus individual ticket files with `epic: auto`. Unrelated tickets stand alone. Each ticket represents an independently deliverable piece of work.
 5. Batch-write every `.md` file to [`proposed-tickets/`](../../proposed-tickets/), using the matching template as the structural basis.
 6. Walk the [Validation](Validation) checklist against each ticket. Items that fail are fixed and the checklist re-run on the revised ticket until every item passes.

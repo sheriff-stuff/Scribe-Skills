@@ -10,6 +10,8 @@ Provide a ticket review for the given pull request.
 - All tools are functional and will work without error. Do not test tools or make exploratory calls. Make sure this is clear to every subagent that is launched.
 - Only call a tool if it is required to complete the task. Every tool call should have a clear purpose.
 
+**Every comment posted to the PR — inline, summary, no-issues note — leads with `🤖 Generated with Claude Code` on its own line.**
+
 To do this, follow these steps precisely:
 
 1. Launch a haiku agent to check if any of the following are true:

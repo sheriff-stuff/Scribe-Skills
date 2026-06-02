@@ -174,7 +174,7 @@ When the user expresses uncertainty about something they want recorded ("I'm not
 
 ## Page Investigation Cautions
 
-A Page Investigation Caution marks a whole page as not ready for implementation — coarser than an ODD, which scopes uncertainty to one point and treats the rest of the body as ground truth. The [ticket-author](../ticket-author/SKILL) skill refuses to draw Scope, Implementation Approach, or Acceptance Criteria from a cautioned page without explicit user authorization.
+A Page Investigation Caution marks a whole page as not ready for implementation — coarser than an ODD, which scopes uncertainty to one point and treats the rest of the body as ground truth. The [ticket-author](../ticket-author/SKILL) skill warns the user when a cautioned page informs a ticket.
 
 Every caution traces back to something the user said — do not invent investigation cautions.
 

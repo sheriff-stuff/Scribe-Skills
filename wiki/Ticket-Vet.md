@@ -37,4 +37,4 @@ Two checks bracket these: a haiku agent gates the PR (closed, draft, no review n
 
 ## Output
 
-Findings print to the terminal. With `--comment`, each issue on a changed line becomes an inline comment, and whole-file, structural, and cross-ticket findings go into one summary comment. When no issues are found, a single comment records that the tickets were checked.
+Findings print to the terminal. With `--comment`, each issue on a changed line becomes an inline comment, and whole-file, structural, and cross-ticket findings go into one summary comment. When no issues are found, a single comment records that the tickets were checked. Every posted comment opens with a `🤖 Generated with Claude Code` line.

@@ -1,6 +1,6 @@
 ---
 name: ticket-author
-description: Use when the user wants to create, edit, or break down tickets — including epics, features, spikes, bugs, chores, documentation, and ODDs (Open Design Decisions raised from the wiki).
+description: Use when the user wants to create, edit, fix, or break down tickets — including epics, features, spikes, bugs, chores, documentation, and ODDs (Open Design Decisions raised from the wiki).
 ---
 
 # Ticket Author

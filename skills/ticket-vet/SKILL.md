@@ -22,7 +22,7 @@ To do this, follow these steps precisely:
 
    If any condition is true, stop and do not proceed.
 
-Note: Still review Claude generated PR's.
+Note: Still review Claude-generated PRs.
 
 2. Launch a haiku agent to return a list of file paths (not their contents) for all relevant CLAUDE.md files including:
    - The root CLAUDE.md file, if it exists
@@ -112,7 +112,7 @@ No issues found. Checked for CLAUDE.md and ticket-author compliance, clarity, an
 
 ---
 
-- When linking to code in inline comments, follow the following format precisely, otherwise the Markdown preview won't render correctly: https://github.com/anthropics/claude-code/blob/c21d3c10bc8e898b7ac1a2d745bdc9bc4e423afe/package.json#L10-L15
+- When linking to code in inline comments, follow this format precisely, otherwise the Markdown preview won't render correctly: https://github.com/anthropics/claude-code/blob/c21d3c10bc8e898b7ac1a2d745bdc9bc4e423afe/package.json#L10-L15
   - Requires full git sha
   - You must provide the full sha. Commands like `https://github.com/owner/repo/blob/$(git rev-parse HEAD)/foo/bar` will not work, since your comment will be directly rendered in Markdown.
   - Repo name must match the repo you're reviewing

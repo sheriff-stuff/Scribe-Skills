@@ -67,7 +67,7 @@ If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 Every check below is sourced from the preloaded `ticket-author` skill — its Frontmatter Schema, File Naming, Body Rules, and the per-type templates under `skills/ticket-author/assets/`. The checklist is the curated review surface; the skill is the source of truth.
 
 - [ ] Frontmatter conforms to the **Frontmatter Schema** — required fields present, types match, `weight` is a bare integer, `epic` is an integer or `"auto"`
-- [ ] Filename matches **File Naming** — lowercase kebab-case, named by subject (not `ticket-1.md`, `feature.md`, or `epic.md`)
+- [ ] Filename matches **File Naming** — lowercase kebab-case, named by the ticket's title (not `ticket-1.md`, `feature.md`, or `epic.md`)
 - [ ] All sections marked mandatory in the matching template under `skills/ticket-author/assets/` are present
 - [ ] Anchor is identified — each ticket is either wiki-anchored or codebase-anchored, and the body matches
 - [ ] Anchor choice is correct, not just consistent — for each codebase-anchored ticket, a reader needs no business case, user impact, or domain rationale to know why the work matters; if they would, it is wiki-anchored and mislabelled

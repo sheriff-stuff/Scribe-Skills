@@ -52,23 +52,20 @@ If unsure, ask the user.
    - [Documentation template](assets/documentation-template.md)
    - [ODD template](assets/odd-template.md)
 
-6. **Review and fix.** Delegate to the `ticket-reviewer` subagent to review every file in `proposed-tickets/`. Drive the loop off the per-file `VERDICT:` lines, not the summary count.
-   - For every file with `VERDICT: NEEDS WORK`, either apply each listed violation, or decline the finding — but decline only when you can cite the wiki, existing code, or the ticket template against it. Record the citation in your reply to the user; never silently ignore a finding.
-   - After fixes, delegate to `ticket-reviewer` again. Stop as soon as every file reports `VERDICT: READY`.
-   - Cap the loop at three reviews. If files still report `NEEDS WORK` after the third — or author and reviewer are deadlocked on a finding neither will move on — stop and surface the outstanding violations to the user with your reasoning, rather than re-reviewing indefinitely.
-   - If the reviewer returns `No tickets to review.`, surface that to the user and stop — do not loop.
-   - If a `NOTES:` line names URLs missing from `.claude/url-resolution.md`, list them to the user once at the end; don't try to resolve them.
+6. **Review and fix.** Whether the reviewer runs depends on the request from [step 1](#workflow):
+   - **New tickets** — review. Delegate to the `ticket-reviewer` subagent to review every file in `proposed-tickets/`.
+   - **Edits to existing tickets** — ask the user whether to run `ticket-reviewer`. If they decline, stop here.
 
-7. **Report.** Report the ticket set as ready once every file reports `VERDICT: READY`. If the loop hit the cap with violations outstanding, report those and your reasoning instead — do not present the set as ready.
+   Fix what the reviewer reports, then re-review — up to three times. If files still report `NEEDS WORK` after the third, surface those to the user instead of looping further.
 
 ## Frontmatter Schema
 
-| Field    | Required | Type                | Notes |
-| -------- | -------- | ------------------- | ----- |
-| `title`  | **Yes**  | string              | Non-empty |
-| `type`   | No       | string              | Only accepted value is `epic` |
-| `labels` | No       | list                | |
-| `weight` | No       | integer             |  |
+| Field    | Required | Type                | Notes                                                                               |
+| -------- | -------- | ------------------- | ----------------------------------------------------------------------------------- |
+| `title`  | **Yes**  | string              | Non-empty                                                                           |
+| `type`   | No       | string              | Only accepted value is `epic`                                                       |
+| `labels` | No       | list                |                                                                                     |
+| `weight` | No       | integer             |                                                                                     |
 | `epic`   | No       | integer or `"auto"` | IID of an existing epic, or `"auto"` to link to the epic created in the same branch |
 
 ## File Naming
@@ -114,7 +111,7 @@ Lowercase kebab-case named by the ticket's title.
   > - one config per environment under `src/main/resources/env/`
   > - one migration per release under `src/main/resources/db/migrations/`
 
-- **Describe relationships in parts, not single verbs.** When pointing at an existing implementation, name what to take from it and what to change. Single verbs (mirror, match, follow, reference) leave the executing agent guessing where on the spectrum to land. Class names follow the class's role: infrastructure names (base classes, configs, converters) come with the borrowed structure; domain names (entities, repositories, services) are part of _what to change_.
+- **Name what to take and what to change, not a single verb.** When a ticket instructs the agent to reproduce structure from a referenced class, file, or module, single verbs (mirror, match, follow, reference) leave the executing agent guessing where on the spectrum to land. Spell out the structure being borrowed and the parts being changed. Class names follow the class's role: infrastructure names (base classes, configs, converters) come with the borrowed structure; domain names (entities, repositories, services) are part of _what to change_.
 
   **Bad — gestures at the relationship with a single verb:**
 

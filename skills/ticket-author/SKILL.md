@@ -52,25 +52,11 @@ If unsure, ask the user.
    - [Documentation template](assets/documentation-template.md)
    - [ODD template](assets/odd-template.md)
 
-6. **Review and fix.**
+6. **Review and fix.** Whether the reviewer runs depends on the request from [step 1](#workflow):
+   - **New tickets** — review. Delegate to the `ticket-reviewer` subagent to review every file in `proposed-tickets/`.
+   - **Edits to existing tickets** — ask the user whether to run `ticket-reviewer`. If they decline, stop here.
 
-   Classify each file, then dispatch:
-   - **New ticket** (request doesn't target it) — dispatch to `ticket-reviewer` right away, naming the files.
-   - **Edit** (request targets a file in `proposed-tickets/`) — ask the user before dispatching.
-
-   A request can mix the two.
-
-   **Drive decisions off per-file `VERDICT:` lines, not the summary count.**
-   - **All `READY`** — go to step 7.
-   - **`NEEDS WORK`** — apply each violation, or decline it with a citation from the wiki, existing code, or the ticket template. Record the citation in your reply.
-   - **`UNVERIFIED`** on a cross-ticket check is expected under per-file dispatch — follow the file's own verdict, don't re-dispatch the folder to clear it.
-   - **Deadlock** (a violation you can neither apply nor decline with a citation, including one that recurs after a fix) — surface with your reasoning instead of looping.
-   - **`No tickets to review.`** — surface and stop.
-   - **`NOTES:` lines naming URLs missing from `.claude/url-resolution.md`** — list once at the end; don't resolve.
-
-   After applying fixes, ask before re-dispatching. Re-dispatch only on agreement, then repeat.
-
-7. **Report.** Report the ticket set as ready only once a reviewer pass shows every file at `VERDICT: READY`. When a file is `VERDICT: READY` but the reviewer left any check `UNVERIFIED`, the set is ready with a caveat, not unconditionally: name the file and carry the reviewer's `UNVERIFIED` check name and reason into the report rather than summarising, so the unrun check stays visible for the user to judge. If the user declined a re-review after fixes, report the files as fixed but not yet re-verified. If author and reviewer deadlocked, report the outstanding violations and your reasoning instead — do not present the set as ready.
+   Fix what the reviewer reports, then re-review — up to three times. If files still report `NEEDS WORK` after the third, surface those to the user instead of looping further.
 
 ## Frontmatter Schema
 

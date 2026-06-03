@@ -4,9 +4,14 @@ import sys
 from pathlib import Path
 import anthropic
 
-# Require a file path argument.
+# Require a file path argument. Trim surrounding whitespace and quotes so a
+# quoted path (including a Windows backslash path) resolves cleanly.
 if len(sys.argv) < 2:
     print("usage: count-skill-tokens.py <path-to-SKILL.md>", file=sys.stderr)
+    sys.exit(1)
+target = Path(sys.argv[1].strip().strip('"').strip("'"))
+if not target.is_file():
+    print(f"error: no such file: {target}", file=sys.stderr)
     sys.exit(1)
 
 # Read the API key from a gitignored file next to this script,
@@ -18,7 +23,7 @@ if not key_file.exists():
 api_key = key_file.read_text(encoding="utf-8").strip()
 
 # Load the target file's contents as a single user message.
-with open(sys.argv[1], encoding="utf-8") as f:
+with open(target, encoding="utf-8") as f:
     content = f.read()
 
 # Ask the API how many input tokens that content would consume.

@@ -1,7 +1,7 @@
 ---
 name: ticket-vet
 allowed-tools: Bash(gh issue view:*), Bash(gh search:*), Bash(gh issue list:*), Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr list:*), WebFetch, mcp__github_inline_comment__create_inline_comment
-description: Review the tickets in a pull request
+description: Vets the proposed tickets in a pull request for clarity, implementability, and ticket-author plus CLAUDE.md compliance, optionally posting findings as PR comments. Use only when the user explicitly asks to vet, lint, or review the tickets (not the code) in a PR — for example vet the tickets, ticket-vet this PR, or review the proposed tickets in a PR. Do NOT use for code review, for general review-this-PR requests, or when a PR is merely mentioned.
 ---
 
 Provide a ticket review for the given pull request.
@@ -32,20 +32,17 @@ Note: Still review Claude-generated PRs.
 
 4. Launch the following agents in parallel to independently review the changes. Each agent should return the list of issues, where each issue includes a description and the reason it was flagged (e.g. "CLAUDE.md adherence", "unclear ticket", "not implementable", "ticket-author rule violation"). The agents should do the following:
 
-   Agent 1: sonnet objective-ticket agent (parallel subagent with the others)
-   Read each changed ticket cold, as a first-time reader who does not know the ticket-author rules. Flag where it is contradictory, ambiguous, unactionable, or unverifiable — a self-conflicting scope, an undefined term, a goal you cannot tell how to meet, an untestable acceptance criterion, an unconfirmable done-state, or a missing or broken reference. Also audit it against any CLAUDE.md that shares its path or a parent. Flag only significant problems; ignore nitpicks. Leave the ticket-author rules to the ticket-reviewer agent.
-
-   Agent 2: ticket-reviewer agent, one per ticket (parallel subagents with the others)
+   Agent 1: ticket-reviewer agent, one per ticket (parallel subagents with the others)
    For each changed ticket file, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
 
-   Agent 3: ticket-reviewer agent, whole batch (parallel subagent with the others)
+   Agent 2: ticket-reviewer agent, whole batch (parallel subagent with the others)
    Launch the ticket-reviewer agent once over the whole `proposed-tickets/` batch, passing no target set so it sees every ticket. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
 
-   Agent 4: sonnet implementability agent, one per changed ticket (parallel subagents with the others)
-   Launch one of these for each changed ticket, skipping any `type: epic` file — an epic is a grouping, not a unit of work to implement (the group implementability agent covers the epic with its children). A ticket is a prompt handed to an LLM coding agent that has the wiki and the codebase in context. Take that agent's position: read the ticket as your prompt and follow its links. Decide whether you could carry the ticket to a correct PR without inventing a decision the ticket left open. You are judging feasibility — do not make any changes. Flag the ticket where you would have to guess at an undecided choice, where the linked context does not resolve a detail the work needs, or where you could not tell when the work is done.
-
-   Agent 5: sonnet implementability agent, the epic with its children as a group (parallel subagent with the others)
-   Run this only when the batch contains an epic. Read the epic together with the child tickets that link to it, and judge the set as a whole: handed these tickets, could an LLM coding agent deliver the epic? Flag where the epic states scope that no child ticket implements, where children contradict each other or the epic, or where delivering every child would still leave the epic's goal unmet. You are judging feasibility — do not make any changes.
+   Agent 3: sonnet implementability agent, whole batch (parallel subagent with the others)
+   Read every changed ticket in one pass and judge it at three levels.
+   - Per ticket (skip `type: epic` files): following the ticket's links, could an LLM coding agent with the wiki and codebase in context deliver this ticket without inventing an undecided choice, and could it tell when the work is done?
+   - Epic group (only when the batch contains an epic): read the epic with its child tickets — does the set, taken together, deliver the epic's stated scope, and do any children contradict each other or the epic?
+   - CLAUDE.md adherence (every ticket, epics included): audit each ticket against any CLAUDE.md that shares its path or a parent, and flag clear violations you can quote the rule for.
 
    **CRITICAL: We only want HIGH SIGNAL issues.** Flag issues where:
    - A ticket is internally contradictory, or so ambiguous a reader cannot tell what to build or when it is done
@@ -53,7 +50,7 @@ Note: Still review Claude-generated PRs.
    - Handed the ticket as a prompt, an LLM coding agent could not deliver it without inventing an undecided choice the ticket or its linked context leaves open
    - The epic and its child tickets, taken together, could not deliver the epic — scope the epic states is implemented by no child, or children that conflict with the epic or each other
    - Clear, unambiguous CLAUDE.md violations where you can quote the exact rule being broken
-   - Clear, unambiguous ticket-author rule violations where you can quote the exact rule being broken
+   - Clear, unambiguous ticket-author rule violations where you can quote the exact rule being broken (these come from the ticket-reviewer agents, which carry the rules)
 
    Do NOT flag:
    - Wording or style preferences
@@ -66,7 +63,7 @@ Note: Still review Claude-generated PRs.
 
    Once every agent above has returned, deduplicate the whole-batch reviewer's per-ticket findings against the per-ticket runs on file + rule + verbatim offending text, keeping its cross-ticket findings. The parallel agents cannot see each other's output, so this dedup happens here, after they all return — not inside any agent.
 
-5. For each issue found in the previous step, launch parallel subagents to validate the issue. These subagents should get the PR title and description along with a description of the issue. The agent's job is to review the issue to validate that the stated issue is truly an issue with high confidence. For a CLAUDE.md or ticket-author rule violation, the agent should validate that the rule that was violated is scoped for this file and is actually violated. For an objective-ticket or implementability issue, the agent should validate that the problem holds when the ticket and the context it links are read together. Use sonnet subagents to validate.
+5. For each issue found in the previous step, launch parallel subagents to validate the issue. These subagents should get the PR title and description along with a description of the issue. The agent's job is to review the issue to validate that the stated issue is truly an issue with high confidence. For a CLAUDE.md or ticket-author rule violation, the agent should validate that the rule that was violated is scoped for this file and is actually violated. For an implementability issue, the agent should validate that the problem holds when the ticket and the context it links are read together. Use sonnet subagents to validate.
 
 6. Filter out any issues that were not validated in step 5. This step will give us our list of high signal issues for our review.
 
@@ -98,6 +95,7 @@ Use this list when evaluating issues in Steps 4 and 5 (these are false positives
 - Something that appears to be a problem but is actually correct
 - Pedantic nitpicks that a senior engineer would not flag
 - A ticket detail the linked spec legitimately owns, where the ticket correctly defers to the link instead of restating it
+- An implementability complaint whose only fix would thicken the ticket past what `skills/ticket-author/SKILL.md` allows — a ticket may defer spec detail to a linked source, name behaviours instead of enumerating test cases, and leave technical decisions to the wiki or code
 
 Notes:
 

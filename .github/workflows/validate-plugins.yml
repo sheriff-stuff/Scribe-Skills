@@ -1,22 +1,22 @@
-# Validates this repo's plugin marketplace on every PR that touches the
-# manifest or any shipped skill content. Uses the canonical composite action
-# from anthropics/claude-plugins-community, which installs the official
-# `claude` CLI fresh each run and uses `claude plugin validate` as the source
-# of truth for the marketplace schema. Mark this workflow's "validate" job as
-# a required check on `master` in Settings → Branches to actually block merges.
+# Validates this repo's plugin marketplace. Runs on every pull request so the
+# required "validate" check is always reported and branch protection never
+# deadlocks waiting for a path-filtered run that will not fire. Also runs on
+# pushes to master that touch the manifest or shipped plugin content. Uses the
+# canonical composite action from anthropics/claude-plugins-community, which
+# installs the official `claude` CLI fresh each run and uses `claude plugin
+# validate` as the source of truth for the marketplace schema. Mark this
+# workflow's "validate" job as a required check on `master` in Settings →
+# Branches to actually block merges.
 name: Validate plugins
 
 on:
   pull_request:
-    paths:
-      - '.claude-plugin/**'
-      - 'skills/**'
-      - '.github/workflows/validate-plugins.yml'
   push:
     branches: [master]
     paths:
       - '.claude-plugin/**'
       - 'skills/**'
+      - 'agents/**'
 
 permissions:
   contents: read

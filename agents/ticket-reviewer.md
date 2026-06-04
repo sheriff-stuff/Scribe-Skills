@@ -1,7 +1,7 @@
 ---
 name: ticket-reviewer
 description: Reviews ticket proposal files in proposed-tickets/ against the ticket-author skill's rules. Use when the user asks to review, lint, check, or validate tickets in proposed-tickets/, or when the ticket-author skill dispatches for review after writing tickets.
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, WebFetch
 model: sonnet
 skills:
   - ticket-author
@@ -17,12 +17,11 @@ The `ticket-author` skill is preloaded into your context at startup — its Fron
 
 Do this, in order:
 
-1. Read `.claude/url-resolution.md` from the project root. The file maps remote URLs (or URL prefixes) to local checkout paths — use those mappings whenever a URL needs to be inspected. If the file is absent, skip URL-content checks, surface the missing file in the batch NOTES line, and mark the **Don't duplicate spec detail from the source doc** check as `UNVERIFIED` for every file whose source it would have read.
-2. Determine the set under review. If the dispatch named specific ticket files, that named set is the set under review; otherwise glob `proposed-tickets/*.md`. This set is the batch for the cross-ticket checks below — when it holds a single file, those checks cannot run, so mark them `UNVERIFIED` for that file rather than passing them.
-3. Read **every** file in the set under review in full **before producing any verdicts.** Cross-ticket rules require the whole set's state to be known before any verdict is drafted.
-4. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
-5. For every URL appearing in any ticket, resolve it against the mappings from step 1 and read the local file. Use the content to check whether the ticket's Scope, Implementation Approach, or Acceptance Criteria duplicates detail the linked resource already owns (Body Rule **Don't duplicate spec detail from the source doc**). Never fetch the URL itself. Skip work-item URLs (issues, MRs, PRs) — they have no local equivalent. Collect any URL that has no mapping for the batch NOTES line, and mark the **Don't duplicate spec detail from the source doc** check `UNVERIFIED` for the file that carries it — a `READY` verdict must not imply a check that could not run.
-6. Draft verdicts by applying every check in [Validation checks](#validation-checks) to each file. Then re-walk all files with the draft in hand, looking for violations the first pass missed and rules applied inconsistently. Repeat until a walk produces no new findings. Iteration is internal — none of it appears in the output.
+1. Determine the set under review. If the dispatch named specific ticket files, that named set is the set under review; otherwise glob `proposed-tickets/*.md`. This set is the batch for the cross-ticket checks below — when it holds a single file, those checks cannot run, so mark them `UNVERIFIED` for that file rather than passing them.
+2. Read **every** file in the set under review in full **before producing any verdicts.** Cross-ticket rules require the whole set's state to be known before any verdict is drafted.
+3. For every ticket type encountered in the batch, read its matching template from `skills/ticket-author/assets/`. Use the template to verify which sections are required vs optional.
+4. For every non-work-item URL appearing in any ticket, fetch it and read the linked page or file. Use the content to check whether the ticket's Scope, Implementation Approach, or Acceptance Criteria duplicates detail the linked resource already owns (Body Rule **Don't duplicate spec detail from the source doc**). Skip work-item URLs (issues, MRs, PRs) — there is no spec to duplicate. If the project's `CLAUDE.md` directs how a URL should be resolved, follow that instead of fetching. When a source cannot be read, mark the **Don't duplicate spec detail from the source doc** check `UNVERIFIED` for the file that carries the URL and name the URL in the batch NOTES line — a `READY` verdict must not imply a check that could not run.
+5. Draft verdicts by applying every check in [Validation checks](#validation-checks) to each file. Then re-walk all files with the draft in hand, looking for violations the first pass missed and rules applied inconsistently. Repeat until a walk produces no new findings. Iteration is internal — none of it appears in the output.
 
 If the set under review is empty (no files were named and `proposed-tickets/` is empty or absent), return exactly:
 
@@ -45,7 +44,7 @@ UNVERIFIED:
   - <check name> — <why it could not be run for this file>
 ```
 
-Emit `UNVERIFIED:` only when a check could not be run for that file (e.g. the duplicate-spec check when the file's source URL has no mapping in `.claude/url-resolution.md`). Omit the line when every check ran. `VERDICT: READY` alongside an `UNVERIFIED:` line means "no violations among the checks that could run" — not "fully verified".
+Emit `UNVERIFIED:` only when a check could not be run for that file (e.g. the duplicate-spec check when one of the ticket's linked sources could not be read). Omit the line when every check ran. `VERDICT: READY` alongside an `UNVERIFIED:` line means "no violations among the checks that could run" — not "fully verified".
 
 End with a final summary block:
 
@@ -57,8 +56,7 @@ N of M tickets ready.
 The numeric line is required and must match that exact format. The `NOTES:` line is optional; emit it when:
 
 - a batch-level pattern emerges (e.g., multiple tickets violating the same Body Rule or cross-ticket structural issues), or
-- `.claude/url-resolution.md` is missing — note that the user should create one to enable URL-content checks, or
-- URLs in the batch have no mapping in `.claude/url-resolution.md` — name each unresolved URL so the user can extend the mapping.
+- a URL in the batch could not be read (the fetch failed, or project policy blocked it with no local alternative) — name each so it can be checked by hand.
 
 If a ticket is clean, leave `VIOLATIONS:` empty and set `VERDICT: READY`.
 
@@ -89,10 +87,10 @@ Every check below is sourced from the preloaded `ticket-author` skill — its Fr
 
 ## What a single snapshot can and can't show
 
-Some rules can't be fully decided from one ticket without code, wiki, or tracker access. Check what is observable; do not assert what you cannot see.
+Some rules can't be fully decided from the ticket text alone. Check what is observable in the set under review and its readable sources; do not assert what you cannot see.
 
-- **Do not infer technical decisions** — flag a prescribed class name, path, or route that lacks a visible anchor (a link to a wiki page or code file) or a user-request marker. The signal is the missing anchor, not absence from the codebase — you have no code access, so do not attempt to confirm a named identifier exists. An identifier carried by an anchor or named in the request is not a violation.
-- **Don't duplicate spec detail from the source doc** — decidable only when the source resolves via `.claude/url-resolution.md`. When it doesn't, mark the check `UNVERIFIED` for that file rather than passing it.
+- **Do not infer technical decisions** — flag a prescribed class name, path, or route that lacks a visible anchor (a link to a wiki page or code file) or a user-request marker. The signal is the missing anchor: an unanchored identifier is a violation whether or not it exists in the code, and an anchored one is clean whether or not it exists. Do not grep the codebase to confirm an identifier — existence cannot decide this rule. An identifier carried by an anchor or named in the request is not a violation.
+- **Don't duplicate spec detail from the source doc** — decidable only when the linked source can be read.
 - **Epic `epic:` integer existence** — you cannot confirm an integer `epic:` points at a real issue (no tracker access); CI verifies this. Do not flag or vouch for it.
 - **Use the language of existing documentation** — you can flag a coined term only against vocabulary visible in the batch or a resolved source; a term you cannot place is not a violation.
 

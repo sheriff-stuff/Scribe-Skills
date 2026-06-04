@@ -6,6 +6,8 @@ Installable plugins are declared in [`.claude-plugin/marketplace.json`](.claude-
 
 This repo is dogfooded on itself, but with the polarity flipped from the consumer workflow above. For projects that *use* these skills, the wiki is the spec and code follows. **For this repo, the shipped skill in `skills/` is authoritative — the wiki documents it.** If `wiki/` and `skills/` (or `.claude/`) disagree on `master`, the skill is right and the wiki needs updating.
 
+**To learn how something behaves, read its `skills/` or `.claude/` (or `agents/`) file — never the wiki.** The wiki can be stale; the shipped files are the facts. Read the wiki only when you are working on the wiki itself.
+
 **The wiki must match `skills/` and `.claude/` before a PR is opened; mid-branch commits can diverge.** Iterate on skills, subagents, hooks, and slash commands freely — individual commits need not touch the wiki. Before pushing the PR, sync the affected wiki pages in the same branch so the update lands in the PR diff. Tickets are cut from the wiki diff during feature work.
 
 ## What the wiki is

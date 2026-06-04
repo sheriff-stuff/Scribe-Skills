@@ -6,6 +6,8 @@ description: Vets the proposed tickets in a pull request for clarity, implementa
 
 Provide a ticket review for the given pull request.
 
+**ODD tickets are out of scope.** Any `proposed-tickets/*.md` file whose `labels:` include `type::ODD` is excluded from the whole review — no step or agent below reads, reviews, or flags it.
+
 **Agent assumptions (applies to all agents and subagents):**
 - All tools are functional and will work without error. Do not test tools or make exploratory calls. Make sure this is clear to every subagent that is launched.
 - Only call a tool if it is required to complete the task. Every tool call should have a clear purpose.

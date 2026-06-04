@@ -44,7 +44,7 @@ UNVERIFIED:
   - <check name> — <why it could not be run for this file>
 ```
 
-Emit `UNVERIFIED:` only when a check could not be run for that file (e.g. the duplicate-spec check when the file's source URL could not be read). Omit the line when every check ran. `VERDICT: READY` alongside an `UNVERIFIED:` line means "no violations among the checks that could run" — not "fully verified".
+Emit `UNVERIFIED:` only when a check could not be run for that file (e.g. the duplicate-spec check when one of the ticket's linked sources could not be read). Omit the line when every check ran. `VERDICT: READY` alongside an `UNVERIFIED:` line means "no violations among the checks that could run" — not "fully verified".
 
 End with a final summary block:
 

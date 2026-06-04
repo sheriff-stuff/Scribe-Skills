@@ -17,7 +17,7 @@ UNVERIFIED:
   - <check name> — <why it could not be run for this file>
 ```
 
-The `UNVERIFIED:` block is emitted only when a check could not be run for that file — for example, the **Don't duplicate spec detail from the source doc** check when the file's source URL could not be read, or the cross-ticket checks when the set under review is a single file. When every check ran, the block is omitted. A `VERDICT: READY` alongside an `UNVERIFIED:` line means no violations among the checks that could run — not that the file was fully verified.
+The `UNVERIFIED:` block is emitted only when a check could not be run for that file — for example, the **Don't duplicate spec detail from the source doc** check when one of the ticket's linked sources could not be read, or the cross-ticket checks when the set under review is a single file. When every check ran, the block is omitted. A `VERDICT: READY` alongside an `UNVERIFIED:` line means no violations among the checks that could run — not that the file was fully verified.
 
 A final summary block follows:
 

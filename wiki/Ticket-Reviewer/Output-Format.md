@@ -17,7 +17,7 @@ UNVERIFIED:
   - <check name> — <why it could not be run for this file>
 ```
 
-The `UNVERIFIED:` block is emitted only when a check could not be run for that file — for example, the **Don't duplicate spec detail from the source doc** check when the file's source URL has no mapping in `.claude/url-resolution.md`, or the cross-ticket checks when the set under review is a single file. When every check ran, the block is omitted. A `VERDICT: READY` alongside an `UNVERIFIED:` line means no violations among the checks that could run — not that the file was fully verified.
+The `UNVERIFIED:` block is emitted only when a check could not be run for that file — for example, the **Don't duplicate spec detail from the source doc** check when the file's source URL could not be read, or the cross-ticket checks when the set under review is a single file. When every check ran, the block is omitted. A `VERDICT: READY` alongside an `UNVERIFIED:` line means no violations among the checks that could run — not that the file was fully verified.
 
 A final summary block follows:
 
@@ -29,7 +29,6 @@ N of M tickets ready.
 The numeric line is required and matches that exact format. The `NOTES:` line is emitted when:
 
 - a batch-level pattern emerges — for example, multiple tickets violating the same Body Rule or cross-ticket structural issues, or
-- the consumer project's `.claude/url-resolution.md` is missing — the note prompts the user to create one to enable URL-content checks, or
-- URLs in the batch have no mapping in `.claude/url-resolution.md` — the unresolved URLs are named so the mapping can be extended.
+- a URL in the batch could not be read — the fetch failed, or project policy blocked it with no local alternative — and the unreadable URLs are named so they can be checked by hand.
 
 A clean ticket gets an empty `VIOLATIONS:` list and `VERDICT: READY`.

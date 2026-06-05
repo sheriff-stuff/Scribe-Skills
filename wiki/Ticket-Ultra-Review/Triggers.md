@@ -1,0 +1,3 @@
+# Triggers
+
+Runs on an explicit request for an ultra review of the tickets in a pull request — a user invoking `/ticket-ultra-review`, or Claude selecting it (interactive or headless `claude -p`) when a prompt asks for an ultra review of the proposed tickets by name. The `description` scopes selection to explicit ultra-review intent, so a generic ticket-review or lint request, a code-review request, or a bare PR mention does not select it. In headless `claude -p`, only this model-driven selection applies — slash commands run in interactive mode — and the installed marketplace plugin must be enabled for the run to discover it.

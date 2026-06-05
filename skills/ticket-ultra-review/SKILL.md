@@ -1,10 +1,10 @@
 ---
-name: ticket-vet
+name: ticket-ultra-review
 allowed-tools: Bash(gh issue view:*), Bash(gh search:*), Bash(gh issue list:*), Bash(gh pr comment:*), Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr list:*), WebFetch, mcp__github_inline_comment__create_inline_comment
-description: Vets the proposed tickets in a pull request for clarity, implementability, and ticket-author compliance, optionally posting findings as PR comments. Use only when the user explicitly asks to vet, lint, or review the tickets (not the code) in a PR — for example vet the tickets, ticket-vet this PR, or review the proposed tickets in a PR. Do NOT use for code review, for general review-this-PR requests, or when a PR is merely mentioned.
+description: Runs an ultra review of the proposed tickets in a pull request for clarity, implementability, and ticket-author compliance, optionally posting findings as PR comments. Use ONLY when the user explicitly asks for an ultra review of the tickets, e.g. "ultra-review the tickets", "ticket-ultra-review this PR", or "run an ultra review on the proposed tickets". A generic request to review or lint the tickets does NOT qualify — the user must ask for the ultra review by name. Do NOT use for code review, for general review-this-PR requests, or when a PR is merely mentioned.
 ---
 
-Provide a ticket review for the given pull request.
+Provide an ultra review of the tickets in the given pull request.
 
 **ODD tickets are out of scope.** Any `proposed-tickets/*.md` file whose `labels` include `type::ODD` is excluded from the whole review — no step or agent below reviews or flags it.
 

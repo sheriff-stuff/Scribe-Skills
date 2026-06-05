@@ -5,7 +5,7 @@ Index of wiki pages.
 ## Skills
 
 - [Ticket Author](Ticket-Author)
-- [Ticket Vet](Ticket-Vet)
+- [Ticket Ultra Review](Ticket-Ultra-Review)
 - [Wiki Page Author](Wiki-Page-Author)
 
 ## Subagents

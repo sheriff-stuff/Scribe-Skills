@@ -32,7 +32,7 @@ Note: Still review Claude-generated PRs.
    For each changed non-ODD ticket file, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
 
    Agent 2: ticket-reviewer agent, whole batch (parallel subagent with the others)
-   Launch the ticket-reviewer agent once over the changed non-ODD tickets in `proposed-tickets/` as a batch, so it sees the whole reviewable set at once. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
+   Launch the ticket-reviewer agent once over the whole non-ODD batch — every non-ODD ticket in `proposed-tickets/`, not only the changed ones — so it sees the whole batch at once. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
 
    Agent 3: sonnet implementability agent, whole batch (parallel subagent with the others)
    Read every changed non-ODD ticket in one pass and judge it at two levels.

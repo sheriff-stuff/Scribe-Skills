@@ -52,10 +52,9 @@ If unsure, ask the user.
    - [Documentation template](assets/documentation-template.md)
    - [ODD template](assets/odd-template.md)
 
-6. **Review and fix.** Whether the reviewer runs depends on the request from [step 1](#workflow):
-   - **New tickets** — review. Delegate to the `ticket-reviewer` subagent to review every file in `proposed-tickets/`.
+6. **Review and fix.** Exclude ODD tickets (`labels` include `type::ODD`) from what the reviewer is given. Whether the reviewer runs depends on the request from [step 1](#workflow):
+   - **New tickets** — review. Delegate to the `ticket-reviewer` subagent to review every non-ODD file in `proposed-tickets/`.
    - **Edits to existing tickets** — ask the user whether to run `ticket-reviewer`. If they decline, stop here.
-   - **ODD tickets** — out of scope. Exclude any file whose `labels` include `type::ODD` from what the reviewer is given.
 
    Fix what the reviewer reports, then re-review — up to three times. If files still report `NEEDS WORK` after the third, surface those to the user instead of looping further.
 

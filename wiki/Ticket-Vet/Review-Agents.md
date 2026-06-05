@@ -2,6 +2,8 @@
 
 The skill launches these agents in parallel. Each is told the PR title and description and returns a list of issues, each with the reason it was flagged. All run on sonnet.
 
+ODD tickets are out of scope: any `proposed-tickets/*.md` file whose `labels` include `type::ODD` is excluded from the whole review — no agent reviews or flags it.
+
 | Agent | Lens | Scope |
 | --- | --- | --- |
 | Ticket-reviewer, per ticket | [Ticket Reviewer](../Ticket-Reviewer) rules on one ticket | each changed ticket |

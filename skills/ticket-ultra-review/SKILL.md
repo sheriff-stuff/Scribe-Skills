@@ -37,7 +37,7 @@ Note: Still review Claude-generated PRs.
    Agent 3: sonnet implementability agent, whole batch (parallel subagent with the others)
    Read every non-ODD ticket in `proposed-tickets/` in one pass and judge it at two levels.
    - Per ticket (skip `type: epic` files): following the ticket's links, could an LLM coding agent with the wiki and codebase in context deliver this ticket without inventing an undecided choice, and could it tell when the work is done?
-   - Epic group: judge whether the epic and its children together deliver the epic's stated scope, and whether any children contradict each other or the epic — flag a clash only if a batch ticket is one of the parties. Find the children two ways: an epic file in the batch carries its `epic: auto` children alongside it; a batch ticket with an integer `epic:` points at an epic whose other children live in the tracker — resolve those from there, or report the group unchecked if the tracker can't be read.
+   - Epic group: judge whether the epic and its children together deliver the epic's stated scope, and whether any children contradict each other or the epic — flag a clash only if a batch ticket is one of the parties. Find the children two ways: an epic file in the batch carries its `epic: auto` children alongside it; a batch ticket with an integer `epic:` points at an epic whose other children live in the tracker — resolve those from there, or report the group unchecked if the tracker cannot be read.
 
    **CRITICAL: We only want HIGH SIGNAL issues.** Flag issues where:
    - A ticket is internally contradictory, or so ambiguous a reader cannot tell what to build or when it is done

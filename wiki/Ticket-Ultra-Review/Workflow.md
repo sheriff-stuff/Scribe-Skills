@@ -1,6 +1,6 @@
 # Workflow
 
-The steps the ticket-vet skill follows to review the tickets in a pull request.
+The steps the ticket-ultra-review skill follows to ultra-review the tickets in a pull request.
 
 1. Gate the PR; stop if it is closed, a draft, needs no review, or Claude has already commented. Claude-generated PRs are still reviewed.
 2. Run the [review agents](Review-Agents) in parallel; each flags only high-signal issues. Deduplicate the whole-batch reviewer's per-ticket findings against the per-ticket runs, keeping its cross-ticket findings.

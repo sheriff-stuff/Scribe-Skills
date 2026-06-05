@@ -8,5 +8,5 @@ The steps the ticket-ultra-review skill follows to ultra-review the tickets in a
 4. Keep the validated issues.
 5. Print the findings to the terminal. Without `--comment`, stop. With `--comment` and no issues, post a clean summary comment and stop.
 6. Plan the comments.
-7. Post one inline comment per issue that maps to a changed line.
+7. Post one inline comment per issue that maps to a line in the PR diff.
 8. Post a summary comment carrying the whole-batch run's `N of M tickets ready.` line and the issues that have no diff line to attach to.

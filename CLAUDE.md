@@ -19,8 +19,6 @@ A living spec describing the current state of the thing being documented — pre
 - Open questions live in inline `> [!ODD]` callout blocks placed next to the section they affect, and are removed once resolved.
 - Folders and pages are named by subject, not by content type or format.
 
-The wiki is the source of truth that tickets and feature specs are built on top of.
-
 ## What this repo contains
 
 - `.claude-plugin/marketplace.json` — plugin marketplace manifest. Declares the installable plugins (`wiki-page-author`, `ticket-author`).

@@ -26,18 +26,18 @@ To do this, follow these steps precisely:
 
 Note: Still review Claude-generated PRs.
 
-2. Launch the following agents in parallel to independently review the changes. Each agent should return the list of issues, where each issue includes a description and the reason it was flagged (e.g. "unclear ticket", "not implementable", "ticket-author rule violation"). The agents should do the following:
+2. Launch the following agents in parallel to independently review the proposed tickets. Each agent should return the list of issues, where each issue includes a description and the reason it was flagged (e.g. "unclear ticket", "not implementable", "ticket-author rule violation"). The agents should do the following:
 
    Agent 1: ticket-reviewer agent, one per ticket (parallel subagents with the others)
-   For each changed non-ODD ticket file, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
+   For each non-ODD ticket file in `proposed-tickets/`, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
 
    Agent 2: ticket-reviewer agent, whole batch (parallel subagent with the others)
-   Launch the ticket-reviewer agent once over the whole non-ODD batch — every non-ODD ticket in `proposed-tickets/`, not only the changed ones — so it sees the whole batch at once. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
+   Launch the ticket-reviewer agent once over the whole non-ODD batch — every non-ODD ticket in `proposed-tickets/` — so it sees the whole batch at once. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
 
    Agent 3: sonnet implementability agent, whole batch (parallel subagent with the others)
-   Read every changed non-ODD ticket in one pass and judge it at two levels.
+   Read every non-ODD ticket in `proposed-tickets/` in one pass and judge it at two levels.
    - Per ticket (skip `type: epic` files): following the ticket's links, could an LLM coding agent with the wiki and codebase in context deliver this ticket without inventing an undecided choice, and could it tell when the work is done?
-   - Epic group (only when the batch contains an epic): read the epic with its child tickets — does the set, taken together, deliver the epic's stated scope, and do any children contradict each other or the epic?
+   - Epic group: judge whether the epic and its children together deliver the epic's stated scope, and whether any children contradict each other or the epic — flag a clash only if a batch ticket is one of the parties. Find the children two ways: an epic file in the batch carries its `epic: auto` children alongside it; a batch ticket with an integer `epic:` points at an epic whose other children live in the tracker — resolve those from there, or report the group unchecked if the tracker can't be read.
 
    **CRITICAL: We only want HIGH SIGNAL issues.** Flag issues where:
    - A ticket is internally contradictory, or so ambiguous a reader cannot tell what to build or when it is done
@@ -57,7 +57,7 @@ Note: Still review Claude-generated PRs.
 
    Once every agent above has returned, deduplicate the whole-batch reviewer's per-ticket findings against the per-ticket runs on file + rule + verbatim offending text, keeping its cross-ticket findings. The parallel agents cannot see each other's output, so this dedup happens here, after they all return — not inside any agent.
 
-3. For each issue found in the previous step, launch parallel subagents to validate the issue. These subagents should get the PR title and description along with a description of the issue. The agent's job is to review the issue to validate that the stated issue is truly an issue with high confidence. For a ticket-author rule violation, the agent should validate that the rule that was violated is scoped for this file and is actually violated. For an implementability issue, the agent should validate that the problem holds when the ticket and the context it links are read together. Use sonnet subagents to validate.
+3. For each issue found in the previous step, launch parallel subagents to validate the issue. These subagents should get the PR title and description along with a description of the issue. The agent's job is to review the issue to validate that the stated issue is truly an issue with high confidence. For a ticket-author rule violation, the agent should validate that the rule that was violated is scoped for this file and is actually violated. For an implementability issue, the agent should validate that the problem holds when the ticket and the context it links are read together; for an epic-group clash, that context is the full epic group, with a tracker-held epic resolved from its integer `epic:`. Use sonnet subagents to validate.
 
 4. Filter out any issues that were not validated in step 3. This step will give us our list of high signal issues for our review.
 

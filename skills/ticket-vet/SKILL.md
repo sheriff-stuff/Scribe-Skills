@@ -6,7 +6,7 @@ description: Vets the proposed tickets in a pull request for clarity, implementa
 
 Provide a ticket review for the given pull request.
 
-**ODD tickets are out of scope.** Any `proposed-tickets/*.md` file whose `labels:` include `type::ODD` is excluded from the whole review — no step or agent below reads, reviews, or flags it.
+**ODD tickets are out of scope.** Any `proposed-tickets/*.md` file whose `labels` include `type::ODD` is excluded from the whole review — no step or agent below reviews or flags it.
 
 **Agent assumptions (applies to all agents and subagents):**
 - All tools are functional and will work without error. Do not test tools or make exploratory calls. Make sure this is clear to every subagent that is launched.
@@ -29,13 +29,13 @@ Note: Still review Claude-generated PRs.
 2. Launch the following agents in parallel to independently review the changes. Each agent should return the list of issues, where each issue includes a description and the reason it was flagged (e.g. "unclear ticket", "not implementable", "ticket-author rule violation"). The agents should do the following:
 
    Agent 1: ticket-reviewer agent, one per ticket (parallel subagents with the others)
-   For each changed ticket file, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
+   For each changed non-ODD ticket file, launch the ticket-reviewer agent once, passing it that one ticket as its target. These per-ticket runs cover the per-ticket rules and cannot run the cross-ticket checks (the whole-batch run does those), so ignore any cross-ticket `UNVERIFIED` they report. Each violation is an issue.
 
    Agent 2: ticket-reviewer agent, whole batch (parallel subagent with the others)
-   Launch the ticket-reviewer agent once over the whole `proposed-tickets/` batch, passing no target set so it sees every ticket. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
+   Launch the ticket-reviewer agent once over the changed non-ODD tickets in `proposed-tickets/` as a batch, so it sees the whole reviewable set at once. Its unique contribution is the cross-ticket checks — at most one epic per batch, `epic:` references resolving; keep those findings as issues.
 
    Agent 3: sonnet implementability agent, whole batch (parallel subagent with the others)
-   Read every changed ticket in one pass and judge it at two levels.
+   Read every changed non-ODD ticket in one pass and judge it at two levels.
    - Per ticket (skip `type: epic` files): following the ticket's links, could an LLM coding agent with the wiki and codebase in context deliver this ticket without inventing an undecided choice, and could it tell when the work is done?
    - Epic group (only when the batch contains an epic): read the epic with its child tickets — does the set, taken together, deliver the epic's stated scope, and do any children contradict each other or the epic?
 

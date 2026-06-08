@@ -78,6 +78,7 @@ Every check below is sourced from the preloaded `ticket-author` skill — its Fr
 - [ ] Wiki-anchored tickets link the wiki and carry no motivational rationale (business case, user impact, strategic priority) in the body
 - [ ] Codebase-anchored tickets carry only causal-mechanical detail (sequencing, invariants, dependencies) — no motivational rationale; if motivational rationale was needed, the anchor was misidentified
 - [ ] No duplicated spec detail from a source-of-truth doc
+- [ ] Every statement earns its place — no statement in any section adds nothing beyond what another section already covers
 - [ ] Acceptance Criteria assert outcomes — each is a falsifiable check, not a restatement of Scope, a project baseline, or a subjective judgement; spec-owned values are resolved through the authoritative link, not reproduced as a field/validation matrix inline
 - [ ] Risks entries name concrete exposure outside the ticket's control (external dependency, migration hazard, cross-system contract) — not generic caveats; applies when a Risks section is present
 - [ ] Testing names behaviours, not cases — no enumerated cases, edges, frameworks, or file paths; a bug's mandatory regression names the broken behaviour, not a framework or path

@@ -152,6 +152,8 @@ Lowercase kebab-case named by the ticket's title.
 
   > Fields per [`User-Storage.md`](https://example.com/wiki/User-Storage).
 
+- **Every statement must earn its place in the section it appears in.** If a statement adds no information beyond what another section already covers, remove it. Elaboration, specificity, and implementation detail are not repetition — touching the same topic is fine as long as something new is added.
+
 - **Acceptance Criteria assert outcomes, not restatement.** Each criterion is a falsifiable check a reviewer would perform — not an imperative, not a project-wide baseline (build/lint/test belong in the project's `CLAUDE.md`), not subjective. State assertions that correspond to a scope goal are fine if falsifiable. A reviewer must be able to tell pass from fail without guessing. Defer spec-owned values to their authoritative link (see **Don't duplicate spec detail from the source doc**); quote inline only a constant the check's pass/fail genuinely turns on.
 
   **Bad — restates the task, baselines, and subjective judgements:**

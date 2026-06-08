@@ -10,25 +10,15 @@
   "plugins": [
     {
       "name": "wiki-page-author",
+      "source": "./plugins/wiki-page-author",
       "description": "Write, update, and organise project wiki pages as a living spec. Handles ODD callouts, page-level caution blocks, and includes a wiki-page-reviewer subagent.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/wiki-page-author"
-      ]
+      "strict": false
     },
     {
       "name": "ticket-author",
+      "source": "./plugins/ticket-author",
       "description": "Author tickets from wiki pages (or wiki diffs) that drive Claude Code implementation, and review the tickets in a pull request. Includes a ticket-reviewer subagent.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/ticket-author",
-        "./skills/ticket-ultra-review"
-      ],
-      "agents": [
-        "./agents/ticket-reviewer.md"
-      ]
+      "strict": false
     }
   ]
 }

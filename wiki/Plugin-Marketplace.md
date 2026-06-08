@@ -4,7 +4,7 @@ The repo is a Claude Code plugin marketplace. Installers add it once, then insta
 
 ## Manifest
 
-[`.claude-plugin/marketplace.json`](../.claude-plugin/marketplace.json) at the repo root declares the marketplace. The `plugins` array lists each installable plugin. Each entry names the plugin, describes it, points at the skill folders it bundles under `skills/`, and may list reviewer agent files under the top-level [`agents/`](../agents/) through an `agents` array.
+[`.claude-plugin/marketplace.json`](../.claude-plugin/marketplace.json) at the repo root declares the marketplace. The `plugins` array lists each installable plugin. Each entry names the plugin, describes it, and points its `source` at the plugin's own folder under [`plugins/`](../plugins/). Claude Code discovers that plugin's skills and reviewer subagent automatically from the source root, so the manifest lists no per-component paths.
 
 ## Plugins
 
@@ -19,7 +19,7 @@ Each plugin is independently installable.
 
 Each plugin ships a reviewer subagent, installed with the plugin and invoked by name. The skill's frontmatter references its reviewer by name, not by path.
 
-The `ticket-author` plugin registers its reviewer as a plugin agent: the agent file lives at the top-level [`agents/`](../agents/) and is listed in the plugin's `agents` array in the manifest. The `wiki-page-author` plugin ships its reviewer inside [`skills/wiki-page-author/agents/`](../skills/wiki-page-author/agents/).
+The `ticket-author` plugin registers its reviewer as a plugin agent: the agent file lives at the plugin root under [`plugins/ticket-author/agents/`](../plugins/ticket-author/agents/), where Claude Code discovers it automatically. The `wiki-page-author` plugin ships its reviewer inside its skill at [`plugins/wiki-page-author/skills/wiki-page-author/agents/`](../plugins/wiki-page-author/skills/wiki-page-author/agents/).
 
 ## Local-only tooling
 

@@ -150,11 +150,11 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
   **Bad — bare in-repo path:**
 
-  > New pages use the page template at `skills/wiki-page-author/assets/page-template.md`.
+  > New pages use the page template at `assets/page-template.md`.
 
   **Good — inline link to the file:**
 
-  > New pages use the [page template](../skills/wiki-page-author/assets/page-template).
+  > New pages use the [page template](assets/page-template).
 
 - **No pleonasm.** State each fact without redundant qualifiers or filler.
 
@@ -174,7 +174,7 @@ When the user expresses uncertainty about something they want recorded ("I'm not
 
 ## Page Investigation Cautions
 
-A Page Investigation Caution marks a whole page as not ready for implementation — coarser than an ODD, which scopes uncertainty to one point and treats the rest of the body as ground truth. The [ticket-author](../ticket-author/SKILL) skill warns the user when a cautioned page informs a ticket.
+A Page Investigation Caution marks a whole page as not ready for implementation — coarser than an ODD, which scopes uncertainty to one point and treats the rest of the body as ground truth. The `ticket-author` skill warns the user when a cautioned page informs a ticket.
 
 Every caution traces back to something the user said — do not invent investigation cautions.
 

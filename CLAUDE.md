@@ -2,13 +2,13 @@
 
 Scribe Skills is a Claude Code plugin marketplace of reusable extensions — skills, subagents, hooks, slash commands, and anything else that plugs into Claude Code — supporting a spec-driven development workflow. Everything here is project-agnostic; point it at any project (including this one).
 
-Installable plugins are declared in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) and consumed via `/plugin marketplace add sheriff-stuff/Scribe-Skills`. Everything under `skills/` and `.claude/` is read by Claude Code, not humans — templates and assets are instructions to the agent.
+Installable plugins are declared in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) and consumed via `/plugin marketplace add sheriff-stuff/Scribe-Skills`. Everything under `plugins/` and `.claude/` is read by Claude Code, not humans — templates and assets are instructions to the agent.
 
-This repo is dogfooded on itself, but with the polarity flipped from the consumer workflow above. For projects that *use* these skills, the wiki is the spec and code follows. **For this repo, the shipped skill in `skills/` is authoritative — the wiki documents it.** If `wiki/` and `skills/` (or `.claude/`) disagree on `master`, the skill is right and the wiki needs updating.
+This repo is dogfooded on itself, but with the polarity flipped from the consumer workflow above. For projects that *use* these skills, the wiki is the spec and code follows. **For this repo, the shipped skill in `plugins/` is authoritative — the wiki documents it.** If `wiki/` and `plugins/` (or `.claude/`) disagree on `master`, the skill is right and the wiki needs updating.
 
-**To learn how something behaves, read its `skills/` or `.claude/` (or `agents/`) file — never the wiki.** The wiki can be stale; the shipped files are the facts. Read the wiki only when you are working on the wiki itself.
+**To learn how something behaves, read its `plugins/` or `.claude/` file — never the wiki.** The wiki can be stale; the shipped files are the facts. Read the wiki only when you are working on the wiki itself.
 
-**The wiki must match `skills/` and `.claude/` before a PR is opened; mid-branch commits can diverge.** Iterate on skills, subagents, hooks, and slash commands freely — individual commits need not touch the wiki. Before pushing the PR, sync the affected wiki pages in the same branch so the update lands in the PR diff. Tickets are cut from the wiki diff during feature work.
+**The wiki must match `plugins/` and `.claude/` before a PR is opened; mid-branch commits can diverge.** Iterate on skills, subagents, hooks, and slash commands freely — individual commits need not touch the wiki. Before pushing the PR, sync the affected wiki pages in the same branch so the update lands in the PR diff. Tickets are cut from the wiki diff during feature work.
 
 ## What the wiki is
 
@@ -21,10 +21,10 @@ A living spec describing the current state of the thing being documented — pre
 
 ## What this repo contains
 
-- `.claude-plugin/marketplace.json` — plugin marketplace manifest. Declares the installable plugins (`wiki-page-author`, `ticket-author`).
-- `skills/` — reusable skills shipped to marketplace installers. Each skill folder holds its `SKILL.md`, `assets/`, `references/`, and any bundled subagents under `agents/`.
+- `.claude-plugin/marketplace.json` — plugin marketplace manifest. Each entry pins a plugin to its own `source` directory under `plugins/`; component discovery is automatic from that root.
+- `plugins/` — one folder per installable plugin, and each folder is the plugin's `source` root. A plugin holds its own `skills/` (every skill folder carries its `SKILL.md`, `assets/`, `references/`, and any bundled subagents under `agents/`) plus an `agents/` at the plugin root for subagents Claude Code discovers directly.
 - `.claude/commands/` — slash commands used while working in this repo (e.g. `/count-skill-tokens`). Local-only; not shipped via the marketplace.
-- `wiki/` — the living spec for everything in `skills/` and `.claude/`.
+- `wiki/` — the living spec for everything in `plugins/` and `.claude/`.
 
 ## Rules
 

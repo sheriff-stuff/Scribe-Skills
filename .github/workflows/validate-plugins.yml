@@ -15,8 +15,7 @@ on:
     branches: [master]
     paths:
       - '.claude-plugin/**'
-      - 'skills/**'
-      - 'agents/**'
+      - 'plugins/**'
 
 permissions:
   contents: read

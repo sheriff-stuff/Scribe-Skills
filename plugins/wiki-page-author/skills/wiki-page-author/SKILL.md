@@ -150,11 +150,11 @@ These apply everywhere on the page **except** inside `> [!ODD]` and `> [!CAUTION
 
   **Bad — bare in-repo path:**
 
-  > New pages use the page template at `skills/wiki-page-author/assets/page-template.md`.
+  > New pages use the page template at `plugins/wiki-page-author/skills/wiki-page-author/assets/page-template.md`.
 
   **Good — inline link to the file:**
 
-  > New pages use the [page template](../skills/wiki-page-author/assets/page-template).
+  > New pages use the [page template](../plugins/wiki-page-author/skills/wiki-page-author/assets/page-template).
 
 - **No pleonasm.** State each fact without redundant qualifiers or filler.
 

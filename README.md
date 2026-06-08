@@ -25,11 +25,15 @@ Or run `/plugin`, pick `Browse and install plugins`, then `scribe-skills`.
 ## Layout
 
 ```
-.claude-plugin/marketplace.json   Plugin manifest
-skills/
-  wiki-page-author/               SKILL.md + agents/wiki-page-reviewer.md
-  ticket-author/                  SKILL.md + agents/ticket-reviewer.md
+.claude-plugin/marketplace.json   Plugin manifest (one source per plugin)
+plugins/
+  wiki-page-author/               source root
+    skills/wiki-page-author/      SKILL.md + agents/wiki-page-reviewer.md
+  ticket-author/                  source root
+    skills/ticket-author/         SKILL.md + assets/
+    skills/ticket-ultra-review/   SKILL.md
+    agents/ticket-reviewer.md
 wiki/                             Living spec for the skills themselves
 ```
 
-The wiki documents the shipped skills. If `wiki/` and `skills/` disagree on `master`, the skill is right and the wiki needs updating.
+The wiki documents the shipped skills. If `wiki/` and `plugins/` disagree on `master`, the skill is right and the wiki needs updating.

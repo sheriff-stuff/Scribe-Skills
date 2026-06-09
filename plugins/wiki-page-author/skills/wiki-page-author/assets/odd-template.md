@@ -13,5 +13,3 @@
 > **Ticket:** [<ticket title>](<ticket URL>)
 > **Affects:** [<Other page>](<../Folder/Page>), [<Other page>](<../Folder/Page>) *(optional)*
 > **Context:** <related considerations, candidate options, edge cases — paragraphs, bullets, and other markdown allowed>
-
----

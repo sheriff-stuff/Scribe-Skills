@@ -1,9 +1,10 @@
 # Workflow
 
-1. Targets come only from explicit paths in the invocation message. The subagent does not infer targets from the skill name, prior conversation, or wiki layout. For folder paths, the subagent globs the `*.md` files directly inside.
-2. If no paths were supplied, the subagent returns exactly the plain-text sentence `No paths supplied. Pass one or more wiki page paths to review.` (no blockquote, no code fences, no other markdown) and stops without globbing, reading, or reviewing anything.
-3. Read every target file in full before producing any verdicts.
-4. For every pointer `> [!ODD]` block in the targets, follow its link to the owner page and read it so the owner ODD and its `Affects:` list can be verified.
-5. Starting at the directory containing any target page and walking upward, find the nearest directory containing `index.md`, `home.md`, or both — that is the wiki root. Whichever of the two files exist there are read. Each target page is linked from one of them. If no directory on the path to the filesystem root contains either file, a batch-level `NOTES:` entry records that no wiki index was found and the Index sync check is skipped.
-6. The checks are walked at least twice before any verdict is emitted. The first pass drafts verdicts internally. The second pass re-walks every rule in [Checks](Checks) against every target with the draft in hand, looking for violations the first pass missed, rules applied inconsistently across the batch, and interactions between rules (e.g. a sentence that is both a hedge and a rationale; a pointer block whose owner page is also a target). Passes continue until a full walk produces no new findings. Iteration is internal — none of it appears in the output.
-7. Emit one verdict block per file, then a final summary block.
+The steps the wiki-page-reviewer subagent follows to review the pages passed to it.
+
+1. Targets come only from explicit paths in the invocation message — the subagent does not infer them from the skill name, prior conversation, or wiki layout. For folder paths it globs the `*.md` files directly inside. When no paths are supplied, it reads nothing, calls no tool, and returns exactly the plain-text sentence `No paths supplied. Pass one or more wiki page paths to review.`
+2. Read every target file in full before producing any verdicts, so cross-page rules can be applied across the batch.
+3. For every pointer `> [!ODD]` block in the targets, follow its link to the owner page and read it, so the owner ODD and its `Affects:` list can be verified. When an owner page cannot be read, the [Cross-page check](Checks) is marked `UNVERIFIED` for the file carrying that pointer.
+4. Locate the wiki index by walking up from a target to the nearest directory containing `index.md`, `home.md`, or both, and confirm each target is linked from it. When no such directory exists, the [Index sync check](Checks) is marked `UNVERIFIED` and named in the batch `NOTES:` line.
+5. Draft a verdict for each target by applying every [check](Checks), then re-walk every check against every target with the draft in hand — looking for violations the first pass missed, rules applied inconsistently across the batch, and interactions between rules (e.g. a sentence that is both a hedge and a rationale; a pointer block whose owner page is also a target). Iteration continues until a walk produces no new findings and is internal — none of it appears in the output.
+6. Emit one verdict block per file, then a final summary block.

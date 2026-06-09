@@ -2,7 +2,7 @@
 
 A Page Investigation Caution marks a whole page as still under investigation and not ready for implementation. It is coarser than an [Open Design Decision](Open-Design-Decision): an ODD says the body is ground truth except for one named open point, while a caution says the body may still be wrong overall.
 
-The [ticket-author](Ticket-Author) skill warns the user when a cautioned page informs a ticket.
+The [ticket-author](../Ticket-Author) skill warns the user when a cautioned page informs a ticket.
 
 ## Where Page Investigation Cautions live
 

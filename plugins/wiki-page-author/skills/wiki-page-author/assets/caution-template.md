@@ -9,5 +9,3 @@
 > <One-sentence reason the page is under investigation. Required.>
 >
 > **Context:** <what's still being worked out, related considerations, candidate directions — paragraphs, bullets, and other markdown allowed> *(optional)*
-
----

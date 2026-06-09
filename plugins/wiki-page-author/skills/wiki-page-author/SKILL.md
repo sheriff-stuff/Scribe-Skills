@@ -5,9 +5,27 @@ description: Write, update, fix, or remove pages in the project wiki, or organis
 
 # Wiki Page Author
 
-This skill writes and updates pages in the project wiki. The wiki is the living design spec for the project being built — present tense, confirmed facts only. Pages tell a future agent or human what the project is, not how it got there or why. An agent reading it should be able to treat every page as ground truth. Development tickets are created from these pages.
+This skill writes and updates pages in the project wiki. The wiki is the living design spec for the project being built — present tense, confirmed facts only. Pages tell a future agent or human what the project is, not how it got there or why.
 
 Uncertainty is allowed in two places: inline `> [!ODD]` blocks placed next to the section they affect (a single open point on an otherwise ground-truth page), and a top-of-page `> [!CAUTION]` block (the whole page is under investigation and not ready to build from).
+
+## Consumer
+
+Each page is read by a human and by an LLM agent building from it; both treat every page as ground truth. Development tickets are created from these pages.
+
+## Workflow
+
+1. **Understand the request.** Decide what the work is — a new page, an edit to an existing page, a removal, folder organisation, or an ODD or caution operation. Uncertainty the user voices is recorded as a block, not guessed into a confident sentence (see [Gotchas](#gotchas)); a request to "add notes" or "document my thinking" is usually not a wiki request — ask first.
+
+2. **Gather context from the project.** Before writing, read what is already in the wiki and the repo — the index, pages topically related to the subject, existing code and terminology. Use the names that already exist; do not coin new terminology for a concept the wiki or code already names. When a related page carries a top-of-page `> [!CAUTION]` block, treat it as not yet ground truth.
+
+3. **Write or update the page(s).** Use the [page template](assets/page-template) for new pages, and apply the [Body Rules](#body-rules) to everything outside `> [!ODD]` and `> [!CAUTION]` blocks. Place ODD blocks (see [Open Design Decisions](#open-design-decisions)) and a caution block (see [Page Investigation Cautions](#page-investigation-cautions)) where the request calls for them. Follow the [Standing Instructions](#standing-instructions) throughout.
+
+4. **Review and fix.** Whether the reviewer runs depends on the request from [step 1](#workflow):
+   - **New pages** — review. Delegate to the `wiki-page-reviewer` subagent, passing it every page written.
+   - **Edits to existing pages** — ask the user whether to run `wiki-page-reviewer`. If they decline, stop here.
+
+   Fix what the reviewer reports, then re-review — up to three times. If pages still report `NEEDS WORK` after the third, surface those to the user instead of looping further.
 
 ## Body Rules
 
@@ -185,53 +203,9 @@ When the user says the page is "still being figured out", "don't build from this
 These apply throughout the work.
 
 - **Use the [page template](assets/page-template) for new pages.**
-- **Keep [`index.md`] or [`home.md`] in sync.** If a page is added or removed, update [`index.md`] or [`home.md`] in the same operation.
+- **Keep `index.md` or `home.md` in sync.** If a page is added or removed, update `index.md` or `home.md` in the same operation.
 - **Flag inconsistencies, do not fix them silently.** If a change makes another wiki page inconsistent, tell the user. Do not edit other pages unprompted.
-
-## Validation
-
-Walk this checklist against every page you wrote or changed. If any item fails, fix it and re-run the checklist on the revised page. Repeat until every item passes. If a failure cannot be resolved without information only the user can provide (an undecided answer, an unresolvable concept), stop and ask the user — list every unresolved item in one message rather than asking piecemeal. Do not report the work as done until validation passes cleanly.
-
-Body — walk the Body Rules section above and confirm each holds for every sentence on the page:
-
-- [ ] One subject per page
-- [ ] Names follow the subject
-- [ ] Present tense, declarative
-- [ ] No hedging in body prose
-- [ ] No rationale in body
-- [ ] No revision history
-- [ ] External services and libraries documented as integrations
-- [ ] Design facts only
-- [ ] Anything linkable is an inline link
-- [ ] No pleonasm
-
-Open Design Decisions — applies inside every `> [!ODD]` block touched:
-
-- [ ] ID follows `ODD-<AREA>-<slug>` — area is one uppercase word naming the owning page or folder concept; slug is kebab-case and distinct
-- [ ] `Ticket:` is present (use `*(placeholder)*` if no ticket exists)
-- [ ] On the owner page the ID is plain text; on pointer blocks it is a markdown link to the owner page or the owner section heading
-- [ ] On the owner page, `Affects:` lists every page that carries a pointer block to this ODD
-- [ ] Every pointer block elsewhere references an ODD that exists on its owner page
-- [ ] One decision per block
-- [ ] The block traces back to something the user said — uncertainty is not invented
-
-Page Investigation Caution — applies when a `> [!CAUTION]` block was added, changed, or removed:
-
-- [ ] At most one caution per page
-- [ ] The reason sentence is present — no bare `> [!CAUTION]`
-- [ ] No pointer blocks elsewhere reference the caution
-- [ ] The caution traces back to something the user said
-
-Cross-page and index:
-
-- [ ] **Cross-page check.** From the page list in [`index.md`] or [`home.md`], identify pages topically related to the target — same domain area, shared concepts, or pages whose subject the target mentions. Read those pages in full. Then check the target for: (a) content already covered by a related page, where a link would suffice; (b) content that belongs on a different existing page rather than here. Flag both to the user.
-- [ ] If a page was added or removed, [`index.md`] or [`home.md`] reflects it
-- [ ] Inconsistencies introduced on other pages by this change have been flagged to the user — not silently fixed
-
-Resolution and removal:
-
-- [ ] When an ODD was resolved, the owner block and every pointer block referencing its ID are removed, and the affected body sections have been rewritten in confident present tense
-- [ ] When a caution was lifted, the block is removed and the body has been rewritten as ground truth
+- **Don't duplicate a related page; link instead.** Where the page would restate content a topically related page already owns, link to that page rather than repeating it. Where content belongs on a different existing page, flag it to the user rather than adding it here.
 
 ## Gotchas
 

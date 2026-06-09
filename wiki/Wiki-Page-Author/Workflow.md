@@ -1,0 +1,8 @@
+# Workflow
+
+The steps the wiki-page-author skill follows to write or update a page.
+
+1. Understand the request — a new page, an edit to an existing page, a removal, folder organisation, or an ODD or caution operation. Uncertainty the user voices is recorded as a block rather than guessed into a confident sentence; a request to "add notes" or "document my thinking" is settled with the user before any page is written.
+2. Gather context before writing. The index, pages topically related to the subject, and existing code and terminology are read, and the names that already exist are reused rather than coined anew. A related page carrying a top-of-page [`> [!CAUTION]`](Page-Investigation-Caution) block is treated as not yet ground truth.
+3. Write or update the page. New pages use the [page template](../../plugins/wiki-page-author/skills/wiki-page-author/assets/page-template). The [Body Rules](Body-Rules) apply everywhere outside `> [!ODD]` and `> [!CAUTION]` blocks; [ODD](Open-Design-Decision) and [caution](Page-Investigation-Caution) blocks are placed where the request calls for them. The [Standing Instructions](Standing-Instructions) hold throughout.
+4. Review and fix. For new pages, the [wiki-page-reviewer](../Wiki-Page-Reviewer) subagent is dispatched over every page written; for a request that only edits existing pages, the skill first asks the user whether to run the reviewer and proceeds only on agreement. The skill fixes what the reviewer reports, then re-reviews — up to three times. Pages still reporting `NEEDS WORK` after the third review are surfaced to the user rather than looped on further.

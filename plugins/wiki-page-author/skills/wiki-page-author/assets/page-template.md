@@ -1,6 +1,6 @@
 # [SUBJECT]
 
-[One-sentence statement of what this page is about.]
+[Statement of what this page is about.]
 
 ## [SECTION NAME]
 
@@ -11,5 +11,3 @@
 [Facts about the subject.]
 
 <!-- Repeat ## sections as needed. -->
-
----

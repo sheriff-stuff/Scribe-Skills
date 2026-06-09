@@ -19,7 +19,7 @@ Each plugin is independently installable.
 
 Each plugin ships a reviewer subagent, installed with the plugin and invoked by name. The skill's frontmatter references its reviewer by name, not by path.
 
-The `ticket-author` plugin registers its reviewer as a plugin agent: the agent file lives at the plugin root under [`plugins/ticket-author/agents/`](../plugins/ticket-author/agents/), where Claude Code discovers it automatically. The `wiki-page-author` plugin ships its reviewer inside its skill at [`plugins/wiki-page-author/skills/wiki-page-author/agents/`](../plugins/wiki-page-author/skills/wiki-page-author/agents/).
+Each reviewer is a plugin agent whose file lives at its plugin's root `agents/` directory, where Claude Code discovers it automatically: [`plugins/ticket-author/agents/`](../plugins/ticket-author/agents/) and [`plugins/wiki-page-author/agents/`](../plugins/wiki-page-author/agents/).
 
 ## Local-only tooling
 

@@ -28,7 +28,8 @@ Or run `/plugin`, pick `Browse and install plugins`, then `scribe-skills`.
 .claude-plugin/marketplace.json   Plugin manifest (one source per plugin)
 plugins/
   wiki-page-author/               source root
-    skills/wiki-page-author/      SKILL.md + agents/wiki-page-reviewer.md
+    skills/wiki-page-author/      SKILL.md
+    agents/wiki-page-reviewer.md
   ticket-author/                  source root
     skills/ticket-author/         SKILL.md + assets/
     skills/ticket-ultra-review/   SKILL.md

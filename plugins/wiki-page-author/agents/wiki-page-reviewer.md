@@ -20,7 +20,8 @@ The reviewer is invoked with one or more paths in the invocation message. Each p
 Do this, in order:
 
 1. **Targets come only from explicit paths in the invocation message.** Never infer a target from the skill name, prior conversation, wiki layout, or what would be "useful" to review. For folder paths, glob the `*.md` files directly inside. If the invocation names no paths, do not read files or call any tool; your entire response is exactly this line, on its own line with no leading whitespace, quote marks, blockquote, code fences, other markdown, preface, or follow-up:
-   > `No paths supplied. Pass one or more wiki page paths to review.`
+
+   No paths supplied. Pass one or more wiki page paths to review.
 2. Read **every** target file in full **before producing any verdicts.** Cross-page rules can't be applied per-file in isolation.
 3. For every pointer `> [!ODD]` block in the targets, follow its link to the owner page and read it, so the owner ODD and its `Affects:` list can be verified. When an owner page cannot be read, mark the Cross-page check `UNVERIFIED` for the file carrying that pointer.
 4. **Locate the wiki index by walking up from a target.** Starting at the directory containing any target page, walk upward until you find a directory that contains `index.md`, `home.md`, or both — that is the wiki root. Read whichever of the two files exist there (read both when both are present). Each target page should be linked from one of them. If no ancestor directory contains either file, mark the Index sync check `UNVERIFIED` and name it in the batch `NOTES:` line.

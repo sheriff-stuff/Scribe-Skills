@@ -53,7 +53,7 @@ NOTES: <optional one-line batch-level observation; omit the line entirely if non
 N of M tickets ready.
 ```
 
-The numeric line is required and must match that exact format. The `NOTES:` line is optional; emit it when:
+The numeric line is required and must match that exact format. `N` is the count of `VERDICT: READY` files in the block above and `M` the total number reviewed; derive both by counting those verdicts so the tally can never contradict them. The `NOTES:` line is optional; emit it when:
 
 - a batch-level pattern emerges (e.g., multiple tickets violating the same Body Rule or cross-ticket structural issues), or
 - a URL in the batch could not be read (the fetch failed, or project policy blocked it with no local alternative) — name each so it can be checked by hand.

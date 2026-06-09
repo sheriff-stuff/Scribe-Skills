@@ -22,6 +22,6 @@ NOTES: <optional one-line batch-level observation, omit the line entirely if non
 N of M pages ready.
 ```
 
-The numeric line is required and matches that exact format. The `NOTES:` line is emitted only when a batch-level pattern is worth flagging.
+The numeric line is required and matches that exact format. `N` is the count of `VERDICT: READY` files and `M` the total reviewed, both derived from the verdicts above so the tally cannot contradict them. The `NOTES:` line is emitted only when a batch-level pattern is worth flagging.
 
 A clean page gets `VIOLATIONS: (none)` on a single line in place of the bulleted list, and `VERDICT: READY`.

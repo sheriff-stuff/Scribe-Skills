@@ -85,7 +85,7 @@ NOTES: <optional one-line batch-level observation, omit the line entirely if non
 N of M pages ready.
 ```
 
-The numeric line is required and must match that exact format. The `NOTES:` line is optional; emit it only when there is a batch-level pattern worth flagging (see Rules).
+The numeric line is required and must match that exact format. `N` is the count of `VERDICT: READY` files in the block above and `M` the total number reviewed; derive both by counting those verdicts so the tally can never contradict them. The `NOTES:` line is optional; emit it only when there is a batch-level pattern worth flagging (see Rules).
 
 If a page is clean, write `VIOLATIONS: (none)` on a single line in place of the bulleted list, and set `VERDICT: READY`.
 
